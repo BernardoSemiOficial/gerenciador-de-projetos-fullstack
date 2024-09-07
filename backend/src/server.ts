@@ -1,17 +1,19 @@
-import Fastify from "fastify";
+import cors from "@fastify/cors";
+import fastify from "fastify";
+import {
+  serializerCompiler,
+  validatorCompiler,
+} from "fastify-type-provider-zod";
 import { env } from "./env";
+import { initializerUsersControler } from "./routes/users";
 
-const fastify = Fastify({
-  logger: true,
-});
+export const api = fastify({ logger: true });
+api.register(cors, { origin: "*" });
 
-fastify.get("/", function (request, reply) {
-  reply.send("Hello, world!");
-});
+api.setValidatorCompiler(validatorCompiler);
+api.setSerializerCompiler(serializerCompiler);
+api.register(initializerUsersControler);
 
-fastify.listen({ port: env.PORT }, function (err, address) {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
+api.listen({ port: env.PORT }).then(() => {
+  console.log(`Server listening at http://localhost:${env.PORT}`);
 });
