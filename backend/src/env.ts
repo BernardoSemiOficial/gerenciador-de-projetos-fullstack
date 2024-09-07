@@ -8,6 +8,7 @@ const envSchema = zod.object({
   API_BASE_URL: zod.string().url(),
   PORT: zod.coerce.number(),
   BCRIPT_SALT_ROUNDS: zod.coerce.number(),
+  SECRET_KEY_TOKEN: zod.string(),
 });
 
 export const env = envSchema.parse(process.env);
