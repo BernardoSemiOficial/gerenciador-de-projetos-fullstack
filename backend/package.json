@@ -1,0 +1,33 @@
+{
+  "name": "@gerenciador-de-tarefas/backend",
+  "version": "1.0.0",
+  "description": "Projeto backend do gerenciador de tarefas que armazenar e gerencia todas as funcionalidades do sistema",
+  "main": "index.js",
+  "scripts": {
+    "server:build": "tsc",
+    "server:watch": "tsx --watch src/server.ts",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
+  "keywords": [
+    "Sistema Web",
+    "NodeJS",
+    "TypeScript",
+    "Prisma",
+    "SQL"
+  ],
+  "author": "Bernardo Pereira",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "prisma": "^5.19.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "zod": "^3.23.8"
+  }
+}
