@@ -9,3 +9,70 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id         Int               @id @default(autoincrement())
+  public_id  String            @unique @default(uuid())
+  email      String            @unique
+  name       String
+  password   String
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
+  projects   UsersOnProjects[]
+
+  @@map("users")
+}
+
+model Project {
+  id          Int               @id @default(autoincrement())
+  public_id   String            @unique @default(uuid())
+  name        String            @unique
+  description String
+  starts_at   DateTime
+  ends_at     DateTime
+  created_at  DateTime          @default(now())
+  updated_at  DateTime          @updatedAt
+  users       UsersOnProjects[]
+
+  @@map("projects")
+}
+
+model UsersOnProjects {
+  user       User    @relation(fields: [user_id], references: [id])
+  user_id    Int
+  project    Project @relation(fields: [project_id], references: [id])
+  project_id Int
+  is_owner   Boolean @default(false)
+
+  @@id([project_id, user_id])
+}
+
+model Task {
+  id            Int          @id @default(autoincrement())
+  public_id     String       @unique @default(uuid())
+  name          String       @unique
+  description   String
+  delivery_time Int
+  status        TaskStatus   @relation(fields: [status_id], references: [id])
+  status_id     Int
+  priority      TaskPriority @relation(fields: [priority_id], references: [id])
+  priority_id   Int
+
+  @@map("tasks")
+}
+
+model TaskStatus {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  tasks Task[]
+
+  @@map("task_statuses")
+}
+
+model TaskPriority {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  tasks Task[]
+
+  @@map("task_priorities")
+}
