@@ -1,5 +1,5 @@
-import { prisma } from "../../../src/database/prisma";
-import { TaskPriority } from "../../../src/enums/status";
+import { prisma } from "../../../src/database/prisma.database";
+import { TaskPriority } from "../../../src/enums/status.enum";
 
 export const populateTableTaskPriority = async () => {
   await prisma.taskPriority.createMany({

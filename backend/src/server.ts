@@ -1,19 +1,36 @@
 import cors from "@fastify/cors";
-import fastify from "fastify";
+import fastify, {
+  FastifyBaseLogger,
+  FastifyInstance,
+  RawReplyDefaultExpression,
+  RawRequestDefaultExpression,
+  RawServerDefault,
+} from "fastify";
 import {
   serializerCompiler,
   validatorCompiler,
+  ZodTypeProvider,
 } from "fastify-type-provider-zod";
 import { env } from "./env";
-import { initializerUsersControler } from "./routes/users";
+import { initializerAuthController } from "./routes/auth/auth.routes";
+import { initializerUsersController } from "./routes/users/users.routes";
 
-export const api = fastify({ logger: true });
-api.register(cors, { origin: "*" });
+export type FastifyZod = FastifyInstance<
+  RawServerDefault,
+  RawRequestDefaultExpression<RawServerDefault>,
+  RawReplyDefaultExpression<RawServerDefault>,
+  FastifyBaseLogger,
+  ZodTypeProvider
+>;
 
-api.setValidatorCompiler(validatorCompiler);
-api.setSerializerCompiler(serializerCompiler);
-api.register(initializerUsersControler);
+const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
+app.register(cors, { origin: "*" });
 
-api.listen({ port: env.PORT }).then(() => {
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
+app.register(initializerAuthController);
+app.register(initializerUsersController);
+
+app.listen({ port: env.PORT }).then(() => {
   console.log(`Server listening at http://localhost:${env.PORT}`);
 });

@@ -1,5 +1,5 @@
-import { prisma } from "../../../src/database/prisma";
-import { TaskStatus } from "../../../src/enums/status";
+import { prisma } from "../../../src/database/prisma.database";
+import { TaskStatus } from "../../../src/enums/status.enum";
 
 export const populateTableTaskStatus = async () => {
   await prisma.taskStatus.createMany({

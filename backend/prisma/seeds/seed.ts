@@ -1,4 +1,4 @@
-import { prisma } from "../../src/database/prisma";
+import { prisma } from "../../src/database/prisma.database";
 import { populateTableTaskPriority } from "./task-priority";
 import { populateTableTaskStatus } from "./task-status";
 

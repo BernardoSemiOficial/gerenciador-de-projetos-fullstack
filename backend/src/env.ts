@@ -1,7 +1,7 @@
 import "dotenv/config";
-import { librarys } from "./librarys";
+import { libraries } from "./libraries";
 
-const zod = librarys.zod;
+const zod = libraries.zod;
 
 const envSchema = zod.object({
   NODE_ENV: zod.enum(["development", "production"]).default("development"),
@@ -9,6 +9,8 @@ const envSchema = zod.object({
   PORT: zod.coerce.number(),
   BCRIPT_SALT_ROUNDS: zod.coerce.number(),
   SECRET_KEY_TOKEN: zod.string(),
+  ACCESS_TOKEN_DURATION: zod.string(),
+  REFRESH_TOKEN_DURATION: zod.string(),
 });
 
 export const env = envSchema.parse(process.env);

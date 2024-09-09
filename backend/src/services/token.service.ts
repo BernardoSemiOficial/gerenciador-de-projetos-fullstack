@@ -1,12 +1,11 @@
-import { librarys } from "../librarys";
+import { env } from "../env";
+import { libraries } from "../libraries";
 import { TokenDecoded, TokenPayload } from "../models/token.model";
 
-const jwt = librarys.jwt;
-
 export class TokenService {
-  private SECRET_KEY = process.env.SECRET_KEY_TOKEN!;
+  private static readonly SECRET_KEY = env.SECRET_KEY_TOKEN;
 
-  generateTokenUser(
+  static generateTokenUser(
     user: TokenPayload,
     { isAccessToken }: { isAccessToken: boolean }
   ): string {
@@ -21,22 +20,25 @@ export class TokenService {
     return this.generateToken(user, false);
   }
 
-  verifyToken(token: string): TokenDecoded {
+  static verifyToken(token: string): TokenDecoded {
     try {
-      const decoded = jwt.verify(token, this.SECRET_KEY);
+      const decoded = libraries.jwt.verify(token, this.SECRET_KEY);
       return decoded as TokenDecoded;
     } catch (error) {
       throw new Error("Invalid token");
     }
   }
 
-  private generateToken(user: TokenPayload, isAccessToken: boolean): string {
+  private static generateToken(
+    user: TokenPayload,
+    isAccessToken: boolean
+  ): string {
     const expiration = {
-      accessToken: "1m",
-      refreshToken: "7d",
+      accessToken: env.ACCESS_TOKEN_DURATION,
+      refreshToken: env.REFRESH_TOKEN_DURATION,
     };
     try {
-      const token = jwt.sign(user, this.SECRET_KEY, {
+      const token = libraries.jwt.sign(user, this.SECRET_KEY, {
         expiresIn: isAccessToken
           ? expiration.accessToken
           : expiration.refreshToken,
