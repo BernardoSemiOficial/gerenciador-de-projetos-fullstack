@@ -4,12 +4,12 @@ import { FastifyZod } from "../../server";
 
 export const initializerTasksController = async (app: FastifyZod) => {
   app.get(
-    "/tasks/:projectId",
+    "/tasks/:projectPublicId",
     TasksControllerSchema.getAllTasksByProjectId,
     TasksController.getAllTasksByProjectId
   );
   app.post(
-    "/tasks/:projectId",
+    "/tasks/:projectPublicId",
     TasksControllerSchema.createTask,
     TasksController.createTask
   );

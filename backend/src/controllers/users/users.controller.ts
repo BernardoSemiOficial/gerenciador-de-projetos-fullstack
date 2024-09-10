@@ -28,7 +28,7 @@ export class UsersController {
     reply: FastifyReply
   ) {
     const { publicId } = request.params;
-    const projects = UsersRespository.findProjectsByUser({ publicId });
-    return reply.status(201).send({ projects });
+    const projects = await UsersRespository.findProjectsByUser({ publicId });
+    return reply.status(200).send({ projects });
   }
 }

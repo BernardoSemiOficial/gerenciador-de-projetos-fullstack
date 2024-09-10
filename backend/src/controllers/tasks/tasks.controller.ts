@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { TaskPriorityId, TaskStatusId } from "../../enums/status.enum";
+import { ClientError } from "../../errors/client-error";
 import { libraries } from "../../libraries";
 import { ProjectsRespository } from "../../repositories/projects/projects.repository";
 import { TasksRespository } from "../../repositories/tasks/tasks.repository";
@@ -24,7 +25,7 @@ export class TasksController {
     }
 
     const tasks = await TasksRespository.getTasks({ projectId: project.id });
-    return reply.status(201).send({ tasks });
+    return reply.status(200).send({ tasks });
   }
 
   static async createTask(
@@ -41,14 +42,19 @@ export class TasksController {
     });
 
     if (!project) {
-      throw new Error("Project not found");
+      throw new ClientError({ message: "Project not found", code: 404 });
     }
 
-    const projectDays = day(project.starts_at).diff(project.ends_at, "days");
-    console.log({ projectDays, deliveryTime });
+    // ** duration project = [3 day] - [1 day] = [1, 2, 3] 3 days completed
+    const projectDays = day(project.ends_at)
+      .add(1, "days")
+      .diff(project.starts_at, "days");
 
     if (deliveryTime > projectDays) {
-      throw new Error("Delivery time is greater than the project duration");
+      throw new ClientError({
+        message: "Delivery time is greater than the project duration",
+        code: 400,
+      });
     }
 
     const task = await TasksRespository.createTask({

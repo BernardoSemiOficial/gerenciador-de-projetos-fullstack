@@ -19,7 +19,7 @@ export class ProjectsController {
 
     const user = await UsersRespository.findUserByPublicId({
       publicId: userPublicId,
-      selectPassword: true,
+      selectId: true,
     });
 
     if (!user) {

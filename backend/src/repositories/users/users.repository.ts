@@ -74,6 +74,11 @@ export class UsersRespository {
         is_owner: true,
         project: {
           select: {
+            _count: {
+              select: {
+                users: true,
+              },
+            },
             public_id: true,
             name: true,
             description: true,
@@ -81,15 +86,6 @@ export class UsersRespository {
             updated_at: true,
             starts_at: true,
             ends_at: true,
-            users: {
-              select: {
-                user: {
-                  select: {
-                    _count: true,
-                  },
-                },
-              },
-            },
           },
         },
       },
@@ -97,16 +93,23 @@ export class UsersRespository {
   }
 
   static async createUser(data: UsersRespositoryCreateUser) {
-    return await prisma.user.create({
-      data,
-      select: {
-        public_id: true,
-        email: true,
-        name: true,
-        created_at: true,
-        updated_at: true,
-      },
-    });
+    try {
+      return await prisma.user.create({
+        data,
+        select: {
+          public_id: true,
+          email: true,
+          name: true,
+          created_at: true,
+          updated_at: true,
+        },
+      });
+    } catch (error) {
+      throw new ClientError({
+        message: "Not possible to create a user",
+        code: 400,
+      });
+    }
   }
 
   static async createProjectForUser(
@@ -117,7 +120,6 @@ export class UsersRespository {
         data,
       });
     } catch (error) {
-      console.log(error);
       throw new ClientError({
         message: "Not possible to create a project for this user",
         code: 400,
