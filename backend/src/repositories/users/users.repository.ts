@@ -1,6 +1,9 @@
 import { prisma } from "../../database/prisma.database";
+import { ClientError } from "../../errors/client-error";
 import {
+  UsersRespositoryCreateProjectForUser,
   UsersRespositoryCreateUser,
+  UsersRespositoryFindProjectForUser,
   UsersRespositoryFindUserByEmail,
   UsersRespositoryFindUserByPublicId,
 } from "./types";
@@ -40,6 +43,7 @@ export class UsersRespository {
   static async findUserByPublicId({
     publicId,
     selectPassword = false,
+    selectId = false,
   }: UsersRespositoryFindUserByPublicId) {
     return await prisma.user.findUnique({
       where: {
@@ -52,6 +56,42 @@ export class UsersRespository {
         created_at: true,
         updated_at: true,
         password: selectPassword,
+        id: selectId,
+      },
+    });
+  }
+
+  static async findProjectsByUser({
+    publicId,
+  }: UsersRespositoryFindProjectForUser) {
+    return await prisma.usersOnProjects.findMany({
+      where: {
+        user: {
+          public_id: publicId,
+        },
+      },
+      select: {
+        is_owner: true,
+        project: {
+          select: {
+            public_id: true,
+            name: true,
+            description: true,
+            created_at: true,
+            updated_at: true,
+            starts_at: true,
+            ends_at: true,
+            users: {
+              select: {
+                user: {
+                  select: {
+                    _count: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     });
   }
@@ -67,5 +107,21 @@ export class UsersRespository {
         updated_at: true,
       },
     });
+  }
+
+  static async createProjectForUser(
+    data: UsersRespositoryCreateProjectForUser
+  ) {
+    try {
+      return await prisma.usersOnProjects.create({
+        data,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new ClientError({
+        message: "Not possible to create a project for this user",
+        code: 400,
+      });
+    }
   }
 }

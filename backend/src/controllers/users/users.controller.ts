@@ -20,4 +20,15 @@ export class UsersController {
     });
     return reply.status(201).send({ user });
   }
+
+  static async getProjectsByUser(
+    request: FastifyRequest<{
+      Params: UsersControllerSchemaType["getProjectsForUserParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { publicId } = request.params;
+    const projects = UsersRespository.findProjectsByUser({ publicId });
+    return reply.status(201).send({ projects });
+  }
 }

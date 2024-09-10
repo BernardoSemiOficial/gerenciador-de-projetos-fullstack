@@ -1,5 +1,8 @@
 import { prisma } from "../../database/prisma.database";
-import { ProjectsRespositoryFindProjectByPublicId } from "./types";
+import {
+  ProjectsRespositoryCreateProject,
+  ProjectsRespositoryFindProjectByPublicId,
+} from "./types";
 
 export class ProjectsRespository {
   static async findProjectByPublicId({
@@ -12,6 +15,22 @@ export class ProjectsRespository {
       select: {
         id: true,
         public_id: true,
+        starts_at: true,
+        ends_at: true,
+      },
+    });
+  }
+
+  static async createProject(data: ProjectsRespositoryCreateProject) {
+    return await prisma.project.create({
+      data,
+      select: {
+        id: true,
+        public_id: true,
+        name: true,
+        description: true,
+        created_at: true,
+        updated_at: true,
         starts_at: true,
         ends_at: true,
       },

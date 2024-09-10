@@ -10,10 +10,20 @@ export const UsersControllerSchema = {
       }),
     },
   },
+  getProjectsForUserParams: {
+    schema: {
+      params: zod.object({
+        publicId: zod.string(),
+      }),
+    },
+  },
 };
 
 export type UsersControllerSchemaType = {
   getUserByPublicId: Zod.infer<
     typeof UsersControllerSchema.getUserByPublicId.schema.params
+  >;
+  getProjectsForUserParams: Zod.infer<
+    typeof UsersControllerSchema.getProjectsForUserParams.schema.params
   >;
 };
