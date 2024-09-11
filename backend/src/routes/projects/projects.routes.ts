@@ -8,4 +8,14 @@ export const initializerProjectsController = async (app: FastifyZod) => {
     ProjectsControllerSchema.createProject,
     ProjectsController.createProject
   );
+  app.put(
+    "/projects/:projectPublicId",
+    ProjectsControllerSchema.updateProject,
+    ProjectsController.updateProject
+  );
+  app.delete(
+    "/projects/:projectPublicId",
+    ProjectsControllerSchema.deleteProject,
+    ProjectsController.deleteProject
+  );
 };

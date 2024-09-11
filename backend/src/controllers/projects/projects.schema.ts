@@ -16,6 +16,26 @@ export const ProjectsControllerSchema = {
       }),
     },
   },
+  updateProject: {
+    schema: {
+      params: zod.object({
+        projectPublicId: zod.string(),
+      }),
+      body: zod.object({
+        name: zod.string().min(5),
+        description: zod.string(),
+        startsAt: zod.coerce.date(),
+        endsAt: zod.coerce.date(),
+      }),
+    },
+  },
+  deleteProject: {
+    schema: {
+      params: zod.object({
+        projectPublicId: zod.string(),
+      }),
+    },
+  },
 };
 
 export type ProjectsControllerSchemaType = {
@@ -24,5 +44,14 @@ export type ProjectsControllerSchemaType = {
   >;
   createProjectBody: Zod.infer<
     typeof ProjectsControllerSchema.createProject.schema.body
+  >;
+  updateProjectParams: Zod.infer<
+    typeof ProjectsControllerSchema.updateProject.schema.params
+  >;
+  updateProjectBody: Zod.infer<
+    typeof ProjectsControllerSchema.updateProject.schema.body
+  >;
+  deleteProjectParams: Zod.infer<
+    typeof ProjectsControllerSchema.deleteProject.schema.params
   >;
 };

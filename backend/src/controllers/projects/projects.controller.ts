@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { ClientError } from "../../errors/client-error";
 import { libraries } from "../../libraries";
 import { ProjectsRespository } from "../../repositories/projects/projects.repository";
 import { UsersRespository } from "../../repositories/users/users.repository";
@@ -23,7 +24,24 @@ export class ProjectsController {
     });
 
     if (!user) {
-      throw new Error("User not found. Not possible to create a project");
+      throw new ClientError({
+        message: "User not found. Not possible to create a project",
+        code: 404,
+      });
+    }
+
+    if (day(startsAt).isAfter(endsAt)) {
+      throw new ClientError({
+        message: "The project start date must be before the end date",
+        code: 400,
+      });
+    }
+
+    if (day(startsAt).isBefore(day())) {
+      throw new ClientError({
+        message: "The project start date must be after the current date",
+        code: 400,
+      });
     }
 
     const project = await ProjectsRespository.createProject({
@@ -40,5 +58,77 @@ export class ProjectsController {
     });
 
     return reply.status(201).send({ project });
+  }
+
+  static async updateProject(
+    request: FastifyRequest<{
+      Body: ProjectsControllerSchemaType["updateProjectBody"];
+      Params: ProjectsControllerSchemaType["updateProjectParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { projectPublicId } = request.params;
+    const { name, description, startsAt, endsAt } = request.body;
+
+    const project = await ProjectsRespository.findProjectByPublicId({
+      publicId: projectPublicId,
+    });
+
+    if (!project) {
+      throw new ClientError({
+        message: "Project not found. Not possible to update the project",
+        code: 404,
+      });
+    }
+
+    if (day(startsAt).isAfter(endsAt)) {
+      throw new ClientError({
+        message: "The project start date must be before the end date",
+        code: 400,
+      });
+    }
+
+    if (day(startsAt).isBefore(day())) {
+      throw new ClientError({
+        message: "The project start date must be after the current date",
+        code: 400,
+      });
+    }
+
+    const projectUpdated = await ProjectsRespository.updateProject(
+      projectPublicId,
+      {
+        name,
+        description,
+        starts_at: startsAt,
+        ends_at: endsAt,
+      }
+    );
+
+    return reply.status(200).send({ project: projectUpdated });
+  }
+
+  static async deleteProject(
+    request: FastifyRequest<{
+      Params: ProjectsControllerSchemaType["deleteProjectParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { projectPublicId } = request.params;
+    const project = await ProjectsRespository.findProjectByPublicId({
+      publicId: projectPublicId,
+    });
+
+    if (!project) {
+      throw new ClientError({
+        message: "Project not found. Not possible to delete the project",
+        code: 404,
+      });
+    }
+
+    await ProjectsRespository.deleteProject(project.id);
+    return reply
+      .status(200)
+      .send({ project: `Project ${projectPublicId} deleted` });
   }
 }
