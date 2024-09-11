@@ -10,3 +10,11 @@ export type TasksRespositoryCreateTask = {
   priorityId: number;
   projectId: number;
 };
+
+export type TasksRespositoryUpdateTask = {
+  name: string;
+  description: string;
+  delivery_time: number;
+  statusId: number;
+  priorityId: number;
+};

@@ -13,4 +13,14 @@ export const initializerTasksController = async (app: FastifyZod) => {
     TasksControllerSchema.createTask,
     TasksController.createTask
   );
+  app.put(
+    "/tasks/:taskPublicId",
+    TasksControllerSchema.updateTask,
+    TasksController.updateTask
+  );
+  app.delete(
+    "/tasks/:taskPublicId",
+    TasksControllerSchema.deleteTask,
+    TasksController.deleteTask
+  );
 };

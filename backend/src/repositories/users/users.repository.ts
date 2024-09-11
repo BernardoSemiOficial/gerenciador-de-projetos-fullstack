@@ -1,5 +1,5 @@
 import { prisma } from "../../database/prisma.database";
-import { ClientError } from "../../errors/client-error";
+import { ServerError } from "../../errors/server-error";
 import {
   UsersRespositoryCreateProjectForUser,
   UsersRespositoryCreateUser,
@@ -105,9 +105,9 @@ export class UsersRespository {
         },
       });
     } catch (error) {
-      throw new ClientError({
+      throw new ServerError({
         message: "Not possible to create a user",
-        code: 400,
+        code: 500,
       });
     }
   }
@@ -120,9 +120,9 @@ export class UsersRespository {
         data,
       });
     } catch (error) {
-      throw new ClientError({
+      throw new ServerError({
         message: "Not possible to create a project for this user",
-        code: 400,
+        code: 500,
       });
     }
   }

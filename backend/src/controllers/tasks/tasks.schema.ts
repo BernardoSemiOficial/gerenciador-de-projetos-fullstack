@@ -1,4 +1,4 @@
-import { TaskPriority } from "../../enums/status.enum";
+import { TaskPriority, TaskStatus } from "../../enums/status.enum";
 import { libraries } from "../../libraries";
 
 const zod = libraries.zod;
@@ -24,6 +24,27 @@ export const TasksControllerSchema = {
       }),
     },
   },
+  updateTask: {
+    schema: {
+      params: zod.object({
+        taskPublicId: zod.string(),
+      }),
+      body: zod.object({
+        name: zod.string().min(5),
+        description: zod.string(),
+        deliveryTime: zod.number().int().positive(),
+        priority: zod.nativeEnum(TaskPriority),
+        status: zod.nativeEnum(TaskStatus),
+      }),
+    },
+  },
+  deleteTask: {
+    schema: {
+      params: zod.object({
+        taskPublicId: zod.string(),
+      }),
+    },
+  },
 };
 
 export type TasksControllerSchemaType = {
@@ -35,5 +56,14 @@ export type TasksControllerSchemaType = {
   >;
   createTaskParams: Zod.infer<
     typeof TasksControllerSchema.createTask.schema.params
+  >;
+  updateTaskBody: Zod.infer<
+    typeof TasksControllerSchema.updateTask.schema.body
+  >;
+  updateTaskParams: Zod.infer<
+    typeof TasksControllerSchema.updateTask.schema.params
+  >;
+  deleteTaskParams: Zod.infer<
+    typeof TasksControllerSchema.deleteTask.schema.params
   >;
 };
