@@ -105,7 +105,7 @@ export class TasksController {
       statusId: TaskStatusId[status],
     });
 
-    return reply.status(201).send({ task: taskUpdated });
+    return reply.status(200).send({ task: taskUpdated });
   }
 
   static async deleteTask(
@@ -124,6 +124,6 @@ export class TasksController {
 
     await TasksRespository.deleteTask(taskPublicId);
 
-    return reply.status(201).send({ task: `Task ${taskPublicId} deleted` });
+    return reply.status(200).send({ task: `Task ${taskPublicId} deleted` });
   }
 }
