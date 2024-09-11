@@ -10,34 +10,42 @@ import {
 
 export class UsersRespository {
   static async getUsers() {
-    return await prisma.user.findMany({
-      select: {
-        public_id: true,
-        email: true,
-        name: true,
-        created_at: true,
-        updated_at: true,
-      },
-    });
+    try {
+      return await prisma.user.findMany({
+        select: {
+          public_id: true,
+          email: true,
+          name: true,
+          created_at: true,
+          updated_at: true,
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
   }
 
   static async findUserByEmail({
     email,
     selectPassword = false,
   }: UsersRespositoryFindUserByEmail) {
-    return await prisma.user.findUnique({
-      where: {
-        email,
-      },
-      select: {
-        public_id: true,
-        email: true,
-        name: true,
-        created_at: true,
-        updated_at: true,
-        password: selectPassword,
-      },
-    });
+    try {
+      return await prisma.user.findUnique({
+        where: {
+          email,
+        },
+        select: {
+          public_id: true,
+          email: true,
+          name: true,
+          created_at: true,
+          updated_at: true,
+          password: selectPassword,
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
   }
 
   static async findUserByPublicId({
@@ -45,51 +53,59 @@ export class UsersRespository {
     selectPassword = false,
     selectId = false,
   }: UsersRespositoryFindUserByPublicId) {
-    return await prisma.user.findUnique({
-      where: {
-        public_id: publicId,
-      },
-      select: {
-        public_id: true,
-        email: true,
-        name: true,
-        created_at: true,
-        updated_at: true,
-        password: selectPassword,
-        id: selectId,
-      },
-    });
+    try {
+      return await prisma.user.findUnique({
+        where: {
+          public_id: publicId,
+        },
+        select: {
+          public_id: true,
+          email: true,
+          name: true,
+          created_at: true,
+          updated_at: true,
+          password: selectPassword,
+          id: selectId,
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
   }
 
   static async findProjectsByUser({
     publicId,
   }: UsersRespositoryFindProjectForUser) {
-    return await prisma.usersOnProjects.findMany({
-      where: {
-        user: {
-          public_id: publicId,
-        },
-      },
-      select: {
-        is_owner: true,
-        project: {
-          select: {
-            _count: {
-              select: {
-                users: true,
-              },
-            },
-            public_id: true,
-            name: true,
-            description: true,
-            created_at: true,
-            updated_at: true,
-            starts_at: true,
-            ends_at: true,
+    try {
+      return await prisma.usersOnProjects.findMany({
+        where: {
+          user: {
+            public_id: publicId,
           },
         },
-      },
-    });
+        select: {
+          is_owner: true,
+          project: {
+            select: {
+              _count: {
+                select: {
+                  users: true,
+                },
+              },
+              public_id: true,
+              name: true,
+              description: true,
+              created_at: true,
+              updated_at: true,
+              starts_at: true,
+              ends_at: true,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
   }
 
   static async createUser(data: UsersRespositoryCreateUser) {
@@ -105,10 +121,7 @@ export class UsersRespository {
         },
       });
     } catch (error) {
-      throw new ServerError({
-        message: "Not possible to create a user",
-        code: 500,
-      });
+      throw new ServerError({ message: (error as Error).message, code: 500 });
     }
   }
 
@@ -120,10 +133,7 @@ export class UsersRespository {
         data,
       });
     } catch (error) {
-      throw new ServerError({
-        message: "Not possible to create a project for this user",
-        code: 500,
-      });
+      throw new ServerError({ message: (error as Error).message, code: 500 });
     }
   }
 }

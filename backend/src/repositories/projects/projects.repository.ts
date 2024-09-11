@@ -104,7 +104,6 @@ export class ProjectsRespository {
         deleteProject,
       ]);
     } catch (error) {
-      console.log(error);
       throw new ServerError({ message: (error as Error).message, code: 500 });
     }
   }

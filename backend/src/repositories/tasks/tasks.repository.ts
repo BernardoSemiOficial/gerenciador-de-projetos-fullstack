@@ -30,27 +30,31 @@ export class TasksRespository {
   }
 
   static async findTaskByPublicId(taskPublicId: string) {
-    return await prisma.task.findUnique({
-      where: {
-        public_id: taskPublicId,
-      },
-      select: {
-        public_id: true,
-        name: true,
-        description: true,
-        delivery_time: true,
-        status: true,
-        priority: true,
-        created_at: true,
-        updated_at: true,
-        project: {
-          select: {
-            starts_at: true,
-            ends_at: true,
+    try {
+      return await prisma.task.findUnique({
+        where: {
+          public_id: taskPublicId,
+        },
+        select: {
+          public_id: true,
+          name: true,
+          description: true,
+          delivery_time: true,
+          status: true,
+          priority: true,
+          created_at: true,
+          updated_at: true,
+          project: {
+            select: {
+              starts_at: true,
+              ends_at: true,
+            },
           },
         },
-      },
-    });
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
   }
 
   static async createTask(data: TasksRespositoryCreateTask) {
