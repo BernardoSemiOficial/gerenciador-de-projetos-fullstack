@@ -1,5 +1,6 @@
 import { FastifyRequest } from "fastify";
 import { ClientError } from "../errors/client-error";
+import { AuthenticatedUser } from "../models/authenticated-user.model";
 import { TokenService } from "../services/token.service";
 
 export class AuthorizationMiddleware {
@@ -10,6 +11,12 @@ export class AuthorizationMiddleware {
     }
     const token = tokenWithBearer.split(" ")[1];
     const tokenDecoded = TokenService.verifyToken(token);
-    console.log(tokenDecoded);
+    request.authenticatedUser = tokenDecoded;
+  }
+}
+
+declare module "fastify" {
+  export interface FastifyRequest {
+    authenticatedUser?: AuthenticatedUser;
   }
 }
