@@ -1,14 +1,14 @@
 type ServerErrorType = {
   message: string;
-  code: number;
+  code?: number;
 };
 
 export class ServerError extends Error {
-  statusCode: number;
+  statusCode?: number;
 
   constructor({ message, code }: ServerErrorType) {
     super(message);
-    this.statusCode = code;
+    if (code) this.statusCode = code;
     this.name = "ServerError";
   }
 }

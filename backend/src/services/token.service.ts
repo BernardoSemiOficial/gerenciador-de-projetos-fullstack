@@ -1,4 +1,6 @@
 import { env } from "../env";
+import { ClientError } from "../errors/client-error";
+import { ServerError } from "../errors/server-error";
 import { libraries } from "../libraries";
 import { TokenDecoded, TokenPayload } from "../models/token.model";
 
@@ -10,12 +12,8 @@ export class TokenService {
     { isAccessToken }: { isAccessToken: boolean }
   ): string {
     if (isAccessToken) {
-      try {
-        const accessToken = this.generateToken(user, true);
-        return accessToken;
-      } catch (error) {
-        throw new Error("Error generating token");
-      }
+      const accessToken = this.generateToken(user, true);
+      return accessToken;
     }
     return this.generateToken(user, false);
   }
@@ -25,7 +23,7 @@ export class TokenService {
       const decoded = libraries.jwt.verify(token, this.SECRET_KEY);
       return decoded as TokenDecoded;
     } catch (error) {
-      throw new Error("Invalid token");
+      throw new ClientError({ message: "Invalid Token", code: 401 });
     }
   }
 
@@ -45,7 +43,7 @@ export class TokenService {
       });
       return token;
     } catch (error) {
-      throw new Error("Error generating token");
+      throw new ServerError({ message: (error as Error).message });
     }
   }
 }

@@ -1,8 +1,11 @@
 import { ProjectsController } from "../../controllers/projects/projects.controller";
 import { ProjectsControllerSchema } from "../../controllers/projects/projects.schema";
+import { AuthorizationMiddleware } from "../../middlewares/authorization.middleware";
 import { FastifyZod } from "../../server";
 
 export const initializerProjectsController = async (app: FastifyZod) => {
+  app.addHook("onRequest", AuthorizationMiddleware.verifyToken);
+
   app.post(
     "/projects/:userPublicId",
     ProjectsControllerSchema.createProject,

@@ -1,12 +1,13 @@
 import { env } from "../env";
+import { ServerError } from "../errors/server-error";
 import { libraries } from "../libraries";
 
 export class BcriptService {
   private static readonly BCRIPT_SALT_ROUNDS = env.BCRIPT_SALT_ROUNDS;
 
-  static async generateHash(password: string): Promise<string> {
+  static async generateHashPassword(password: string): Promise<string> {
     const salt = await this.generateSalt();
-    const hash = await libraries.bcript.hash(password, salt);
+    const hash = await this.generateHash(password, salt);
     return hash;
   }
 
@@ -14,10 +15,30 @@ export class BcriptService {
     password: string,
     hashPassword: string
   ): Promise<boolean> {
-    return await libraries.bcript.compare(password, hashPassword);
+    try {
+      return await libraries.bcript.compare(password, hashPassword);
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message });
+    }
   }
 
   private static async generateSalt(): Promise<string> {
-    return await libraries.bcript.genSalt(this.BCRIPT_SALT_ROUNDS);
+    try {
+      return await libraries.bcript.genSalt(this.BCRIPT_SALT_ROUNDS);
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message });
+    }
+  }
+
+  private static async generateHash(
+    password: string,
+    salt: string
+  ): Promise<string> {
+    try {
+      const hash = await libraries.bcript.hash(password, salt);
+      return hash;
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message });
+    }
   }
 }

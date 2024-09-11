@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { ClientError } from "../../errors/client-error";
 import { TokenPayload } from "../../models/token.model";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { BcriptService } from "../../services/bcript.service";
@@ -17,7 +18,7 @@ export class AuthController {
     });
 
     if (!user) {
-      throw new Error("Not authorized");
+      throw new ClientError({ message: "Not authorized", code: 401 });
     }
 
     const isPasswordEqual = await BcriptService.compareHash(
@@ -26,7 +27,7 @@ export class AuthController {
     );
 
     if (!isPasswordEqual) {
-      throw new Error("Not authorized");
+      throw new ClientError({ message: "Not authorized", code: 401 });
     }
     const tokenPayload: TokenPayload = {
       publicId: user.public_id,
@@ -49,7 +50,7 @@ export class AuthController {
     reply: FastifyReply
   ) {
     const { name, email, password } = request.body;
-    const hashPassword = await BcriptService.generateHash(password);
+    const hashPassword = await BcriptService.generateHashPassword(password);
     const user = await UsersRespository.createUser({
       name,
       email,

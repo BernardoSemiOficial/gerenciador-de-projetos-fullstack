@@ -27,13 +27,11 @@ export type FastifyZod = FastifyInstance<
 >;
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
-app.register(cors, { origin: "*" });
-
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
-
 app.setErrorHandler(errorHandler);
 
+app.register(cors, { origin: "*" });
 app.register(initializerAuthController);
 app.register(initializerUsersController);
 app.register(initializerTasksController);
