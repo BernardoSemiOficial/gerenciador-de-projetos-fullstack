@@ -1,4 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { ClientError } from "../../errors/client-error";
+import { ProjectForUserClient, UserClient } from "../../models/user.model";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { UsersControllerSchemaType } from "./users.schema";
 
@@ -18,7 +20,14 @@ export class UsersController {
     const user = await UsersRespository.findUserByPublicId({
       publicId,
     });
-    return reply.status(201).send({ user });
+
+    if (!user) {
+      throw new ClientError({ message: "User not found", code: 404 });
+    }
+
+    const userClient = new UserClient(user);
+
+    return reply.status(201).send({ user: userClient });
   }
 
   static async getProjectsByUser(
@@ -29,6 +38,9 @@ export class UsersController {
   ) {
     const { publicId } = request.params;
     const projects = await UsersRespository.findProjectsByUser({ publicId });
-    return reply.status(200).send({ projects });
+    const projectForUserClient = projects.map(
+      (project) => new ProjectForUserClient(project)
+    );
+    return reply.status(200).send({ projects: projectForUserClient });
   }
 }

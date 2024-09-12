@@ -42,14 +42,7 @@ export class AuthController {
     const refreshToken = TokenService.generateTokenUser(tokenPayload, {
       isAccessToken: false,
     });
-
-    const userClient = new UserClient(
-      user.public_id,
-      user.email,
-      user.name,
-      user.created_at,
-      user.updated_at
-    );
+    const userClient = new UserClient(user);
 
     return reply
       .status(201)
@@ -81,13 +74,7 @@ export class AuthController {
       isAccessToken: false,
     });
 
-    const userClient = new UserClient(
-      user.public_id,
-      user.email,
-      user.name,
-      user.created_at,
-      user.updated_at
-    );
+    const userClient = new UserClient(user);
 
     return reply
       .status(201)
