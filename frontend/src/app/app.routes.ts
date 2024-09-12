@@ -25,6 +25,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'dashboard/projects/create',
+    canActivate: [canActivateAuth],
+    loadComponent: () =>
+      import('./pages/create-project-page/create-project-page.component').then(
+        (m) => m.CreateProjectPageComponent
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'login',

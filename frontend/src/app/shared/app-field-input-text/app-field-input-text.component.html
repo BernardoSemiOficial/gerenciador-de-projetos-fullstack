@@ -1,0 +1,22 @@
+@let id = fieldId(); @let label = fieldLabel(); @let inputHelp =
+fieldInputHelp();
+
+<div class="w-full flex flex-column gap-2">
+  @if (label) {
+  <label [for]="fieldId()">{{ label }}</label>
+  }
+  <input
+    pInputText
+    [id]="id"
+    [name]="id"
+    [type]="fieldInputType()"
+    [disabled]="isDisabled"
+    [(ngModel)]="fieldInputValue"
+    (blur)="_onTouched()"
+    (ngModelChange)="_onChange(fieldInputValue)"
+    aria-describedby="field-help"
+  />
+  @if(inputHelp) {
+  <small id="field-help">{{ inputHelp }}</small>
+  }
+</div>
