@@ -3,13 +3,20 @@ import { Component, effect, inject } from '@angular/core';
 import { UserService } from '@core/services/user/user.service';
 import { ResponseGetProjectsForUser } from '@core/services/user/user.service.types';
 import { AppCardComponent } from '@shared/app-card/app-card.component';
+import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
+import { AppHeaderComponent } from '@shared/app-header/app-header.component';
 import { PrimeIcons } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, AppCardComponent],
+  imports: [
+    CommonModule,
+    AppHeaderComponent,
+    AppFooterComponent,
+    AppCardComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
