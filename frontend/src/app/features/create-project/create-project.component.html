@@ -9,30 +9,30 @@
       [formGroup]="createProjectForm"
       class="flex align-content-center flex-wrap justify-content-between gap-5"
     >
-      <app-field-input-text
+      <app-field-input
         [fieldId]="'name'"
         formControlName="name"
         [fieldLabel]="'name'"
         [fieldInputHelp]="'The name of your project'"
-      ></app-field-input-text>
-      <app-field-input-text
+      ></app-field-input>
+      <app-field-input
         [fieldId]="'description'"
         formControlName="description"
         [fieldLabel]="'description'"
         [fieldInputHelp]="'The description of your project'"
-      ></app-field-input-text>
-      <app-field-input-text
+      ></app-field-input>
+      <app-field-input
         [fieldId]="'starts_at'"
         formControlName="starts_at"
         [fieldLabel]="'starts at'"
         [fieldInputHelp]="'The starts at of your project'"
-      ></app-field-input-text>
-      <app-field-input-text
+      ></app-field-input>
+      <app-field-input
         [fieldId]="'ends_at'"
         formControlName="ends_at"
         [fieldLabel]="'ends at'"
         [fieldInputHelp]="'The ends at of your project'"
-      ></app-field-input-text>
+      ></app-field-input>
       <app-button
         class="w-full mt-5"
         [label]="'create project here'"

@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AppButtonComponent } from '@shared/app-button/app-button.component';
-import { AppFieldInputTextComponent } from '@shared/app-field-input-text/app-field-input-text.component';
+import { AppFieldInputComponent } from '@shared/app-field-input/app-field-input.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
 import { PrimeIcons } from 'primeng/api';
@@ -19,7 +19,7 @@ import { PrimeIcons } from 'primeng/api';
     AppHeaderComponent,
     AppFooterComponent,
     AppButtonComponent,
-    AppFieldInputTextComponent,
+    AppFieldInputComponent,
   ],
   templateUrl: './create-project.component.html',
   styleUrl: './create-project.component.scss',

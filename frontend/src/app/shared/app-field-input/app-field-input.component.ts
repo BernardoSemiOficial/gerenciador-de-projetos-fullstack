@@ -7,20 +7,20 @@ import {
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
-  selector: 'app-field-input-text',
+  selector: 'app-field-input',
   standalone: true,
   imports: [InputTextModule, FormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AppFieldInputTextComponent),
+      useExisting: forwardRef(() => AppFieldInputComponent),
       multi: true,
     },
   ],
-  templateUrl: './app-field-input-text.component.html',
-  styleUrl: './app-field-input-text.component.scss',
+  templateUrl: './app-field-input.component.html',
+  styleUrl: './app-field-input.component.scss',
 })
-export class AppFieldInputTextComponent implements ControlValueAccessor {
+export class AppFieldInputComponent implements ControlValueAccessor {
   fieldId = input.required<string>();
   fieldLabel = input.required<string>();
   fieldInputHelp = input.required<string>();
