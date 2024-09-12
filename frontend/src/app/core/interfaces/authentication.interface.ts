@@ -1,3 +1,5 @@
+import { User } from './user.interface';
+
 export interface LoginPayload {
   email: string;
   password: string;
@@ -6,6 +8,7 @@ export interface LoginPayload {
 export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
+  user: User;
 }
 
 export interface RegisterPayload {
@@ -15,9 +18,9 @@ export interface RegisterPayload {
 }
 
 export interface RegisterResponse {
-  id: string;
-  name: string;
-  email: string;
+  accessToken: string;
+  refreshToken: string;
+  user: User;
 }
 
 export interface RefreshTokenPayload {

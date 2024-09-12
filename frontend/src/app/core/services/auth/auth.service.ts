@@ -21,7 +21,7 @@ export class AuthService {
   private readonly baseUrl = environment.apiUrl;
 
   login(user: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.baseUrl + 'api/auth/login', user);
+    return this.http.post<LoginResponse>(this.baseUrl + '/auth/login', user);
   }
 
   logout() {
@@ -32,7 +32,7 @@ export class AuthService {
 
   register(registerPayload: RegisterPayload): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
-      this.baseUrl + 'api/auth/register',
+      this.baseUrl + '/auth/register',
       registerPayload
     );
   }
@@ -41,7 +41,7 @@ export class AuthService {
     const refreshToken =
       localStorage.getItem(LocalStorage.RefreshToken) ?? null;
     return this.http.post<RefreshTokenResponse>(
-      this.baseUrl + 'api/auth/refresh-token',
+      this.baseUrl + '/auth/refresh-token',
       {
         refreshToken,
       }

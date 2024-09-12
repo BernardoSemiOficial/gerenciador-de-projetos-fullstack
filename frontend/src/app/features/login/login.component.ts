@@ -7,6 +7,7 @@ import {
   LoginResponse,
 } from '@core/interfaces/authentication.interface';
 import { AuthService } from '@core/services/auth/auth.service';
+import { UserService } from '@core/services/user/user.service';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,6 +23,7 @@ import { PasswordModule } from 'primeng/password';
 export class LoginComponent {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private authService: AuthService = inject(AuthService);
+  private userService: UserService = inject(UserService);
   private messageService: MessageService = inject(MessageService);
   private router: Router = inject(Router);
   loginForm = this.initForm();
@@ -44,6 +46,7 @@ export class LoginComponent {
     this.authService.login(payload).subscribe({
       next: (data: LoginResponse) => {
         this.authService.setTokens(data);
+        this.userService.saveUser(data.user);
         this.router.navigate(['/dashboard']);
         this.messageService.add({
           severity: 'success',
