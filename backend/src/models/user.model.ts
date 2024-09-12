@@ -27,17 +27,15 @@ export class UserClient {
 }
 
 export class ProjectForUserClient {
-  public project!: {
-    id: string;
-    name: string;
-    created_at: Date;
-    updated_at: Date;
-    number_of_users: number;
-    description: string;
-    starts_at: Date;
-    ends_at: Date;
-    is_owner: boolean;
-  };
+  public id: string;
+  public name: string;
+  public created_at: Date;
+  public updated_at: Date;
+  public number_of_users: number;
+  public description: string;
+  public starts_at: Date;
+  public ends_at: Date;
+  public is_owner: boolean;
 
   constructor({
     is_owner,
@@ -57,16 +55,14 @@ export class ProjectForUserClient {
       ends_at: Date;
     };
   }) {
-    this.project = {
-      id: project.public_id,
-      name: project.name,
-      created_at: project.created_at,
-      updated_at: project.updated_at,
-      number_of_users: project._count.users,
-      description: project.description,
-      starts_at: project.starts_at,
-      ends_at: project.ends_at,
-      is_owner,
-    };
+    this.id = project.public_id;
+    this.name = project.name;
+    this.created_at = project.created_at;
+    this.updated_at = project.updated_at;
+    this.number_of_users = project._count.users;
+    this.description = project.description;
+    this.starts_at = project.starts_at;
+    this.ends_at = project.ends_at;
+    this.is_owner = is_owner;
   }
 }
