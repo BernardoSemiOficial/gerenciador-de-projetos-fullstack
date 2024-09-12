@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { ClientError } from "../../errors/client-error";
 import { TokenPayload } from "../../models/token.model";
+
+import { UserClient } from "../../models/user.model";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { BcriptService } from "../../services/bcript.service";
 import { TokenService } from "../../services/token.service";
@@ -29,6 +31,7 @@ export class AuthController {
     if (!isPasswordEqual) {
       throw new ClientError({ message: "Not authorized", code: 401 });
     }
+
     const tokenPayload: TokenPayload = {
       publicId: user.public_id,
       email: user.email,
@@ -40,7 +43,17 @@ export class AuthController {
       isAccessToken: false,
     });
 
-    return reply.status(201).send({ accessToken, refreshToken });
+    const userClient = new UserClient(
+      user.public_id,
+      user.email,
+      user.name,
+      user.created_at,
+      user.updated_at
+    );
+
+    return reply
+      .status(201)
+      .send({ accessToken, refreshToken, user: userClient });
   }
 
   static async register(
@@ -56,6 +69,7 @@ export class AuthController {
       email,
       password: hashPassword,
     });
+
     const tokenPayload: TokenPayload = {
       publicId: user.public_id,
       email: user.email,
@@ -66,7 +80,18 @@ export class AuthController {
     const refreshToken = TokenService.generateTokenUser(tokenPayload, {
       isAccessToken: false,
     });
-    return reply.status(201).send({ user, accessToken, refreshToken });
+
+    const userClient = new UserClient(
+      user.public_id,
+      user.email,
+      user.name,
+      user.created_at,
+      user.updated_at
+    );
+
+    return reply
+      .status(201)
+      .send({ accessToken, refreshToken, user: userClient });
   }
 
   static async refreshToken(
@@ -81,16 +106,20 @@ export class AuthController {
     const user = await UsersRespository.findUserByPublicId({
       publicId: userPublicId,
     });
+
     if (!user) {
       throw new Error("Cannot generate a new token");
     }
+
     const tokenPayload: TokenPayload = {
       publicId: user.public_id,
       email: user.email,
     };
+
     const accessToken = TokenService.generateTokenUser(tokenPayload, {
       isAccessToken: true,
     });
+
     return reply.status(200).send({ accessToken });
   }
 }
