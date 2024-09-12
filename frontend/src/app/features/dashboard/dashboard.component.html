@@ -1,5 +1,20 @@
-<p>dashboard works!</p>
+@let userProjects = userProjects$ | async;
 
-<code>
-  {{ userProjects$ | async | json }}
-</code>
+<main>
+  <h1 class="px-3">Dashboard</h1>
+
+  <section class="projects my-5 px-3">
+    <h2>Projects</h2>
+
+    <article class="projects-list">
+      @for (project of userProjects?.projects; track project.id) {
+      <app-card
+        [title]="project.name"
+        [description]="project.description"
+        [icons]="[{ label: project.number_of_users, class: PrimeIcons.USER }]"
+        [redirectPath]="['/projects', project.id]"
+      ></app-card>
+      }
+    </article>
+  </section>
+</main>
