@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { canActivateAuth } from '@core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivate: [canActivateAuth],
     loadComponent: () =>
       import('./pages/dashboard-page/dashboard-page.component').then(
         (m) => m.DashboardPageComponent
