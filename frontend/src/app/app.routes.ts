@@ -16,6 +16,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./pages/dashboard-page/dashboard-page.component').then(
+        (m) => m.DashboardPageComponent
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'login',
