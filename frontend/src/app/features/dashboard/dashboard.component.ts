@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { UserService } from '@core/services/user/user.service';
 import { ResponseGetProjectsForUser } from '@core/services/user/user.service.types';
+import { AppButtonComponent } from '@shared/app-button/app-button.component';
 import { AppCardComponent } from '@shared/app-card/app-card.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
@@ -13,9 +15,11 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     AppHeaderComponent,
     AppFooterComponent,
     AppCardComponent,
+    AppButtonComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',

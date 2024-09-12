@@ -4,7 +4,14 @@
   <h1 class="m-0 pt-5 px-3">Dashboard</h1>
 
   <section class="projects my-5 px-3">
-    <h2>Projects</h2>
+    <div class="flex align-content-center justify-content-between gap-2">
+      <h2>Projects</h2>
+      <app-button
+        [label]="'Create Project'"
+        [icon]="PrimeIcons.PLUS"
+        [routerLink]="['/projects/create']"
+      ></app-button>
+    </div>
 
     <article class="projects-list">
       @for (project of userProjects?.projects; track project.id) {
