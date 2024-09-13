@@ -25,12 +25,24 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'dashboard/projects/create',
+    path: 'projects',
     canActivate: [canActivateAuth],
-    loadComponent: () =>
-      import('./pages/create-project-page/create-project-page.component').then(
-        (m) => m.CreateProjectPageComponent
-      ),
+    children: [
+      {
+        path: 'create',
+        loadComponent: () =>
+          import(
+            './pages/create-project-page/create-project-page.component'
+          ).then((m) => m.CreateProjectPageComponent),
+      },
+      {
+        path: ':projectId',
+        loadComponent: () =>
+          import('./pages/view-project-page/view-project-page.component').then(
+            (m) => m.ViewProjectPageComponent
+          ),
+      },
+    ],
   },
   {
     path: '',

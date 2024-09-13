@@ -9,7 +9,7 @@
       <app-button
         [label]="'create project'"
         [icon]="PrimeIcons.PLUS"
-        [routerLink]="['projects/create']"
+        [routerLink]="['/projects/create']"
       ></app-button>
     </div>
 
@@ -19,7 +19,7 @@
         [title]="project.name"
         [description]="project.description"
         [icons]="[{ label: project.number_of_users, class: PrimeIcons.USER }]"
-        [redirectPath]="['/projects', project.id]"
+        [redirectPath]="['projects', project.id]"
         [date]="{ startsAt: project.created_at, endsAt: project.ends_at }"
       ></app-card>
       }
