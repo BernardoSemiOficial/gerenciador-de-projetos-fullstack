@@ -22,18 +22,18 @@
         [fieldLabel]="'description'"
         [fieldInputHelp]="'The description of your project'"
       ></app-field-textarea>
-      <app-field-input
+      <app-field-calendar
         [fieldId]="'starts_at'"
         formControlName="starts_at"
         [fieldLabel]="'starts at'"
         [fieldInputHelp]="'The starts at of your project'"
-      ></app-field-input>
-      <app-field-input
+      ></app-field-calendar>
+      <app-field-calendar
         [fieldId]="'ends_at'"
         formControlName="ends_at"
         [fieldLabel]="'ends at'"
         [fieldInputHelp]="'The ends at of your project'"
-      ></app-field-input>
+      ></app-field-calendar>
       <app-button
         class="w-full mt-5"
         [type]="'submit'"
