@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ViewProjectComponent } from '@features/view-project/view-project.component';
+import { ViewProjectComponent } from '@features/projects/view-project/view-project.component';
 
 @Component({
   selector: 'app-view-project-page',

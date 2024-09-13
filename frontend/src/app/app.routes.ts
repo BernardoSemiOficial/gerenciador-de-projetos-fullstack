@@ -27,22 +27,10 @@ export const routes: Routes = [
   {
     path: 'projects',
     canActivate: [canActivateAuth],
-    children: [
-      {
-        path: 'create',
-        loadComponent: () =>
-          import(
-            './pages/create-project-page/create-project-page.component'
-          ).then((m) => m.CreateProjectPageComponent),
-      },
-      {
-        path: ':projectId',
-        loadComponent: () =>
-          import('./pages/view-project-page/view-project-page.component').then(
-            (m) => m.ViewProjectPageComponent
-          ),
-      },
-    ],
+    loadChildren: () =>
+      import('./pages/projects-page/projects-page-router').then(
+        (r) => r.PROJECTS_PAGE_ROUTER
+      ),
   },
   {
     path: '',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CreateProjectComponent } from '@features/create-project/create-project.component';
+import { CreateProjectComponent } from '@features/projects/create-project/create-project.component';
 
 @Component({
   selector: 'app-create-project-page',
