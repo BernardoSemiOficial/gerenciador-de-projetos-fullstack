@@ -19,7 +19,7 @@ export const TasksControllerSchema = {
       body: zod.object({
         name: zod.string().min(5),
         description: zod.string(),
-        deliveryTime: zod.number().int().positive(),
+        delivery_time: zod.number().int().positive(),
         priority: zod.nativeEnum(TaskPriority),
       }),
     },
@@ -32,7 +32,7 @@ export const TasksControllerSchema = {
       body: zod.object({
         name: zod.string().min(5),
         description: zod.string(),
-        deliveryTime: zod.number().int().positive(),
+        delivery_time: zod.number().int().positive(),
         priority: zod.nativeEnum(TaskPriority),
         status: zod.nativeEnum(TaskStatus),
       }),

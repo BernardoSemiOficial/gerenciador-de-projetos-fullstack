@@ -11,8 +11,8 @@ export const ProjectsControllerSchema = {
       body: zod.object({
         name: zod.string().min(5),
         description: zod.string().min(5),
-        startsAt: zod.coerce.date(),
-        endsAt: zod.coerce.date(),
+        starts_at: zod.coerce.date(),
+        ends_at: zod.coerce.date(),
       }),
     },
   },
@@ -24,8 +24,8 @@ export const ProjectsControllerSchema = {
       body: zod.object({
         name: zod.string().min(5),
         description: zod.string(),
-        startsAt: zod.coerce.date(),
-        endsAt: zod.coerce.date(),
+        starts_at: zod.coerce.date(),
+        ends_at: zod.coerce.date(),
       }),
     },
   },

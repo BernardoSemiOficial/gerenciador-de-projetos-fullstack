@@ -36,7 +36,7 @@ export class TasksController {
     reply: FastifyReply
   ) {
     const { projectPublicId } = request.params;
-    const { name, description, deliveryTime, priority } = request.body;
+    const { name, description, delivery_time, priority } = request.body;
     const project = await ProjectsRespository.findProjectByPublicId({
       publicId: projectPublicId,
     });
@@ -50,7 +50,7 @@ export class TasksController {
       .add(1, "days")
       .diff(project.starts_at, "days");
 
-    if (deliveryTime > projectDays) {
+    if (delivery_time > projectDays) {
       throw new ClientError({
         message: "Delivery time is greater than the project duration",
         code: 400,
@@ -61,7 +61,7 @@ export class TasksController {
       projectId: project.id,
       name,
       description,
-      delivery_time: deliveryTime,
+      delivery_time,
       priorityId: TaskPriorityId[priority],
       statusId: TaskStatusId.PENDING,
     });
@@ -77,7 +77,7 @@ export class TasksController {
     reply: FastifyReply
   ) {
     const { taskPublicId } = request.params;
-    const { name, description, deliveryTime, priority, status } = request.body;
+    const { name, description, delivery_time, priority, status } = request.body;
 
     const task = await TasksRespository.findTaskByPublicId(taskPublicId);
 
@@ -90,7 +90,7 @@ export class TasksController {
       .add(1, "days")
       .diff(task.project.starts_at, "days");
 
-    if (deliveryTime > projectDays) {
+    if (delivery_time > projectDays) {
       throw new ClientError({
         message: "Delivery time is greater than the project duration",
         code: 400,
@@ -100,7 +100,7 @@ export class TasksController {
     const taskUpdated = await TasksRespository.updateTask(taskPublicId, {
       name,
       description,
-      delivery_time: deliveryTime,
+      delivery_time,
       priorityId: TaskPriorityId[priority],
       statusId: TaskStatusId[status],
     });

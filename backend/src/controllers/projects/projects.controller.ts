@@ -16,7 +16,7 @@ export class ProjectsController {
     reply: FastifyReply
   ) {
     const { userPublicId } = request.params;
-    const { name, description, startsAt, endsAt } = request.body;
+    const { name, description, starts_at, ends_at } = request.body;
 
     const user = await UsersRespository.findUserByPublicId({
       publicId: userPublicId,
@@ -30,14 +30,14 @@ export class ProjectsController {
       });
     }
 
-    if (day(startsAt).isAfter(endsAt)) {
+    if (day(starts_at).isAfter(ends_at)) {
       throw new ClientError({
         message: "The project start date must be before the end date",
         code: 400,
       });
     }
 
-    if (day(startsAt).isBefore(day())) {
+    if (day(starts_at).isBefore(day())) {
       throw new ClientError({
         message: "The project start date must be after the current date",
         code: 400,
@@ -47,8 +47,8 @@ export class ProjectsController {
     const project = await ProjectsRespository.createProject({
       name,
       description,
-      starts_at: startsAt,
-      ends_at: endsAt,
+      starts_at,
+      ends_at,
     });
 
     await UsersRespository.createProjectForUser({
@@ -68,7 +68,7 @@ export class ProjectsController {
     reply: FastifyReply
   ) {
     const { projectPublicId } = request.params;
-    const { name, description, startsAt, endsAt } = request.body;
+    const { name, description, starts_at, ends_at } = request.body;
 
     const project = await ProjectsRespository.findProjectByPublicId({
       publicId: projectPublicId,
@@ -81,14 +81,14 @@ export class ProjectsController {
       });
     }
 
-    if (day(startsAt).isAfter(endsAt)) {
+    if (day(starts_at).isAfter(ends_at)) {
       throw new ClientError({
         message: "The project start date must be before the end date",
         code: 400,
       });
     }
 
-    if (day(startsAt).isBefore(day())) {
+    if (day(starts_at).isBefore(day())) {
       throw new ClientError({
         message: "The project start date must be after the current date",
         code: 400,
@@ -100,8 +100,8 @@ export class ProjectsController {
       {
         name,
         description,
-        starts_at: startsAt,
-        ends_at: endsAt,
+        starts_at,
+        ends_at,
       }
     );
 
