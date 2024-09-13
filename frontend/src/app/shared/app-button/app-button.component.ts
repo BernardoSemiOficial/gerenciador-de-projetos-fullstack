@@ -22,6 +22,7 @@ type ButtonSeverity =
 })
 export class AppButtonComponent {
   label = input<string>();
+  type = input<HTMLButtonElement['type']>('button');
   icon = input<string>();
   isRounded = input<boolean>();
   iconPos = input<ButtonIconPosition>('left');

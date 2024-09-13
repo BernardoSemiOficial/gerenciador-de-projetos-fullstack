@@ -7,6 +7,7 @@
 
     <form
       [formGroup]="createProjectForm"
+      (ngSubmit)="onSubmit()"
       class="flex align-content-center flex-wrap justify-content-between gap-5"
     >
       <app-field-input
@@ -15,12 +16,12 @@
         [fieldLabel]="'name'"
         [fieldInputHelp]="'The name of your project'"
       ></app-field-input>
-      <app-field-input
+      <app-field-textarea
         [fieldId]="'description'"
         formControlName="description"
         [fieldLabel]="'description'"
         [fieldInputHelp]="'The description of your project'"
-      ></app-field-input>
+      ></app-field-textarea>
       <app-field-input
         [fieldId]="'starts_at'"
         formControlName="starts_at"
@@ -35,6 +36,7 @@
       ></app-field-input>
       <app-button
         class="w-full mt-5"
+        [type]="'submit'"
         [label]="'create project here'"
         [icon]="PrimeIcons.PLUS"
       ></app-button>
