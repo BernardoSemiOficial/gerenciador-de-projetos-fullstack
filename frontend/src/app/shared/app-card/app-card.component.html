@@ -10,7 +10,16 @@
     </div>
     <h5 class="m-0 mb-1">{{ title() }}</h5>
   </ng-template>
-  <p class="m-0">{{ description() }}</p>
+  <p class="m-0">
+    {{ description() }}
+    @if (date()) {
+    <small class="mt-4 flex align-items-center font-bold">
+      <i [ngClass]="[PrimeIcons.CALENDAR, 'mr-1']"></i>
+      {{ date()?.startsAt | date }} -
+      {{ date()?.endsAt | date }}
+    </small>
+    }
+  </p>
   <ng-template pTemplate="footer">
     <div class="mt-1">
       <p-button

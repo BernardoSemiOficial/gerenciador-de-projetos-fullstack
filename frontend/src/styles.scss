@@ -15,3 +15,9 @@ body {
 main {
   min-height: calc(100dvh - $header-height - $footer-height);
 }
+
+.container-max-w-120rem {
+  width: 100%;
+  max-width: 70rem;
+  margin: 0 auto;
+}

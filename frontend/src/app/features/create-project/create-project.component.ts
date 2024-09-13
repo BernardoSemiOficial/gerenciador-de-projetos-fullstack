@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '@core/services/user/user.service';
 import { AppButtonComponent } from '@shared/app-button/app-button.component';
 import { AppFieldCalendarComponent } from '@shared/app-field-calendar/app-field-calendar.component';
@@ -31,8 +32,9 @@ import { CreateProjectForm } from './create-project.model';
   styleUrl: './create-project.component.scss',
 })
 export class CreateProjectComponent implements OnInit {
-  fb = inject(FormBuilder);
   userService = inject(UserService);
+  router = inject(Router);
+  fb = inject(FormBuilder);
   PrimeIcons = PrimeIcons;
 
   createProjectForm!: FormGroup<CreateProjectForm>;
@@ -42,16 +44,22 @@ export class CreateProjectComponent implements OnInit {
   }
 
   initProjectForm() {
-    this.createProjectForm = this.fb.group({
+    this.createProjectForm = this.fb.nonNullable.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
       starts_at: [new Date(), Validators.required],
-      ends_at: [new Date(), Validators.required],
+      ends_at: [
+        new Date(new Date().setDate(new Date().getDate() + 1)),
+        Validators.required,
+      ],
     });
   }
 
   onSubmit() {
-    console.log('Form submitted:', this.createProjectForm.value);
+    console.log(
+      { invalid: this.createProjectForm.invalid },
+      this.createProjectForm.value
+    );
     if (this.createProjectForm.invalid) return;
 
     const userId = this.userService.user()?.id;
@@ -66,13 +74,15 @@ export class CreateProjectComponent implements OnInit {
       ends_at: endsAt,
     };
 
-    // this.userService.createProjectForUser(userId, payload).subscribe({
-    //   next: (data) => {
-    //     console.log('Project created:', data);
-    //   },
-    //   error: (error) => {
-    //     console.error(error);
-    //   },
-    // });
+    this.userService.createProjectForUser(userId, payload).subscribe({
+      next: (data) => {
+        console.log('Project created:', data);
+        this.createProjectForm.reset();
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

@@ -1,5 +1,5 @@
 <app-header></app-header>
-<main>
+<main class="container-max-w-120rem">
   <h1 class="m-0 pt-5 px-3">Create your project</h1>
 
   <section class="my-5 px-3">
@@ -15,6 +15,7 @@
         formControlName="name"
         [fieldLabel]="'name'"
         [fieldInputHelp]="'The name of your project'"
+        [formControlField]="createProjectForm.get('name')"
       ></app-field-input>
       <app-field-textarea
         [fieldId]="'description'"
@@ -35,10 +36,20 @@
         [fieldInputHelp]="'The ends at of your project'"
       ></app-field-calendar>
       <app-button
+        [isDisabled]="createProjectForm.invalid"
         class="w-full mt-5"
         [type]="'submit'"
         [label]="'create project here'"
         [icon]="PrimeIcons.PLUS"
+      ></app-button>
+      <app-button
+        class="w-full"
+        [type]="'button'"
+        [label]="'clear form'"
+        [icon]="PrimeIcons.TRASH"
+        [isOutlined]="true"
+        (click)="createProjectForm.reset()"
+        (keydown.enter)="createProjectForm.reset()"
       ></app-button>
     </form>
   </section>

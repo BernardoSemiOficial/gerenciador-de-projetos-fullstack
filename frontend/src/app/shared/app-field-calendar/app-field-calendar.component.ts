@@ -35,6 +35,7 @@ export class AppFieldCalendarComponent implements OnInit {
     const currentMonth = month === 0 ? 11 : month;
     const currentYear = currentMonth === 11 ? year - 1 : year;
     this.minDate = new Date();
+    this.minDate.setHours(0, 0, 0, 0);
     this.minDate.setMonth(currentMonth);
     this.minDate.setFullYear(currentYear);
   }

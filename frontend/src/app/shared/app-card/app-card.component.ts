@@ -1,3 +1,4 @@
+import { DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +13,7 @@ import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CardModule, ButtonModule],
+  imports: [CardModule, ButtonModule, NgClass, DatePipe],
   templateUrl: './app-card.component.html',
   styleUrl: './app-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,9 +21,11 @@ import { CardModule } from 'primeng/card';
 export class AppCardComponent {
   router = inject(Router);
   title = input<string>();
+  date = input<{ startsAt: Date; endsAt: Date }>();
   description = input.required<string>();
   icons = input<{ label: string | number; class: PrimeIcons }[]>([]);
   redirectPath = input<[string, string | number]>();
+  PrimeIcons = PrimeIcons;
 
   handleClickButton() {
     const redirectPath = this.redirectPath();

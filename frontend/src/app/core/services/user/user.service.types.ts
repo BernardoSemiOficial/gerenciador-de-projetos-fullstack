@@ -11,8 +11,8 @@ export interface ResponseGetProjectsForUser {
 export interface PayloadCreateProjectForUser {
   name: string;
   description: string;
-  starts_at: Date;
-  ends_at: Date;
+  starts_at: string;
+  ends_at: string;
 }
 
 export interface ResponseCreateProjectForUser {

@@ -1,9 +1,17 @@
-@let id = fieldId(); @let label = fieldLabel(); @let inputHelp =
-fieldInputHelp();
+@let formControlAnalytics = analyticsFormControl(); @let id = fieldId(); @let
+label = fieldLabel(); @let inputHelp = fieldInputHelp();
 
 <div class="w-full flex flex-column gap-2">
   @if (label) {
-  <label [for]="fieldId()">{{ label }}</label>
+  <label
+    [for]="fieldId()"
+    [ngClass]="{
+      'text-red-600':
+        formControlField()?.touched && formControlAnalytics.errorsLength > 0
+    }"
+  >
+    {{ label }}
+  </label>
   }
   <input
     pInputText
@@ -16,7 +24,13 @@ fieldInputHelp();
     (ngModelChange)="_onChange(fieldInputValue)"
     aria-describedby="field-help"
   />
-  @if(inputHelp) {
-  <small id="field-help">{{ inputHelp }}</small>
+  @if(inputHelp && formControlAnalytics.errorsLength === 0) {
+  <small id="field-help">
+    {{ inputHelp }}
+  </small>
+  } @if(formControlField()?.touched && formControlAnalytics.errorsLength > 0) {
+  <small id="field-help" class="text-red-600">
+    Field {{ label }} is {{ formControlAnalytics.errorKey }}
+  </small>
   }
 </div>
