@@ -3,6 +3,13 @@ import { libraries } from "../../libraries";
 const zod = libraries.zod;
 
 export const ProjectsControllerSchema = {
+  getProject: {
+    schema: {
+      params: zod.object({
+        projectPublicId: zod.string(),
+      }),
+    },
+  },
   createProject: {
     schema: {
       params: zod.object({
@@ -39,6 +46,9 @@ export const ProjectsControllerSchema = {
 };
 
 export type ProjectsControllerSchemaType = {
+  getProjectParams: Zod.infer<
+    typeof ProjectsControllerSchema.getProject.schema.params
+  >;
   createProjectParams: Zod.infer<
     typeof ProjectsControllerSchema.createProject.schema.params
   >;

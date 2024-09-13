@@ -20,6 +20,16 @@ export class ProjectsRespository {
           public_id: true,
           starts_at: true,
           ends_at: true,
+          name: true,
+          description: true,
+          created_at: true,
+          updated_at: true,
+          _count: {
+            select: {
+              users: true,
+              tasks: true,
+            },
+          },
         },
       });
     } catch (error) {

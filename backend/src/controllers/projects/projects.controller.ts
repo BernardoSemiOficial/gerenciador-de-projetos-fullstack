@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { ClientError } from "../../errors/client-error";
 import { libraries } from "../../libraries";
+import { ProjectClient } from "../../models/project.model";
 import { ProjectsRespository } from "../../repositories/projects/projects.repository";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { ProjectsControllerSchemaType } from "./projects.schema";
@@ -8,6 +9,30 @@ import { ProjectsControllerSchemaType } from "./projects.schema";
 const day = libraries.day;
 
 export class ProjectsController {
+  static async getProject(
+    request: FastifyRequest<{
+      Params: ProjectsControllerSchemaType["getProjectParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { projectPublicId } = request.params;
+
+    const project = await ProjectsRespository.findProjectByPublicId({
+      publicId: projectPublicId,
+    });
+
+    if (!project) {
+      throw new ClientError({
+        message: "Project not found",
+        code: 404,
+      });
+    }
+
+    const projectClient = new ProjectClient({ project });
+
+    return reply.status(201).send({ project: projectClient });
+  }
+
   static async createProject(
     request: FastifyRequest<{
       Body: ProjectsControllerSchemaType["createProjectBody"];
