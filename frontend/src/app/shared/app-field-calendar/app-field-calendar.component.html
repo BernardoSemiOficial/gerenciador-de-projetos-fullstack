@@ -1,0 +1,26 @@
+@let id = fieldId(); @let label = fieldLabel(); @let inputHelp =
+fieldInputHelp();
+
+<div class="w-full flex flex-column gap-2">
+  @if (label) {
+  <label [for]="fieldId()">{{ label }}</label>
+  }
+  <p-calendar
+    pInputText
+    [id]="id"
+    [name]="id"
+    [minDate]="minDate"
+    [dateFormat]="fieldInputFormat()"
+    [showIcon]="isShowIcon()"
+    [showOnFocus]="isShowOnFocus()"
+    [showButtonBar]="isShowButtonBar"
+    [disabled]="isDisabled"
+    [(ngModel)]="fieldInputValue"
+    (blur)="_onTouched()"
+    (ngModelChange)="_onChange(fieldInputValue)"
+    aria-describedby="field-help"
+  />
+  @if(inputHelp) {
+  <small id="field-help">{{ inputHelp }}</small>
+  }
+</div>
