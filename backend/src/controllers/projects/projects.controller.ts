@@ -113,7 +113,7 @@ export class ProjectsController {
       });
     }
 
-    if (day(starts_at).isBefore(day())) {
+    if (day(starts_at).isBefore(project.starts_at)) {
       throw new ClientError({
         message: "The project start date must be after the current date",
         code: 400,
