@@ -82,7 +82,9 @@ export class ProjectsController {
       project_id: project.id,
     });
 
-    return reply.status(201).send({ project });
+    const projectClient = new ProjectClient({ project });
+
+    return reply.status(201).send({ project: projectClient });
   }
 
   static async updateProject(
