@@ -1,5 +1,6 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, inject, input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ProjectService } from '@core/services/project/project.service';
 import { ResponseGetProject } from '@core/services/project/project.service.types';
 import { AppChipComponent } from '@shared/app-chip/app-chip.component';
@@ -8,6 +9,7 @@ import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
 import { PrimeIcons } from 'primeng/api';
 import { Observable } from 'rxjs';
+import { AppButtonComponent } from '../../../shared/app-button/app-button.component';
 import { AppCardComponent } from '../../../shared/app-card/app-card.component';
 
 @Component({
@@ -19,6 +21,8 @@ import { AppCardComponent } from '../../../shared/app-card/app-card.component';
     AppCardComponent,
     AppChipComponent,
     AppDividerComponent,
+    AppButtonComponent,
+    RouterLink,
     AsyncPipe,
     DatePipe,
   ],

@@ -1,10 +1,19 @@
 <app-header></app-header>
 
 @let getProject = getProject$ | async; @let project = getProject?.project;
+
 <main class="container-max-w-120rem">
+  @if (project) {
   <div class="pt-5 px-3">
     <app-chip label="project" [icon]="PrimeIcons.BRIEFCASE" />
-    <h1>{{ project?.name }}</h1>
+    <div class="flex justify-content-between">
+      <h1>{{ project?.name }}</h1>
+      <app-button
+        label="edit project"
+        [icon]="PrimeIcons.FILE_EDIT"
+        [routerLink]="['/projects/edit', project?.id]"
+      ></app-button>
+    </div>
     <app-divider></app-divider>
     <p>{{ project?.description }}</p>
   </div>
@@ -47,5 +56,6 @@
       </ul>
     </article>
   </section>
+  }
 </main>
 <app-footer></app-footer>
