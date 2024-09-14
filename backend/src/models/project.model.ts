@@ -9,22 +9,18 @@ export class ProjectClient {
   public starts_at: Date;
   public ends_at: Date;
 
-  constructor({
-    project,
-  }: {
-    project: {
-      public_id: string;
-      name: string;
-      created_at: Date;
-      updated_at: Date;
-      _count: {
-        users: number;
-        tasks: number;
-      };
-      description: string;
-      starts_at: Date;
-      ends_at: Date;
+  constructor(project: {
+    public_id: string;
+    name: string;
+    created_at: Date;
+    updated_at: Date;
+    _count: {
+      users: number;
+      tasks: number;
     };
+    description: string;
+    starts_at: Date;
+    ends_at: Date;
   }) {
     this.id = project.public_id;
     this.name = project.name;

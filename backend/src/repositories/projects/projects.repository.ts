@@ -87,6 +87,12 @@ export class ProjectsRespository {
           updated_at: true,
           starts_at: true,
           ends_at: true,
+          _count: {
+            select: {
+              users: true,
+              tasks: true,
+            },
+          },
         },
       });
     } catch (error) {

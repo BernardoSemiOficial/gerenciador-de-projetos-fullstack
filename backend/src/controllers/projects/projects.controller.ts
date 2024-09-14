@@ -28,7 +28,7 @@ export class ProjectsController {
       });
     }
 
-    const projectClient = new ProjectClient({ project });
+    const projectClient = new ProjectClient(project);
 
     return reply.status(201).send({ project: projectClient });
   }
@@ -82,7 +82,7 @@ export class ProjectsController {
       project_id: project.id,
     });
 
-    const projectClient = new ProjectClient({ project });
+    const projectClient = new ProjectClient(project);
 
     return reply.status(201).send({ project: projectClient });
   }
@@ -132,7 +132,9 @@ export class ProjectsController {
       }
     );
 
-    return reply.status(200).send({ project: projectUpdated });
+    const projectUpdatedClient = new ProjectClient(projectUpdated);
+
+    return reply.status(200).send({ project: projectUpdatedClient });
   }
 
   static async deleteProject(

@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { TaskPriorityId, TaskStatusId } from "../../enums/status.enum";
 import { ClientError } from "../../errors/client-error";
 import { libraries } from "../../libraries";
+import { TaskClient } from "../../models/task.model";
 import { ProjectsRespository } from "../../repositories/projects/projects.repository";
 import { TasksRespository } from "../../repositories/tasks/tasks.repository";
 import { TasksControllerSchemaType } from "./tasks.schema";
@@ -25,7 +26,8 @@ export class TasksController {
     }
 
     const tasks = await TasksRespository.getTasks({ projectId: project.id });
-    return reply.status(200).send({ tasks });
+    const tasksClient = tasks.map((task) => new TaskClient(task));
+    return reply.status(200).send({ tasks: tasksClient });
   }
 
   static async createTask(
@@ -66,7 +68,9 @@ export class TasksController {
       statusId: TaskStatusId.PENDING,
     });
 
-    return reply.status(201).send({ task });
+    const taskClient = new TaskClient(task);
+
+    return reply.status(201).send({ task: taskClient });
   }
 
   static async updateTask(
@@ -105,7 +109,9 @@ export class TasksController {
       statusId: TaskStatusId[status],
     });
 
-    return reply.status(200).send({ task: taskUpdated });
+    const taskUpdatedClient = new TaskClient(taskUpdated);
+
+    return reply.status(200).send({ task: taskUpdatedClient });
   }
 
   static async deleteTask(

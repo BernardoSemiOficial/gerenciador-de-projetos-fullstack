@@ -7,7 +7,8 @@ import { UsersControllerSchemaType } from "./users.schema";
 export class UsersController {
   static async getUsers(_: FastifyRequest, reply: FastifyReply) {
     const users = await UsersRespository.getUsers();
-    return reply.status(201).send({ users });
+    const usersClient = users.map((user) => new UserClient(user));
+    return reply.status(201).send({ users: usersClient });
   }
 
   static async getUser(
