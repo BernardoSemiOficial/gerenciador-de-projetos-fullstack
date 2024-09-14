@@ -4,10 +4,10 @@ import { libraries } from "../../libraries";
 const zod = libraries.zod;
 
 export const TasksControllerSchema = {
-  getAllTasksByProjectId: {
+  getTask: {
     schema: {
       params: zod.object({
-        projectPublicId: zod.string(),
+        taskPublicId: zod.string(),
       }),
     },
   },
@@ -48,9 +48,7 @@ export const TasksControllerSchema = {
 };
 
 export type TasksControllerSchemaType = {
-  getAllTasksByProjectIdParams: Zod.infer<
-    typeof TasksControllerSchema.getAllTasksByProjectId.schema.params
-  >;
+  getTask: Zod.infer<typeof TasksControllerSchema.getTask.schema.params>;
   createTaskBody: Zod.infer<
     typeof TasksControllerSchema.createTask.schema.body
   >;

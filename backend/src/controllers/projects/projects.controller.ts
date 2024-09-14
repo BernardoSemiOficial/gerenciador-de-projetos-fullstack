@@ -2,7 +2,9 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { ClientError } from "../../errors/client-error";
 import { libraries } from "../../libraries";
 import { ProjectClient } from "../../models/project.model";
+import { TaskClient } from "../../models/task.model";
 import { ProjectsRespository } from "../../repositories/projects/projects.repository";
+import { TasksRespository } from "../../repositories/tasks/tasks.repository";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { ProjectsControllerSchemaType } from "./projects.schema";
 
@@ -31,6 +33,28 @@ export class ProjectsController {
     const projectClient = new ProjectClient(project);
 
     return reply.status(201).send({ project: projectClient });
+  }
+
+  static async getTasksByProjectId(
+    request: FastifyRequest<{
+      Params: ProjectsControllerSchemaType["getTasksByProjectIdParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { projectPublicId } = request.params;
+
+    const project = await ProjectsRespository.findProjectByPublicId({
+      publicId: projectPublicId,
+    });
+
+    if (!project) {
+      throw new ClientError({ message: "Project not found", code: 404 });
+    }
+
+    const tasks = await TasksRespository.getTasks({ projectId: project.id });
+    const tasksClient = tasks.map((task) => new TaskClient(task));
+
+    return reply.status(200).send({ tasks: tasksClient });
   }
 
   static async createProject(

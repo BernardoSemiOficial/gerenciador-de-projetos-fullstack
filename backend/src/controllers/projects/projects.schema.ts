@@ -10,6 +10,13 @@ export const ProjectsControllerSchema = {
       }),
     },
   },
+  getTasksByProjectId: {
+    schema: {
+      params: zod.object({
+        projectPublicId: zod.string(),
+      }),
+    },
+  },
   createProject: {
     schema: {
       params: zod.object({
@@ -48,6 +55,9 @@ export const ProjectsControllerSchema = {
 export type ProjectsControllerSchemaType = {
   getProjectParams: Zod.infer<
     typeof ProjectsControllerSchema.getProject.schema.params
+  >;
+  getTasksByProjectIdParams: Zod.infer<
+    typeof ProjectsControllerSchema.getTasksByProjectId.schema.params
   >;
   createProjectParams: Zod.infer<
     typeof ProjectsControllerSchema.createProject.schema.params

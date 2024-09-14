@@ -7,9 +7,9 @@ export const initializerTasksController = async (app: FastifyZod) => {
   app.addHook("onRequest", AuthorizationMiddleware.verifyToken);
 
   app.get(
-    "/tasks/:projectPublicId",
-    TasksControllerSchema.getAllTasksByProjectId,
-    TasksController.getAllTasksByProjectId
+    "/tasks/:taskPublicId",
+    TasksControllerSchema.getTask,
+    TasksController.getTask
   );
   app.post(
     "/tasks/:projectPublicId",

@@ -10,24 +10,23 @@ import { TasksControllerSchemaType } from "./tasks.schema";
 const day = libraries.day;
 
 export class TasksController {
-  static async getAllTasksByProjectId(
+  static async getTask(
     request: FastifyRequest<{
-      Params: TasksControllerSchemaType["getAllTasksByProjectIdParams"];
+      Params: TasksControllerSchemaType["getTask"];
     }>,
     reply: FastifyReply
   ) {
-    const { projectPublicId } = request.params;
-    const project = await ProjectsRespository.findProjectByPublicId({
-      publicId: projectPublicId,
-    });
+    const { taskPublicId } = request.params;
 
-    if (!project) {
-      throw new Error("Project not found");
+    const task = await TasksRespository.findTaskByPublicId(taskPublicId);
+
+    if (!task) {
+      throw new ClientError({ message: "Task not found", code: 404 });
     }
 
-    const tasks = await TasksRespository.getTasks({ projectId: project.id });
-    const tasksClient = tasks.map((task) => new TaskClient(task));
-    return reply.status(200).send({ tasks: tasksClient });
+    const taskClient = new TaskClient(task);
+
+    return reply.status(200).send({ task: taskClient });
   }
 
   static async createTask(

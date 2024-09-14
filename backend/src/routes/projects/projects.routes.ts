@@ -11,6 +11,11 @@ export const initializerProjectsController = async (app: FastifyZod) => {
     ProjectsControllerSchema.getProject,
     ProjectsController.getProject
   );
+  app.get(
+    "/projects/:projectPublicId/tasks",
+    ProjectsControllerSchema.getTasksByProjectId,
+    ProjectsController.getTasksByProjectId
+  );
   app.post(
     "/projects/:userPublicId",
     ProjectsControllerSchema.createProject,
