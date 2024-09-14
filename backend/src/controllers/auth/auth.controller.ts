@@ -45,7 +45,7 @@ export class AuthController {
     const userClient = new UserClient(user);
 
     return reply
-      .status(201)
+      .status(200)
       .send({ accessToken, refreshToken, user: userClient });
   }
 
