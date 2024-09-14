@@ -26,7 +26,7 @@ export class AppFieldCalendarComponent implements OnInit {
   fieldInputValue: string | number = '';
   isDisabled: boolean = false;
   isShowButtonBar: boolean = true;
-  minDate: Date | undefined;
+  minDate = input<Date>(new Date());
 
   ngOnInit() {
     const today = new Date();
@@ -34,10 +34,9 @@ export class AppFieldCalendarComponent implements OnInit {
     const year = today.getFullYear();
     const currentMonth = month === 0 ? 11 : month;
     const currentYear = currentMonth === 11 ? year - 1 : year;
-    this.minDate = new Date();
-    this.minDate.setHours(0, 0, 0, 0);
-    this.minDate.setMonth(currentMonth);
-    this.minDate.setFullYear(currentYear);
+    this.minDate().setHours(0, 0, 0, 0);
+    this.minDate().setMonth(currentMonth);
+    this.minDate().setFullYear(currentYear);
   }
 
   _onChange = (_: any) => {};
