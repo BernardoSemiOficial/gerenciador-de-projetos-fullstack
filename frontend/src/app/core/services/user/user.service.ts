@@ -4,8 +4,6 @@ import { SessionStorage } from '@core/enums/session-storage.enum';
 import { User } from '@core/interfaces/user.interface';
 import { environment } from '@environment/environment';
 import {
-  PayloadCreateProjectForUser,
-  ResponseCreateProjectForUser,
   ResponseGetProjectsForUser,
   ResponseGetUser,
 } from './user.service.types';
@@ -49,13 +47,6 @@ export class UserService {
   getProjectsForUser(userId: string) {
     return this.http.get<ResponseGetProjectsForUser>(
       this.baseUrl + `/users/${userId}/projects`
-    );
-  }
-
-  createProjectForUser(userId: string, payload: PayloadCreateProjectForUser) {
-    return this.http.post<ResponseCreateProjectForUser>(
-      this.baseUrl + `/projects/${userId}`,
-      payload
     );
   }
 }

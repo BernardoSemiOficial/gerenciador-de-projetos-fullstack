@@ -7,14 +7,3 @@ export interface ResponseGetUser {
 export interface ResponseGetProjectsForUser {
   projects: ProjectForUser[];
 }
-
-export interface PayloadCreateProjectForUser {
-  name: string;
-  description: string;
-  starts_at: string;
-  ends_at: string;
-}
-
-export interface ResponseCreateProjectForUser {
-  project: ProjectForUser;
-}
