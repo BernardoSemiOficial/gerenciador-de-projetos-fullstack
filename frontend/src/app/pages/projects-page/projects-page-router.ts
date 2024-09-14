@@ -9,6 +9,13 @@ export const PROJECTS_PAGE_ROUTER: Route[] = [
       ),
   },
   {
+    path: 'edit/:projectId',
+    loadComponent: () =>
+      import('./edit-project-page/edit-project-page.component').then(
+        (m) => m.EditProjectPageComponent
+      ),
+  },
+  {
     path: ':projectId',
     loadComponent: () =>
       import('./view-project-page/view-project-page.component').then(
