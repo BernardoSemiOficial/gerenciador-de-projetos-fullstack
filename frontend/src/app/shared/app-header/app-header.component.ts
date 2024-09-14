@@ -38,7 +38,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logoutByUser();
   }
 
   formatLabelAvatar() {

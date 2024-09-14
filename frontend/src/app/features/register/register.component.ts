@@ -46,12 +46,12 @@ export class RegisterComponent {
       next: (data) => {
         this.authService.setTokens(data);
         this.userService.saveUser(data.user);
-        this.router.navigate(['/dashboard']);
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
           detail: 'User registered',
         });
+        this.router.navigate(['/dashboard']);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);

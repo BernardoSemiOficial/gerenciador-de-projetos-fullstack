@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
+  CanActivateChildFn,
   CanActivateFn,
   Router,
   RouterStateSnapshot,
@@ -8,13 +9,29 @@ import {
 import { AuthService } from '@core/services/auth/auth.service';
 
 export const canActivateAuth: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
+  _: ActivatedRouteSnapshot,
+  __: RouterStateSnapshot
 ) => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const hasAccessToken = authService.getAccessToken();
   if (!hasAccessToken) {
+    authService.alertMessageLogout();
+    router.navigate(['/login']);
+    return false;
+  }
+  return true;
+};
+
+export const canActivateChildAuth: CanActivateChildFn = (
+  _: ActivatedRouteSnapshot,
+  __: RouterStateSnapshot
+) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  const hasAccessToken = authService.getAccessToken();
+  if (!hasAccessToken) {
+    authService.alertMessageLogout();
     router.navigate(['/login']);
     return false;
   }

@@ -10,12 +10,14 @@ import {
   RegisterResponse,
 } from '@core/interfaces/authentication.interface';
 import { environment } from '@environment/environment';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private messageService: MessageService = inject(MessageService);
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
   private readonly baseUrl = environment.apiUrl;
@@ -24,10 +26,30 @@ export class AuthService {
     return this.http.post<LoginResponse>(this.baseUrl + '/auth/login', user);
   }
 
+  logoutByUser() {
+    localStorage.removeItem(LocalStorage.AccessToken);
+    localStorage.removeItem(LocalStorage.RefreshToken);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'User logged out',
+    });
+    this.router.navigate(['/login']);
+  }
+
   logout() {
     localStorage.removeItem(LocalStorage.AccessToken);
     localStorage.removeItem(LocalStorage.RefreshToken);
+    this.alertMessageLogout();
     this.router.navigate(['/login']);
+  }
+
+  alertMessageLogout() {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Warning',
+      detail: 'User logged out',
+    });
   }
 
   register(registerPayload: RegisterPayload): Observable<RegisterResponse> {

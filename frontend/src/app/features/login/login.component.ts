@@ -47,12 +47,12 @@ export class LoginComponent {
       next: (data: LoginResponse) => {
         this.authService.setTokens(data);
         this.userService.saveUser(data.user);
-        this.router.navigate(['/dashboard']);
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
           detail: 'User logged in',
         });
+        this.router.navigate(['/dashboard']);
       },
       error: (error: HttpErrorResponse) => {
         this.messageService.add({

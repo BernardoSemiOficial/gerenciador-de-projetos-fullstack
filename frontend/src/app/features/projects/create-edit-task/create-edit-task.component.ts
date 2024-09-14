@@ -24,7 +24,7 @@ import { AppFieldInputComponent } from '@shared/app-field-input/app-field-input.
 import { AppFieldTextareaComponent } from '@shared/app-field-textarea/app-field-textarea.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { CreateEditTaskForm } from './create-edit-task.model';
 
 @Component({
@@ -47,6 +47,7 @@ export class CreateEditTaskComponent {
   taskService = inject(TaskService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
+  messageService = inject(MessageService);
   fb = inject(FormBuilder);
   projectId = input<string>('');
   taskId = input<string>('');
@@ -135,24 +136,42 @@ export class CreateEditTaskComponent {
   createTask(projectId: string, payload: PayloadCreateTask) {
     this.taskService.createTask(projectId, payload).subscribe({
       next: (data) => {
-        console.log('Task created:', data);
         this.router.navigate(['../edit', data.task.id], {
           relativeTo: this.activatedRoute,
         });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'task created successfully',
+        });
       },
-      error: (error) => {
+      error: ({ error }) => {
         console.error(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: error.message,
+        });
       },
     });
   }
 
   editTask(taskId: string, payload: PayloadEditTask) {
     this.taskService.editTask(taskId, payload).subscribe({
-      next: (data) => {
-        console.log('Task edited:', data);
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'task edited successfully',
+        });
       },
-      error: (error) => {
+      error: ({ error }) => {
         console.error(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: error.message,
+        });
       },
     });
   }

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { canActivateAuth } from '@core/guards/auth.guard';
+import { canActivateAuth, canActivateChildAuth } from '@core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -27,6 +27,7 @@ export const routes: Routes = [
   {
     path: 'projects',
     canActivate: [canActivateAuth],
+    canActivateChild: [canActivateChildAuth],
     loadChildren: () =>
       import('./pages/projects-page/projects-page-router').then(
         (r) => r.PROJECTS_PAGE_ROUTER

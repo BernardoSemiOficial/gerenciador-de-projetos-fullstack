@@ -19,7 +19,7 @@ import { AppFieldInputComponent } from '@shared/app-field-input/app-field-input.
 import { AppFieldTextareaComponent } from '@shared/app-field-textarea/app-field-textarea.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { CreateEditProjectForm } from './create-edit-project.model';
 
 @Component({
@@ -40,6 +40,7 @@ import { CreateEditProjectForm } from './create-edit-project.model';
 export class CreateEditProjectComponent implements OnInit {
   userService = inject(UserService);
   projectService = inject(ProjectService);
+  messageService = inject(MessageService);
   router = inject(Router);
   fb = inject(FormBuilder);
   projectId = input<string>('');
@@ -113,9 +114,19 @@ export class CreateEditProjectComponent implements OnInit {
       next: (data) => {
         console.log('Project created:', data);
         this.router.navigate(['/projects/edit', data.project.id]);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Project created',
+        });
       },
-      error: (error) => {
+      error: ({ error }) => {
         console.error(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: error.message,
+        });
       },
     });
   }
@@ -124,9 +135,19 @@ export class CreateEditProjectComponent implements OnInit {
     this.projectService.editProjectForUser(projectId, payload).subscribe({
       next: (data) => {
         console.log('Project edited:', data);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Project edited',
+        });
       },
-      error: (error) => {
+      error: ({ error }) => {
         console.error(error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: error.message,
+        });
       },
     });
   }
