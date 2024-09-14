@@ -1,14 +1,51 @@
 <app-header></app-header>
+
+@let getProject = getProject$ | async; @let project = getProject?.project;
 <main class="container-max-w-120rem">
   <div class="pt-5 px-3">
-    <h1 class="m-0">Project</h1>
-    <h2>Id: {{ projectId() }}</h2>
+    <app-chip label="project" [icon]="PrimeIcons.BRIEFCASE" />
+    <h1>{{ project?.name }}</h1>
+    <app-divider></app-divider>
+    <p>{{ project?.description }}</p>
   </div>
 
   <section class="my-5 px-3">
-    <h2>Basic informations</h2>
+    <article class="mt-6">
+      <h2>Basic informations</h2>
+      <app-divider></app-divider>
+      <p>Created at {{ project?.created_at | date }}</p>
+      <p>Updated at {{ project?.updated_at | date }}</p>
+      <p>
+        Starts at {{ project?.starts_at | date }} and ends at
+        {{ project?.ends_at | date }}
+      </p>
 
-    {{ project$ | async | json }}
+      <div class="flex gap-2">
+        <app-chip
+          label="{{ project?.number_of_users }} users"
+          [icon]="PrimeIcons.USERS"
+        />
+        <app-chip
+          label="{{ project?.number_of_tasks }} tasks"
+          [icon]="PrimeIcons.LIST_CHECK"
+        />
+      </div>
+    </article>
+
+    <article class="tasks mt-8">
+      <h2>Tasks</h2>
+      <app-divider></app-divider>
+      <ul class="tasks-list">
+        <app-card
+          [title]="'Task'"
+          [description]="'description'"
+          [icons]="[
+            { label: 'delivery times of 8 days', class: PrimeIcons.BRIEFCASE }
+          ]"
+          [redirectPath]="['tasks', 1]"
+        ></app-card>
+      </ul>
+    </article>
   </section>
 </main>
 <app-footer></app-footer>
