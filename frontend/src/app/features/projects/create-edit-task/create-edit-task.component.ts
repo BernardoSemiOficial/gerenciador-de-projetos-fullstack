@@ -156,4 +156,8 @@ export class CreateEditTaskComponent {
       },
     });
   }
+
+  returnToProject() {
+    this.router.navigate(['projects', this.projectId()]);
+  }
 }

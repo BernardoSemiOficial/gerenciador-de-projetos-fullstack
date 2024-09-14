@@ -130,4 +130,8 @@ export class CreateEditProjectComponent implements OnInit {
       },
     });
   }
+
+  returnToProject() {
+    this.router.navigate(['projects', this.projectId()]);
+  }
 }

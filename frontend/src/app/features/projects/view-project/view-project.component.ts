@@ -2,7 +2,11 @@ import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, inject, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProjectService } from '@core/services/project/project.service';
-import { ResponseGetProject } from '@core/services/project/project.service.types';
+import {
+  ResponseGetProject,
+  ResponseGetTasks,
+} from '@core/services/project/project.service.types';
+import { TaskService } from '@core/services/task/task.service';
 import { AppChipComponent } from '@shared/app-chip/app-chip.component';
 import { AppDividerComponent } from '@shared/app-divider/app-divider.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
@@ -31,12 +35,15 @@ import { AppCardComponent } from '../../../shared/app-card/app-card.component';
 })
 export class ViewProjectComponent implements OnInit {
   projectService = inject(ProjectService);
+  taskService = inject(TaskService);
   projectId = input.required<string>();
   PrimeIcons = PrimeIcons;
 
   getProject$!: Observable<ResponseGetProject>;
+  getTasks$!: Observable<ResponseGetTasks>;
 
   ngOnInit() {
     this.getProject$ = this.projectService.getProject(this.projectId());
+    this.getTasks$ = this.projectService.getTasksForProject(this.projectId());
   }
 }

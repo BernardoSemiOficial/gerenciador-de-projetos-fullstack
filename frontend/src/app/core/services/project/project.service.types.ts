@@ -1,8 +1,13 @@
 import { Project } from '@core/interfaces/project.interface';
+import { Task } from '@core/interfaces/task.interface';
 import { ProjectForUser } from '@core/interfaces/user.interface';
 
 export interface ResponseGetProject {
   project: Project;
+}
+
+export interface ResponseGetTasks {
+  tasks: Task[];
 }
 
 export interface PayloadCreateProjectForUser {

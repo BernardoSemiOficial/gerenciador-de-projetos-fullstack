@@ -1,8 +1,8 @@
 <p-card>
   <ng-template pTemplate="title">
-    <div class="flex align-content-center gap-2 mb-2">
+    <div class="flex align-items-center gap-2 mb-2">
       @for (icon of icons(); track $index) { @if (icon.label) {
-      <div class="flex align-content-center gap-2">
+      <div class="flex align-items-center gap-2">
         <i [class]="icon.class"></i>
         <span class="text-base">{{ icon.label }}</span>
       </div>
@@ -10,16 +10,19 @@
     </div>
     <h5 class="m-0 mb-1">{{ title() }}</h5>
   </ng-template>
-  <p class="m-0">
-    {{ description() }}
-    @if (date()) {
+  <ng-template pTemplate="content">
+    @if (description()) {
+    <p class="m-0">
+      {{ description() }}
+    </p>
+    } @if (date()) {
     <small class="mt-4 flex align-items-center font-bold">
       <i [ngClass]="[PrimeIcons.CALENDAR, 'mr-1']"></i>
       {{ date()?.startsAt | date }} -
       {{ date()?.endsAt | date }}
     </small>
     }
-  </p>
+  </ng-template>
   <ng-template pTemplate="footer">
     <div class="mt-1">
       <p-button

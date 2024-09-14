@@ -8,6 +8,7 @@ import {
   ResponseCreateProjectForUser,
   ResponseEditProjectForUser,
   ResponseGetProject,
+  ResponseGetTasks,
 } from './project.service.types';
 
 @Injectable({
@@ -20,6 +21,12 @@ export class ProjectService {
   getProject(projectId: string) {
     return this.http.get<ResponseGetProject>(
       this.baseUrl + `/projects/${projectId}`
+    );
+  }
+
+  getTasksForProject(projectId: string) {
+    return this.http.get<ResponseGetTasks>(
+      this.baseUrl + `/projects/${projectId}/tasks`
     );
   }
 

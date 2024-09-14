@@ -22,9 +22,9 @@ export class AppCardComponent {
   router = inject(Router);
   title = input<string>();
   date = input<{ startsAt: Date; endsAt: Date }>();
-  description = input.required<string>();
+  description = input<string>();
   icons = input<{ label: string | number; class: PrimeIcons }[]>([]);
-  redirectPath = input<[string, string | number]>();
+  redirectPath = input<any[]>();
   PrimeIcons = PrimeIcons;
 
   handleClickButton() {

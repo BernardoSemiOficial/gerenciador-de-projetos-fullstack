@@ -2,9 +2,19 @@
 
 @let id = projectId();
 <main class="container-max-w-120rem">
-  <h1 class="m-0 pt-5 px-3">
-    {{ id ? "Edit your project" : "Create your project" }}
-  </h1>
+  <div
+    class="pt-5 px-3 flex align-items-center justify-content-between flex-wrap"
+  >
+    <h1 class="m-0">
+      {{ id ? "Edit your project" : "Create your project" }}
+    </h1>
+    <app-button
+      label="return to the project"
+      [icon]="PrimeIcons.UNDO"
+      (click)="returnToProject()"
+      (keydown.enter)="returnToProject()"
+    ></app-button>
+  </div>
 
   <section class="my-5 px-3">
     <h2>Basic informations</h2>
@@ -49,7 +59,7 @@
         class="w-full mt-5"
         [type]="'submit'"
         [label]="id ? 'edit project here' : 'create project here'"
-        [icon]="PrimeIcons.PLUS"
+        [icon]="id ? PrimeIcons.SYNC : PrimeIcons.PLUS"
       ></app-button>
       <app-button
         class="w-full"

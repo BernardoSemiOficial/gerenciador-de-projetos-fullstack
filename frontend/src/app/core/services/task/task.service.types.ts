@@ -1,10 +1,6 @@
 import { TaskPriority, TaskStatus } from '@core/enums/status.enum';
 import { Task } from '@core/interfaces/task.interface';
 
-export interface ResponseGetTasks {
-  tasks: Task[];
-}
-
 export interface ResponseGetTask {
   task: Task;
 }

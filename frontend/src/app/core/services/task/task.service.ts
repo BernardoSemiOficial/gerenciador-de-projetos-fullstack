@@ -8,7 +8,6 @@ import {
   ResponseCreateTask,
   ResponseEditTask,
   ResponseGetTask,
-  ResponseGetTasks,
 } from './task.service.types';
 
 @Injectable({
@@ -17,12 +16,6 @@ import {
 export class TaskService {
   private http: HttpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
-
-  getTasks(projectId: string) {
-    return this.http.get<ResponseGetTasks>(
-      this.baseUrl + `/tasks/${projectId}`
-    );
-  }
 
   getTask(taskId: string) {
     return this.http.get<ResponseGetTask>(this.baseUrl + `/tasks/${taskId}`);
