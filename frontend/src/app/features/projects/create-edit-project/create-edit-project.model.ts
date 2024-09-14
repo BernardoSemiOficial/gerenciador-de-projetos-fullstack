@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-export type CreateProjectForm = {
+export type CreateEditProjectForm = {
   name: FormControl<string>;
   description: FormControl<string>;
   starts_at: FormControl<Date>;

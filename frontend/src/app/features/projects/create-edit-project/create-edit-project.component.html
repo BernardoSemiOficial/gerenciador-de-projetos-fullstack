@@ -1,12 +1,16 @@
 <app-header></app-header>
+
+@let id = projectId();
 <main class="container-max-w-120rem">
-  <h1 class="m-0 pt-5 px-3">Create your project</h1>
+  <h1 class="m-0 pt-5 px-3">
+    {{ id ? "Edit your project" : "Create your project" }}
+  </h1>
 
   <section class="my-5 px-3">
     <h2>Basic informations</h2>
 
     <form
-      [formGroup]="createProjectForm"
+      [formGroup]="createEditProjectForm"
       (ngSubmit)="onSubmit()"
       class="flex align-content-center flex-wrap justify-content-between gap-5"
     >
@@ -15,7 +19,7 @@
         formControlName="name"
         [fieldLabel]="'name'"
         [fieldInputHelp]="'The name of your project'"
-        [formControlField]="createProjectForm.get('name')"
+        [formControlField]="createEditProjectForm.get('name')"
       ></app-field-input>
       <app-field-textarea
         [fieldId]="'description'"
@@ -28,6 +32,11 @@
         formControlName="starts_at"
         [fieldLabel]="'starts at'"
         [fieldInputHelp]="'The starts at of your project'"
+        [minDate]="
+          id
+            ? createEditProjectForm.get('starts_at')?.getRawValue()
+            : currentDate
+        "
       ></app-field-calendar>
       <app-field-calendar
         [fieldId]="'ends_at'"
@@ -36,10 +45,10 @@
         [fieldInputHelp]="'The ends at of your project'"
       ></app-field-calendar>
       <app-button
-        [isDisabled]="createProjectForm.invalid"
+        [isDisabled]="createEditProjectForm.invalid"
         class="w-full mt-5"
         [type]="'submit'"
-        [label]="'create project here'"
+        [label]="id ? 'edit project here' : 'create project here'"
         [icon]="PrimeIcons.PLUS"
       ></app-button>
       <app-button
@@ -48,8 +57,8 @@
         [label]="'clear form'"
         [icon]="PrimeIcons.TRASH"
         [isOutlined]="true"
-        (click)="createProjectForm.reset()"
-        (keydown.enter)="createProjectForm.reset()"
+        (click)="createEditProjectForm.reset()"
+        (keydown.enter)="createEditProjectForm.reset()"
       ></app-button>
     </form>
   </section>
