@@ -18,6 +18,8 @@ import {
   PayloadEditTask,
 } from '@core/services/task/task.service.types';
 import { AppButtonComponent } from '@shared/app-button/app-button.component';
+import { AppFieldDropdownComponent } from '@shared/app-field-dropdown/app-field-dropdown.component';
+import { AppFieldInputNumberComponent } from '@shared/app-field-input-number/app-field-input-number.component';
 import { AppFieldInputComponent } from '@shared/app-field-input/app-field-input.component';
 import { AppFieldTextareaComponent } from '@shared/app-field-textarea/app-field-textarea.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
@@ -35,6 +37,8 @@ import { CreateEditTaskForm } from './create-edit-task.model';
     AppButtonComponent,
     AppFieldInputComponent,
     AppFieldTextareaComponent,
+    AppFieldInputNumberComponent,
+    AppFieldDropdownComponent,
   ],
   templateUrl: './create-edit-task.component.html',
   styleUrl: './create-edit-task.component.scss',
@@ -46,8 +50,11 @@ export class CreateEditTaskComponent {
   fb = inject(FormBuilder);
   projectId = input<string>('');
   taskId = input<string>('');
-  PrimeIcons = PrimeIcons;
+
   currentDate = new Date();
+  PrimeIcons = PrimeIcons;
+  taskPriorityOptions: { id: TaskPriorityId; name: TaskPriority }[] = [];
+  taskStatusOptions: { id: TaskStatusId; name: TaskStatus }[] = [];
 
   createEditTaskForm!: FormGroup<CreateEditTaskForm>;
 
@@ -57,6 +64,18 @@ export class CreateEditTaskComponent {
   }
 
   initProjectForm() {
+    this.taskPriorityOptions = [
+      { id: TaskPriorityId.LOW, name: TaskPriority.LOW },
+      { id: TaskPriorityId.MEDIUM, name: TaskPriority.MEDIUM },
+      { id: TaskPriorityId.HIGH, name: TaskPriority.HIGH },
+      { id: TaskPriorityId.CRITICAL, name: TaskPriority.CRITICAL },
+    ];
+    this.taskStatusOptions = [
+      { id: TaskStatusId.IN_PROGRESS, name: TaskStatus.IN_PROGRESS },
+      { id: TaskStatusId.PENDING, name: TaskStatus.PENDING },
+      { id: TaskStatusId.COMPLETED, name: TaskStatus.COMPLETED },
+      { id: TaskStatusId.CANCELLED, name: TaskStatus.CANCELLED },
+    ];
     this.createEditTaskForm = this.fb.nonNullable.group({
       name: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
@@ -73,7 +92,7 @@ export class CreateEditTaskComponent {
   }
 
   getTask() {
-    this.taskService.getTask(this.projectId()).subscribe({
+    this.taskService.getTask(this.taskId()).subscribe({
       next: (data) => {
         const task = data.task;
         this.createEditTaskForm.patchValue({

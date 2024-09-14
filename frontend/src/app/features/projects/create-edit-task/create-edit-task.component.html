@@ -27,6 +27,46 @@
         [fieldLabel]="'description'"
         [fieldInputHelp]="'The description of your task'"
       ></app-field-textarea>
+      <app-field-input-number
+        [fieldId]="'delivery_time'"
+        formControlName="delivery_time"
+        [fieldLabel]="'delivery time'"
+        [fieldInputHelp]="'The delivery time of your task'"
+        formControlName="delivery_time"
+        buttonLayout="horizontal"
+        decrementButtonClass="p-button-danger"
+        incrementButtonClass="p-button-success"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        [isShowButtons]="true"
+        [required]="true"
+        [max]="100"
+        [min]="1"
+        [step]="1"
+        [maxlength]="3"
+      />
+      <app-field-dropdown
+        [fieldId]="'priority'"
+        formControlName="priority"
+        [fieldLabel]="'priority'"
+        [fieldInputHelp]="'The priority of your task'"
+        [options]="taskPriorityOptions"
+        formControlName="priority"
+        optionLabel="name"
+        placeholder="Select a priority"
+      />
+      @if (id) {
+      <app-field-dropdown
+        [fieldId]="'status'"
+        formControlName="status"
+        [fieldLabel]="'status'"
+        [fieldInputHelp]="'The status of your task'"
+        [options]="taskStatusOptions"
+        formControlName="status"
+        optionLabel="name"
+        placeholder="Select a status"
+      />
+      }
       <app-button
         [isDisabled]="createEditTaskForm.invalid"
         class="w-full mt-5"
@@ -34,6 +74,7 @@
         [label]="id ? 'edit task here' : 'create task here'"
         [icon]="PrimeIcons.PLUS"
       ></app-button>
+
       <app-button
         class="w-full"
         [type]="'button'"

@@ -1,5 +1,9 @@
 import { Component, forwardRef, input, OnInit } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 
 @Component({
@@ -16,7 +20,7 @@ import { CalendarModule } from 'primeng/calendar';
   templateUrl: './app-field-calendar.component.html',
   styleUrl: './app-field-calendar.component.scss',
 })
-export class AppFieldCalendarComponent implements OnInit {
+export class AppFieldCalendarComponent implements ControlValueAccessor, OnInit {
   fieldId = input.required<string>();
   fieldLabel = input.required<string>();
   fieldInputHelp = input.required<string>();

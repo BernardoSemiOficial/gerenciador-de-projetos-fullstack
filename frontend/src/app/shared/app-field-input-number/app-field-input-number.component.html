@@ -1,0 +1,46 @@
+@let formControlAnalytics = analyticsFormControl(); @let id = fieldId(); @let
+label = fieldLabel(); @let inputHelp = fieldInputHelp();
+
+<div class="w-full flex flex-column gap-2">
+  @if (label) {
+  <label
+    [for]="fieldId()"
+    [ngClass]="{
+      'text-red-600':
+        formControlField()?.touched && formControlAnalytics.errorsLength > 0
+    }"
+  >
+    {{ label }}
+  </label>
+  }
+  <p-inputNumber
+    [inputId]="id"
+    [name]="id"
+    [step]="step()"
+    [mode]="mode()"
+    [max]="max()"
+    [min]="min()"
+    [maxlength]="maxlength()"
+    [buttonLayout]="buttonLayout()"
+    [showButtons]="isShowButtons()"
+    [required]="isRequired()"
+    [readonly]="isReadonly()"
+    [decrementButtonClass]="decrementButtonClass()"
+    [incrementButtonClass]="incrementButtonClass()"
+    [incrementButtonIcon]="incrementButtonIcon()"
+    [decrementButtonIcon]="decrementButtonIcon()"
+    [(ngModel)]="fieldInputValue"
+    (blur)="_onTouched()"
+    (ngModelChange)="_onChange(fieldInputValue)"
+    aria-describedby="field-help"
+  />
+  @if(inputHelp && formControlAnalytics.errorsLength === 0) {
+  <small id="field-help">
+    {{ inputHelp }}
+  </small>
+  } @if(formControlField()?.touched && formControlAnalytics.errorsLength > 0) {
+  <small id="field-help" class="text-red-600">
+    Field {{ label }} is {{ formControlAnalytics.errorKey }}
+  </small>
+  }
+</div>
