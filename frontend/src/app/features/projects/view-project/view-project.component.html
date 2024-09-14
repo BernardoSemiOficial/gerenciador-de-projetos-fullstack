@@ -42,7 +42,14 @@
     </article>
 
     <article class="tasks mt-8">
-      <h2>Tasks</h2>
+      <div class="flex justify-content-between">
+        <h2>Tasks</h2>
+        <app-button
+          label="create task"
+          [icon]="PrimeIcons.PLUS"
+          [routerLink]="['tasks/create']"
+        ></app-button>
+      </div>
       <app-divider></app-divider>
       <ul class="tasks-list">
         <app-card

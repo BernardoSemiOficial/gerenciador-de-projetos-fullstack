@@ -22,4 +22,18 @@ export const PROJECTS_PAGE_ROUTER: Route[] = [
         (m) => m.ViewProjectPageComponent
       ),
   },
+  {
+    path: ':projectId/tasks/create',
+    loadComponent: () =>
+      import('./create-task-page/create-task-page.component').then(
+        (m) => m.CreateTaskPageComponent
+      ),
+  },
+  {
+    path: ':projectId/tasks/edit/:taskId',
+    loadComponent: () =>
+      import('./edit-task-page/edit-task-page.component').then(
+        (m) => m.EditTaskPageComponent
+      ),
+  },
 ];
