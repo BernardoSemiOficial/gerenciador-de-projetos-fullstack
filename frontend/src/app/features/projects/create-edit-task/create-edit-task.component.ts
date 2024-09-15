@@ -17,6 +17,7 @@ import {
   PayloadCreateTask,
   PayloadEditTask,
 } from '@core/services/task/task.service.types';
+import { ToastAlertService } from '@core/services/toast-alert/toast-alert.service';
 import { AppButtonComponent } from '@shared/app-button/app-button.component';
 import { AppFieldDropdownComponent } from '@shared/app-field-dropdown/app-field-dropdown.component';
 import { AppFieldInputNumberComponent } from '@shared/app-field-input-number/app-field-input-number.component';
@@ -24,7 +25,7 @@ import { AppFieldInputComponent } from '@shared/app-field-input/app-field-input.
 import { AppFieldTextareaComponent } from '@shared/app-field-textarea/app-field-textarea.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
-import { MessageService, PrimeIcons } from 'primeng/api';
+import { PrimeIcons } from 'primeng/api';
 import { CreateEditTaskForm } from './create-edit-task.model';
 
 @Component({
@@ -47,7 +48,7 @@ export class CreateEditTaskComponent {
   taskService = inject(TaskService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
-  messageService = inject(MessageService);
+  toastAlertService = inject(ToastAlertService);
   fb = inject(FormBuilder);
   projectId = input<string>('');
   taskId = input<string>('');
@@ -139,18 +140,16 @@ export class CreateEditTaskComponent {
         this.router.navigate(['../edit', data.task.id], {
           relativeTo: this.activatedRoute,
         });
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'task created successfully',
+        this.toastAlertService.addSuccessMessage({
+          title: 'Success',
+          description: 'task created successfully',
         });
       },
       error: ({ error }) => {
         console.error(error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.message,
+        this.toastAlertService.addDangerMessage({
+          title: 'Error',
+          description: error.message,
         });
       },
     });
@@ -159,18 +158,16 @@ export class CreateEditTaskComponent {
   editTask(taskId: string, payload: PayloadEditTask) {
     this.taskService.editTask(taskId, payload).subscribe({
       next: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'task edited successfully',
+        this.toastAlertService.addSuccessMessage({
+          title: 'Success',
+          description: 'task edited successfully',
         });
       },
       error: ({ error }) => {
         console.error(error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.message,
+        this.toastAlertService.addDangerMessage({
+          title: 'Error',
+          description: error.message,
         });
       },
     });

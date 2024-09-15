@@ -13,13 +13,14 @@ import {
 } from '@core/services/project/project.service.types';
 import { UserService } from '@core/services/user/user.service';
 
+import { ToastAlertService } from '@core/services/toast-alert/toast-alert.service';
 import { AppButtonComponent } from '@shared/app-button/app-button.component';
 import { AppFieldCalendarComponent } from '@shared/app-field-calendar/app-field-calendar.component';
 import { AppFieldInputComponent } from '@shared/app-field-input/app-field-input.component';
 import { AppFieldTextareaComponent } from '@shared/app-field-textarea/app-field-textarea.component';
 import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
-import { MessageService, PrimeIcons } from 'primeng/api';
+import { PrimeIcons } from 'primeng/api';
 import { CreateEditProjectForm } from './create-edit-project.model';
 
 @Component({
@@ -40,7 +41,7 @@ import { CreateEditProjectForm } from './create-edit-project.model';
 export class CreateEditProjectComponent implements OnInit {
   userService = inject(UserService);
   projectService = inject(ProjectService);
-  messageService = inject(MessageService);
+  toastAlertService = inject(ToastAlertService);
   router = inject(Router);
   fb = inject(FormBuilder);
   projectId = input<string>('');
@@ -114,18 +115,16 @@ export class CreateEditProjectComponent implements OnInit {
       next: (data) => {
         console.log('Project created:', data);
         this.router.navigate(['/projects/edit', data.project.id]);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Project created',
+        this.toastAlertService.addSuccessMessage({
+          title: 'Success',
+          description: 'Project created',
         });
       },
       error: ({ error }) => {
         console.error(error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.message,
+        this.toastAlertService.addDangerMessage({
+          title: 'Error',
+          description: error.message,
         });
       },
     });
@@ -135,18 +134,16 @@ export class CreateEditProjectComponent implements OnInit {
     this.projectService.editProjectForUser(projectId, payload).subscribe({
       next: (data) => {
         console.log('Project edited:', data);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Project edited',
+        this.toastAlertService.addSuccessMessage({
+          title: 'Success',
+          description: 'Project edited',
         });
       },
       error: ({ error }) => {
         console.error(error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.message,
+        this.toastAlertService.addDangerMessage({
+          title: 'Error',
+          description: error.message,
         });
       },
     });

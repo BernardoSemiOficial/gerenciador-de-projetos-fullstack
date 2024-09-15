@@ -4,8 +4,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterPayload } from '@core/interfaces/authentication.interface';
 import { AuthService } from '@core/services/auth/auth.service';
+import { ToastAlertService } from '@core/services/toast-alert/toast-alert.service';
 import { UserService } from '@core/services/user/user.service';
-import { MessageService } from 'primeng/api';
+
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -21,7 +22,7 @@ export class RegisterComponent {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private authService: AuthService = inject(AuthService);
   private userService: UserService = inject(UserService);
-  private messageService: MessageService = inject(MessageService);
+  private toastAlertService: ToastAlertService = inject(ToastAlertService);
   private router: Router = inject(Router);
   registerForm = this.initForm();
 
@@ -46,19 +47,17 @@ export class RegisterComponent {
       next: (data) => {
         this.authService.setTokens(data);
         this.userService.saveUser(data.user);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'User registered',
+        this.toastAlertService.addSuccessMessage({
+          title: 'Success',
+          description: 'User registered',
         });
         this.router.navigate(['/dashboard']);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'User registration failed',
+        this.toastAlertService.addDangerMessage({
+          title: 'Error',
+          description: 'User registration failed',
         });
       },
     });

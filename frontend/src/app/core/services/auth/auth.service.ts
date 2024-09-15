@@ -10,14 +10,15 @@ import {
   RegisterResponse,
 } from '@core/interfaces/authentication.interface';
 import { environment } from '@environment/environment';
-import { MessageService } from 'primeng/api';
+
 import { Observable } from 'rxjs';
+import { ToastAlertService } from '../toast-alert/toast-alert.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private messageService: MessageService = inject(MessageService);
+  private toastAlertService: ToastAlertService = inject(ToastAlertService);
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
   private readonly baseUrl = environment.apiUrl;
@@ -29,10 +30,9 @@ export class AuthService {
   logoutByUser() {
     localStorage.removeItem(LocalStorage.AccessToken);
     localStorage.removeItem(LocalStorage.RefreshToken);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'User logged out',
+    this.toastAlertService.addSuccessMessage({
+      title: 'Success',
+      description: 'User logged out',
     });
     this.router.navigate(['/login']);
   }
@@ -45,10 +45,9 @@ export class AuthService {
   }
 
   alertMessageLogout() {
-    this.messageService.add({
-      severity: 'warn',
-      summary: 'Warning',
-      detail: 'User logged out',
+    this.toastAlertService.addWarningMessage({
+      title: 'Warning',
+      description: 'User logged out',
     });
   }
 
