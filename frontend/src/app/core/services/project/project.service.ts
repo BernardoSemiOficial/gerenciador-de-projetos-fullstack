@@ -6,6 +6,7 @@ import {
   PayloadCreateProjectForUser,
   PayloadEditProjectForUser,
   ResponseCreateProjectForUser,
+  ResponseDeleteProject,
   ResponseEditProjectForUser,
   ResponseGetProject,
   ResponseGetTasks,
@@ -41,6 +42,12 @@ export class ProjectService {
     return this.http.put<ResponseEditProjectForUser>(
       this.baseUrl + `/projects/${projectId}`,
       payload
+    );
+  }
+
+  deleteProject(projectId: string) {
+    return this.http.delete<ResponseDeleteProject>(
+      this.baseUrl + `/projects/${projectId}`
     );
   }
 }

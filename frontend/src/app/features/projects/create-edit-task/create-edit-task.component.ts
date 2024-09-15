@@ -12,6 +12,7 @@ import {
   TaskStatus,
   TaskStatusId,
 } from '@core/enums/status.enum';
+import { DialogConfirmationService } from '@core/services/dialog-confirmation/dialog-confirmation.service';
 import { TaskService } from '@core/services/task/task.service';
 import {
   PayloadCreateTask,
@@ -49,6 +50,7 @@ export class CreateEditTaskComponent {
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   toastAlertService = inject(ToastAlertService);
+  dialogConfirmationService = inject(DialogConfirmationService);
   fb = inject(FormBuilder);
   projectId = input<string>('');
   taskId = input<string>('');
@@ -170,6 +172,33 @@ export class CreateEditTaskComponent {
           description: error.message,
         });
       },
+    });
+  }
+
+  deleteTask() {
+    this.taskService.deleteTask(this.taskId()).subscribe({
+      next: (data) => {
+        this.toastAlertService.addSuccessMessage({
+          title: 'Deleted task',
+          description: data.task,
+        });
+        this.returnToProject();
+      },
+      error: ({ error }) => {
+        this.toastAlertService.addDangerMessage({
+          title: 'Error deleting task',
+          description: error.message,
+        });
+      },
+    });
+  }
+
+  confirmationDelete() {
+    this.dialogConfirmationService.addConfirmation({
+      title: 'Delete task',
+      description: 'Are you sure you want to delete this task?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptCallback: () => this.deleteTask(),
     });
   }
 

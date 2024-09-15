@@ -6,6 +6,7 @@ import {
   PayloadCreateTask,
   PayloadEditTask,
   ResponseCreateTask,
+  ResponseDeleteTask,
   ResponseEditTask,
   ResponseGetTask,
 } from './task.service.types';
@@ -32,6 +33,12 @@ export class TaskService {
     return this.http.put<ResponseEditTask>(
       this.baseUrl + `/tasks/${taskId}`,
       payload
+    );
+  }
+
+  deleteTask(taskId: string) {
+    return this.http.delete<ResponseDeleteTask>(
+      this.baseUrl + `/tasks/${taskId}`
     );
   }
 }

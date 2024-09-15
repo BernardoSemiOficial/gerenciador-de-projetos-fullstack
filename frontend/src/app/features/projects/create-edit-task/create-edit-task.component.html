@@ -8,12 +8,21 @@
     <h1 class="m-0">
       {{ id ? "Edit your task" : "Create your task" }}
     </h1>
-    <app-button
-      label="return to the project"
-      [icon]="PrimeIcons.UNDO"
-      (click)="returnToProject()"
-      (keydown.enter)="returnToProject()"
-    ></app-button>
+    <div class="flex gap-2">
+      <app-button
+        label="return to the project"
+        [icon]="PrimeIcons.UNDO"
+        (click)="returnToProject()"
+        (keydown.enter)="returnToProject()"
+      ></app-button>
+      <app-button
+        label="delete task"
+        severity="danger"
+        [icon]="PrimeIcons.TRASH"
+        (click)="confirmationDelete()"
+        (keydown.enter)="confirmationDelete()"
+      ></app-button>
+    </div>
   </div>
 
   <section class="my-5 px-3">

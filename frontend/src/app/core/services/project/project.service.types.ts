@@ -31,3 +31,7 @@ export interface PayloadEditProjectForUser {
 export interface ResponseEditProjectForUser {
   project: ProjectForUser;
 }
+
+export interface ResponseDeleteProject {
+  project: string;
+}

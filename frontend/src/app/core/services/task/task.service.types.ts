@@ -27,3 +27,7 @@ export interface PayloadEditTask {
 export interface ResponseEditTask {
   task: Task;
 }
+
+export interface ResponseDeleteTask {
+  task: string;
+}
