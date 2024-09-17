@@ -1,11 +1,14 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { env } from "../../env";
 import { ClientError } from "../../errors/client-error";
+import { EmailTemplates } from "../../models/email-templates";
 import {
   InvitationForUsersClient,
   ProjectForUserClient,
   UserClient,
 } from "../../models/user.model";
 import { UsersRespository } from "../../repositories/users/users.repository";
+import { EmailService } from "../../services/email.service";
 import { UsersControllerSchemaType } from "./users.schema";
 
 export class UsersController {
@@ -57,6 +60,7 @@ export class UsersController {
   ) {
     const invitationForUsers = request.body;
     const userPublicId = request.authenticatedUser?.publicId;
+    const userEmail = request.authenticatedUser?.email;
 
     const invitationsPromise = invitationForUsers.map(async (user) =>
       UsersRespository.createInvitationForUsers({
@@ -72,6 +76,22 @@ export class UsersController {
     const invitationsClient = invitations.map(
       (invitation) => new InvitationForUsersClient(invitation)
     );
+
+    const invitationsEmailsPromise = invitationsClient.map(async (user) =>
+      EmailService.sendEmail(
+        EmailTemplates.InviteUser,
+        { name: user.email, address: user.email },
+        {
+          email: user.email,
+          create_user_link:
+            env.FRONTEND_URL +
+            "/invitation-for-user" +
+            `?invitation=${user.id}`,
+          user_owner: userEmail,
+        }
+      )
+    );
+    await Promise.all(invitationsEmailsPromise);
 
     return reply.status(201).send({ invitations: invitationsClient });
   }
