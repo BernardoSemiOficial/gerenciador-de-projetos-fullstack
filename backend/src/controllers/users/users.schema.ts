@@ -17,20 +17,6 @@ export const UsersControllerSchema = {
       }),
     },
   },
-  getInvitationForUser: {
-    schema: {
-      params: zod.object({
-        invitePublicId: zod.string(),
-      }),
-    },
-  },
-  deleteInvitationForUser: {
-    schema: {
-      params: zod.object({
-        invitePublicId: zod.string(),
-      }),
-    },
-  },
   createInvitationForUsers: {
     schema: {
       body: zod.array(
@@ -49,12 +35,6 @@ export type UsersControllerSchemaType = {
   >;
   getProjectsForUserParams: Zod.infer<
     typeof UsersControllerSchema.getProjectsForUser.schema.params
-  >;
-  getInvitationForUserParams: Zod.infer<
-    typeof UsersControllerSchema.getInvitationForUser.schema.params
-  >;
-  deleteInvitationForUserParams: Zod.infer<
-    typeof UsersControllerSchema.deleteInvitationForUser.schema.params
   >;
   createInvitationForUsersBody: Zod.infer<
     typeof UsersControllerSchema.createInvitationForUsers.schema.body

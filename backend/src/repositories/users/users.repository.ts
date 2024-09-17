@@ -4,8 +4,6 @@ import {
   UsersRespositoryCreateInvitationForUsers,
   UsersRespositoryCreateProjectForUser,
   UsersRespositoryCreateUser,
-  UsersRespositoryDeleteInviteByPublicId,
-  UsersRespositoryFindInviteByPublicId,
   UsersRespositoryFindProjectForUser,
   UsersRespositoryFindUserByEmail,
   UsersRespositoryFindUserByPublicId,
@@ -72,53 +70,6 @@ export class UsersRespository {
           role: true,
           password: selectPassword,
           id: selectId,
-        },
-      });
-    } catch (error) {
-      throw new ServerError({ message: (error as Error).message, code: 500 });
-    }
-  }
-
-  static async findInviteByPublicId({
-    invitePublicId,
-  }: UsersRespositoryFindInviteByPublicId) {
-    try {
-      return await prisma.userInvitation.findUnique({
-        where: {
-          public_id: invitePublicId,
-        },
-        select: {
-          email: true,
-          public_id: true,
-          created_at: true,
-          updated_at: true,
-          user: {
-            select: {
-              email: true,
-              name: true,
-            },
-          },
-          projects: {
-            select: {
-              name: true,
-              id: true,
-              public_id: true,
-            },
-          },
-        },
-      });
-    } catch (error) {
-      throw new ServerError({ message: (error as Error).message, code: 500 });
-    }
-  }
-
-  static async deleteInviteByPublicId({
-    invitePublicId,
-  }: UsersRespositoryDeleteInviteByPublicId) {
-    try {
-      return await prisma.userInvitation.delete({
-        where: {
-          public_id: invitePublicId,
         },
       });
     } catch (error) {
