@@ -96,3 +96,45 @@ export class InvitationForUsersClient {
     this.email = email;
   }
 }
+
+export class InviteForUserClient {
+  public id: string;
+  public email: string;
+  public created_at: Date;
+  public updated_at: Date;
+  public user: {
+    email: string;
+    name: string;
+  };
+  public projects: {
+    name: string;
+  }[];
+
+  constructor({
+    user,
+    email,
+    created_at,
+    updated_at,
+    public_id,
+    projects,
+  }: {
+    user: {
+      email: string;
+      name: string;
+    };
+    public_id: string;
+    email: string;
+    created_at: Date;
+    updated_at: Date;
+    projects: {
+      name: string;
+    }[];
+  }) {
+    this.id = public_id;
+    this.email = email;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
+    this.user = user;
+    this.projects = projects.map((project) => ({ name: project.name }));
+  }
+}

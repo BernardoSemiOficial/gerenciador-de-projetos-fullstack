@@ -34,3 +34,11 @@ export type UsersRespositoryCreateInvitationForUsers = {
   user_public_id: string;
   projects_id: { public_id: string }[];
 };
+
+export type UsersRespositoryFindInviteByPublicId = {
+  invitePublicId: string;
+};
+
+export type UsersRespositoryDeleteInviteByPublicId = {
+  invitePublicId: string;
+};

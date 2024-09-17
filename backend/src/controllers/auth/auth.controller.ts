@@ -83,6 +83,62 @@ export class AuthController {
       .send({ accessToken, refreshToken, user: userClient });
   }
 
+  static async invite(
+    request: FastifyRequest<{
+      Params: AuthControllerSchemaType["inviteParams"];
+      Body: AuthControllerSchemaType["inviteBody"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { invitePublicId } = request.params;
+    const { name, email, password } = request.body;
+
+    const inviteUser = await UsersRespository.findInviteByPublicId({
+      invitePublicId,
+    });
+
+    if (!inviteUser) {
+      throw new ClientError({ message: "Invite not found", code: 404 });
+    }
+
+    const hashPassword = await BcriptService.generateHashPassword(password);
+    const user = await UsersRespository.createUser({
+      name,
+      email,
+      role_id: RoleId.ADMIN,
+      password: hashPassword,
+    });
+
+    const insertUserInProjects = inviteUser.projects.map(async (project) =>
+      UsersRespository.createProjectForUser({
+        is_owner: false,
+        user_id: user.id,
+        project_id: project.id,
+        role_id: RoleId.CONTRIBUTOR,
+      })
+    );
+    await Promise.all(insertUserInProjects);
+
+    await UsersRespository.deleteInviteByPublicId({ invitePublicId });
+
+    const tokenPayload: TokenPayload = {
+      publicId: user.public_id,
+      email: user.email,
+    };
+    const accessToken = TokenService.generateTokenUser(tokenPayload, {
+      isAccessToken: true,
+    });
+    const refreshToken = TokenService.generateTokenUser(tokenPayload, {
+      isAccessToken: false,
+    });
+
+    const userClient = new UserClient(user);
+
+    return reply
+      .status(201)
+      .send({ accessToken, refreshToken, user: userClient });
+  }
+
   static async refreshToken(
     request: FastifyRequest<{
       Body: AuthControllerSchemaType["refreshTokenBody"];

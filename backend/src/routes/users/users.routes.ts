@@ -22,4 +22,14 @@ export const initializerUsersController = async (app: FastifyZod) => {
     UsersControllerSchema.createInvitationForUsers,
     UsersController.createInvitationForUsers
   );
+  app.get(
+    "/invitations/:invitePublicId",
+    UsersControllerSchema.getInvitationForUser,
+    UsersController.getInvitationForUser
+  );
+  app.delete(
+    "/invitations/:invitePublicId",
+    UsersControllerSchema.deleteInvitationForUser,
+    UsersController.deleteInvitationForUser
+  );
 };

@@ -4,6 +4,7 @@ import { ClientError } from "../../errors/client-error";
 import { EmailTemplates } from "../../models/email-templates";
 import {
   InvitationForUsersClient,
+  InviteForUserClient,
   ProjectForUserClient,
   UserClient,
 } from "../../models/user.model";
@@ -50,6 +51,41 @@ export class UsersController {
       (project) => new ProjectForUserClient(project)
     );
     return reply.status(200).send({ projects: projectForUserClient });
+  }
+
+  static async getInvitationForUser(
+    request: FastifyRequest<{
+      Params: UsersControllerSchemaType["getInvitationForUserParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { invitePublicId } = request.params;
+    const inviteUser = await UsersRespository.findInviteByPublicId({
+      invitePublicId,
+    });
+
+    if (!inviteUser) {
+      throw new ClientError({ message: "Invite not found", code: 404 });
+    }
+
+    const inviteUserClient = new InviteForUserClient(inviteUser);
+
+    return reply.status(200).send({ invite: inviteUserClient });
+  }
+
+  static async deleteInvitationForUser(
+    request: FastifyRequest<{
+      Params: UsersControllerSchemaType["deleteInvitationForUserParams"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const { invitePublicId } = request.params;
+    await UsersRespository.deleteInviteByPublicId({
+      invitePublicId,
+    });
+    return reply
+      .status(200)
+      .send({ invite: `Invite ${invitePublicId} deleted` });
   }
 
   static async createInvitationForUsers(

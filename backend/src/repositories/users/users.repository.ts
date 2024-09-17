@@ -4,6 +4,8 @@ import {
   UsersRespositoryCreateInvitationForUsers,
   UsersRespositoryCreateProjectForUser,
   UsersRespositoryCreateUser,
+  UsersRespositoryDeleteInviteByPublicId,
+  UsersRespositoryFindInviteByPublicId,
   UsersRespositoryFindProjectForUser,
   UsersRespositoryFindUserByEmail,
   UsersRespositoryFindUserByPublicId,
@@ -77,6 +79,53 @@ export class UsersRespository {
     }
   }
 
+  static async findInviteByPublicId({
+    invitePublicId,
+  }: UsersRespositoryFindInviteByPublicId) {
+    try {
+      return await prisma.userInvitation.findUnique({
+        where: {
+          public_id: invitePublicId,
+        },
+        select: {
+          email: true,
+          public_id: true,
+          created_at: true,
+          updated_at: true,
+          user: {
+            select: {
+              email: true,
+              name: true,
+            },
+          },
+          projects: {
+            select: {
+              name: true,
+              id: true,
+              public_id: true,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
+  }
+
+  static async deleteInviteByPublicId({
+    invitePublicId,
+  }: UsersRespositoryDeleteInviteByPublicId) {
+    try {
+      return await prisma.userInvitation.delete({
+        where: {
+          public_id: invitePublicId,
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
+  }
+
   static async findProjectsByUser({
     publicId,
   }: UsersRespositoryFindProjectForUser) {
@@ -118,6 +167,7 @@ export class UsersRespository {
       return await prisma.user.create({
         data,
         select: {
+          id: true,
           public_id: true,
           email: true,
           name: true,
