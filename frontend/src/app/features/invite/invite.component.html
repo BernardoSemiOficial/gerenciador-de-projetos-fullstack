@@ -1,0 +1,45 @@
+<form class="mx-auto max-w-30rem w-full" [formGroup]="inviteForm">
+  <div class="flex flex-column gap-2 mt-4">
+    <label for="name">name</label>
+    <input
+      pInputText
+      id="name"
+      name="name"
+      aria-describedby="name-help"
+      formControlName="name"
+    />
+    <small id="name-help">Enter your name.</small>
+  </div>
+  <div class="flex flex-column gap-2 mt-4">
+    <label for="email">e-mail</label>
+    <input
+      pInputText
+      id="email"
+      name="email"
+      aria-describedby="email-help"
+      formControlName="email"
+    />
+    <small id="email-help">Enter your e-mail.</small>
+  </div>
+  <div class="flex flex-column gap-2 mt-4">
+    <label for="password">password</label>
+    <p-password
+      styleClass="w-full"
+      inputStyleClass="w-full"
+      formControlName="password"
+      [toggleMask]="true"
+      [feedback]="false"
+      name="password"
+    />
+    <small id="password-help">Digit your password.</small>
+  </div>
+  <p-button
+    (click)="confirmInviteUser()"
+    (keydown)="confirmInviteUser()"
+    [disabled]="inviteForm.invalid"
+    styleClass="w-full"
+    class="block mt-4"
+    size="large"
+    label="create account"
+  />
+</form>
