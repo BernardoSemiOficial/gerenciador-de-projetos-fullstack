@@ -28,3 +28,9 @@ export type UsersRespositoryCreateProjectForUser = {
   project_id: number;
   role_id: RoleId;
 };
+
+export type UsersRespositoryCreateInvitationForUsers = {
+  email: string;
+  user_public_id: string;
+  projects_id: { public_id: string }[];
+};

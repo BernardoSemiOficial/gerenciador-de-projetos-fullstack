@@ -14,7 +14,12 @@ export const initializerUsersController = async (app: FastifyZod) => {
   );
   app.get(
     "/users/:publicId/projects",
-    UsersControllerSchema.getProjectsForUserParams,
+    UsersControllerSchema.getProjectsForUser,
     UsersController.getProjectsByUser
+  );
+  app.post(
+    "/users/invitation-for-users",
+    UsersControllerSchema.createInvitationForUsers,
+    UsersController.createInvitationForUsers
   );
 };

@@ -17,6 +17,6 @@ export class AuthorizationMiddleware {
 
 declare module "fastify" {
   export interface FastifyRequest {
-    authenticatedUser?: AuthenticatedUser;
+    authenticatedUser: AuthenticatedUser;
   }
 }

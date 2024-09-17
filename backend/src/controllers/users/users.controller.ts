@@ -1,6 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { ClientError } from "../../errors/client-error";
-import { ProjectForUserClient, UserClient } from "../../models/user.model";
+import {
+  InvitationForUsersClient,
+  ProjectForUserClient,
+  UserClient,
+} from "../../models/user.model";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { UsersControllerSchemaType } from "./users.schema";
 
@@ -43,5 +47,32 @@ export class UsersController {
       (project) => new ProjectForUserClient(project)
     );
     return reply.status(200).send({ projects: projectForUserClient });
+  }
+
+  static async createInvitationForUsers(
+    request: FastifyRequest<{
+      Body: UsersControllerSchemaType["createInvitationForUsersBody"];
+    }>,
+    reply: FastifyReply
+  ) {
+    const invitationForUsers = request.body;
+    const userPublicId = request.authenticatedUser?.publicId;
+
+    const invitationsPromise = invitationForUsers.map(async (user) =>
+      UsersRespository.createInvitationForUsers({
+        user_public_id: userPublicId,
+        email: user.email,
+        projects_id: user.projectsId.map((projectId) => ({
+          public_id: projectId,
+        })),
+      })
+    );
+    const invitations = await Promise.all(invitationsPromise);
+
+    const invitationsClient = invitations.map(
+      (invitation) => new InvitationForUsersClient(invitation)
+    );
+
+    return reply.status(201).send({ invitations: invitationsClient });
   }
 }

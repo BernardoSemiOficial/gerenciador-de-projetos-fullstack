@@ -1,6 +1,7 @@
 import { prisma } from "../../database/prisma.database";
 import { ServerError } from "../../errors/server-error";
 import {
+  UsersRespositoryCreateInvitationForUsers,
   UsersRespositoryCreateProjectForUser,
   UsersRespositoryCreateUser,
   UsersRespositoryFindProjectForUser,
@@ -136,6 +137,28 @@ export class UsersRespository {
     try {
       return await prisma.usersOnProjects.create({
         data,
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
+  }
+
+  static async createInvitationForUsers(
+    data: UsersRespositoryCreateInvitationForUsers
+  ) {
+    try {
+      return await prisma.userInvitation.create({
+        data: {
+          email: data.email,
+          projects: {
+            connect: data.projects_id,
+          },
+          user: {
+            connect: {
+              public_id: data.user_public_id,
+            },
+          },
+        },
       });
     } catch (error) {
       throw new ServerError({ message: (error as Error).message, code: 500 });

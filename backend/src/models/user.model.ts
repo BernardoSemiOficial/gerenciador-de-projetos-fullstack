@@ -86,3 +86,13 @@ export class ProjectForUserClient {
     this.role = role;
   }
 }
+
+export class InvitationForUsersClient {
+  public id: string;
+  public email: string;
+
+  constructor({ email, public_id }: { email: string; public_id: string }) {
+    this.id = public_id;
+    this.email = email;
+  }
+}
