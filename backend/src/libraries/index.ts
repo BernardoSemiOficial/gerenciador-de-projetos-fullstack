@@ -1,10 +1,10 @@
 import * as b from "bcrypt";
-import * as j from "jsonwebtoken";
-import * as z from "zod";
-
 import dayjs from "dayjs";
 import ptBR from "dayjs/locale/pt-br";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
+import * as j from "jsonwebtoken";
+import nodemailer from "nodemailer";
+import * as z from "zod";
 
 dayjs.locale(ptBR);
 dayjs.extend(LocalizedFormat);
@@ -18,4 +18,5 @@ export const libraries = {
   bcript: bcript,
   jwt: jwt,
   day: dayjs,
+  mailer: nodemailer,
 };
