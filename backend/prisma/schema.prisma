@@ -11,29 +11,31 @@ datasource db {
 }
 
 model User {
-  id         Int               @id @default(autoincrement())
-  public_id  String            @unique @default(uuid())
-  email      String            @unique
-  name       String
-  password   String
-  created_at DateTime          @default(now())
-  updated_at DateTime          @updatedAt
-  projects   UsersOnProjects[]
+  id             Int               @id @default(autoincrement())
+  public_id      String            @unique @default(uuid())
+  email          String            @unique
+  name           String
+  password       String
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
+  projects       UsersOnProjects[]
+  userInvitation UserInvitation[]
 
   @@map("users")
 }
 
 model Project {
-  id          Int               @id @default(autoincrement())
-  public_id   String            @unique @default(uuid())
-  name        String            @unique
-  description String
-  starts_at   DateTime
-  ends_at     DateTime
-  created_at  DateTime          @default(now())
-  updated_at  DateTime          @updatedAt
-  users       UsersOnProjects[]
-  tasks       Task[]
+  id             Int               @id @default(autoincrement())
+  public_id      String            @unique @default(uuid())
+  name           String            @unique
+  description    String
+  starts_at      DateTime
+  ends_at        DateTime
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
+  users          UsersOnProjects[]
+  tasks          Task[]
+  userInvitation UserInvitation[]
 
   @@map("projects")
 }
@@ -80,4 +82,17 @@ model TaskPriority {
   tasks Task[]
 
   @@map("task_priorities")
+}
+
+model UserInvitation {
+  id         Int       @id @default(autoincrement())
+  public_id  String    @unique @default(uuid())
+  email      String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  projects   Project[]
+  user       User      @relation(fields: [user_id], references: [id])
+  user_id    Int
+
+  @@map("user_invitations")
 }
