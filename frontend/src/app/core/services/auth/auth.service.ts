@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorage } from '@core/enums/local-storage.enum';
 import {
+  InviteResponse,
   LoginPayload,
   LoginResponse,
   RefreshTokenResponse,
@@ -54,6 +55,16 @@ export class AuthService {
   register(registerPayload: RegisterPayload): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(
       this.baseUrl + '/auth/register',
+      registerPayload
+    );
+  }
+
+  invite(
+    inviteId: string,
+    registerPayload: RegisterPayload
+  ): Observable<InviteResponse> {
+    return this.http.post<InviteResponse>(
+      this.baseUrl + `/auth/invite/${inviteId}`,
       registerPayload
     );
   }

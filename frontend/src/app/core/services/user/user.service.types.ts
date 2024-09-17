@@ -1,4 +1,8 @@
-import { ProjectForUser, User } from '@core/interfaces/user.interface';
+import {
+  InviteForUser,
+  ProjectForUser,
+  User,
+} from '@core/interfaces/user.interface';
 
 export interface ResponseGetUser {
   user: User;
@@ -6,4 +10,8 @@ export interface ResponseGetUser {
 
 export interface ResponseGetProjectsForUser {
   projects: ProjectForUser[];
+}
+
+export interface ResponseGetInvitationForUser {
+  invite: InviteForUser;
 }

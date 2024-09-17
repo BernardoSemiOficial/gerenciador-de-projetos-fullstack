@@ -23,6 +23,18 @@ export interface RegisterResponse {
   user: User;
 }
 
+export interface InvitePayload {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface InviteResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: User;
+}
+
 export interface RefreshTokenPayload {
   refreshToken: string;
 }

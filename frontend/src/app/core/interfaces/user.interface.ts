@@ -16,3 +16,17 @@ export interface ProjectForUser {
   ends_at: Date;
   number_of_users: number;
 }
+
+export interface InviteForUser {
+  id: string;
+  email: string;
+  created_at: Date;
+  updated_at: Date;
+  user: {
+    email: string;
+    name: string;
+  };
+  projects: {
+    name: string;
+  }[];
+}

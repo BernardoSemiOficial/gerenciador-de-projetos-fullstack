@@ -26,7 +26,7 @@ export class ToastAlertService {
 
   addDangerMessage({ title, description }: ToaskAlertMessage) {
     this.messageService.add({
-      severity: 'danger',
+      severity: 'error',
       summary: title,
       detail: description,
     });
