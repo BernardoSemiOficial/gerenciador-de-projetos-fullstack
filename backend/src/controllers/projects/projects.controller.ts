@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { RoleId } from "../../enums/roles.enum";
 import { ClientError } from "../../errors/client-error";
 import { libraries } from "../../libraries";
 import { ProjectClient } from "../../models/project.model";
@@ -104,6 +105,7 @@ export class ProjectsController {
       is_owner: true,
       user_id: user.id,
       project_id: project.id,
+      role_id: RoleId.ADMIN,
     });
 
     const projectClient = new ProjectClient(project);

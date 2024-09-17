@@ -4,6 +4,10 @@ export class UserClient {
   public name: string;
   public created_at: Date;
   public updated_at: Date;
+  public role: {
+    id: number;
+    name: string;
+  };
 
   constructor({
     public_id,
@@ -11,18 +15,24 @@ export class UserClient {
     name,
     created_at,
     updated_at,
+    role,
   }: {
     public_id: string;
     email: string;
     name: string;
     created_at: Date;
     updated_at: Date;
+    role: {
+      id: number;
+      name: string;
+    };
   }) {
     this.id = public_id;
     this.email = email;
     this.name = name;
     this.created_at = created_at;
     this.updated_at = updated_at;
+    this.role = role;
   }
 }
 
@@ -36,12 +46,21 @@ export class ProjectForUserClient {
   public starts_at: Date;
   public ends_at: Date;
   public is_owner: boolean;
+  public role: {
+    id: number;
+    name: string;
+  };
 
   constructor({
     is_owner,
+    role,
     project,
   }: {
     is_owner: boolean;
+    role: {
+      id: number;
+      name: string;
+    };
     project: {
       public_id: string;
       name: string;
@@ -64,5 +83,6 @@ export class ProjectForUserClient {
     this.starts_at = project.starts_at;
     this.ends_at = project.ends_at;
     this.is_owner = is_owner;
+    this.role = role;
   }
 }

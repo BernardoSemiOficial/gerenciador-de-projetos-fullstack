@@ -18,6 +18,7 @@ export class UsersRespository {
           name: true,
           created_at: true,
           updated_at: true,
+          role: true,
         },
       });
     } catch (error) {
@@ -40,6 +41,7 @@ export class UsersRespository {
           name: true,
           created_at: true,
           updated_at: true,
+          role: true,
           password: selectPassword,
         },
       });
@@ -64,6 +66,7 @@ export class UsersRespository {
           name: true,
           created_at: true,
           updated_at: true,
+          role: true,
           password: selectPassword,
           id: selectId,
         },
@@ -85,6 +88,7 @@ export class UsersRespository {
         },
         select: {
           is_owner: true,
+          role: true,
           project: {
             select: {
               _count: {
@@ -118,6 +122,7 @@ export class UsersRespository {
           name: true,
           created_at: true,
           updated_at: true,
+          role: true,
         },
       });
     } catch (error) {

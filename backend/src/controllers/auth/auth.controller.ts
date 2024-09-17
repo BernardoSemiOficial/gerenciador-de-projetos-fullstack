@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { ClientError } from "../../errors/client-error";
 import { TokenPayload } from "../../models/token.model";
 
+import { RoleId } from "../../enums/roles.enum";
 import { UserClient } from "../../models/user.model";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { BcriptService } from "../../services/bcript.service";
@@ -60,6 +61,7 @@ export class AuthController {
     const user = await UsersRespository.createUser({
       name,
       email,
+      role_id: RoleId.ADMIN,
       password: hashPassword,
     });
 
