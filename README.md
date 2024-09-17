@@ -21,7 +21,7 @@ Este é um projeto de um gerenciador de projetos fullstack, que permite aos usu�
 
 ### Atribuição de Tarefas
 
-- As tarefas devem poder ser atribuídas a diferentes usuários dentro do projeto (para equipes).
+- As tarefas devem poder ser atribuídas a diferentes usuários dentro do projeto.
 - Notificações (e-mail ou dentro do sistema) devem ser enviadas quando uma tarefa for atribuída ou modificada.
 
 ### Comentários em Tarefas
@@ -44,41 +44,3 @@ Este é um projeto de um gerenciador de projetos fullstack, que permite aos usu�
 ### Relatórios de Progresso
 
 - Deve ser possível gerar relatórios de progresso de um projeto (quantas tarefas foram concluídas, quantas estão atrasadas, etc.).
-
-## Requisitos Não Funcionais
-
-### Desempenho
-
-- O sistema deve carregar as páginas em menos de 2 segundos em uma conexão de rede média (ex: 3G).
-- Deve ser capaz de suportar múltiplas requisições simultâneas sem perda de desempenho significativo.
-
-### Segurança
-
-- Dados dos usuários (como senhas) devem ser armazenados de forma segura, utilizando criptografia (ex: bcrypt para senhas).
-- Todas as interações sensíveis com o servidor devem ser protegidas via HTTPS.
-
-### Usabilidade
-
-- A interface deve ser amigável e intuitiva, permitindo que usuários novos possam entender e usar o sistema sem treinamento extensivo.
-- A aplicação deve ser responsiva e funcionar bem em dispositivos móveis.
-
-### Escalabilidade
-
-- O sistema deve ser escalável para suportar um grande número de usuários simultaneamente e a adição de novos recursos no futuro.
-
-### Manutenibilidade
-
-- O código deve ser modular e bem documentado para facilitar a manutenção e adição de novas funcionalidades.
-- Boas práticas de desenvolvimento devem ser seguidas, como uso de testes automatizados e versionamento de código.
-
-### Disponibilidade
-
-- O sistema deve ter alta disponibilidade, com tempo de inatividade mínimo (ex: 99.9% de uptime).
-
-### Compatibilidade
-
-- O sistema deve ser compatível com os principais navegadores (Chrome, Firefox, Edge, Safari).
-
-### Conformidade
-
-- O sistema deve seguir as leis de proteção de dados (ex: LGPD no Brasil) e privacidade do usuário.
