@@ -31,12 +31,10 @@ export class InviteComponent implements OnInit {
   private toastAlertService: ToastAlertService = inject(ToastAlertService);
   private router: Router = inject(Router);
   inviteForm!: FormGroup;
-  inviteId = input.required<string>();
-  inviteDetails!: InviteForUser;
+  inviteDetails = input<InviteForUser>();
 
   ngOnInit() {
     this.initForm();
-    this.getInvite();
   }
 
   initForm() {
@@ -45,28 +43,17 @@ export class InviteComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-  }
 
-  getInvite() {
-    this.userService.getInvitationForUser(this.inviteId()).subscribe({
-      next: (data) => {
-        this.inviteDetails = data.invite;
-        this.inviteForm.patchValue({
-          email: data.invite.email,
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log(error);
-        this.toastAlertService.addDangerMessage({
-          title: 'Error',
-          description: 'Failed to get invitation',
-        });
-      },
+    this.inviteForm.patchValue({
+      email: this.inviteDetails()?.email,
     });
   }
 
   confirmInviteUser() {
     if (this.inviteForm.invalid) return;
+
+    const inviteId = this.inviteDetails()?.id;
+    if (!inviteId) return;
 
     const registerFormValue = this.inviteForm.getRawValue();
     const payload: InvitePayload = {
@@ -74,7 +61,7 @@ export class InviteComponent implements OnInit {
       email: registerFormValue.email!,
       password: registerFormValue.password!,
     };
-    this.authService.invite(this.inviteId(), payload).subscribe({
+    this.authService.invite(inviteId, payload).subscribe({
       next: (data) => {
         this.authService.setTokens(data);
         this.userService.saveUser(data.user);
