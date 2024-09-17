@@ -84,9 +84,7 @@ export class UsersController {
         {
           email: user.email,
           create_user_link:
-            env.FRONTEND_URL +
-            "/invitation-for-user" +
-            `?invitation=${user.id}`,
+            env.FRONTEND_URL + "/invite" + `?invitation=${user.id}`,
           user_owner: userEmail,
         }
       )

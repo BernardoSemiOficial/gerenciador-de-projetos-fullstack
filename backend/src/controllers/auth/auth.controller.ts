@@ -4,6 +4,7 @@ import { TokenPayload } from "../../models/token.model";
 
 import { RoleId } from "../../enums/roles.enum";
 import { UserClient } from "../../models/user.model";
+import { InvitationsRespository } from "../../repositories/invitations/invitations.repository";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { BcriptService } from "../../services/bcript.service";
 import { TokenService } from "../../services/token.service";
@@ -93,7 +94,7 @@ export class AuthController {
     const { invitePublicId } = request.params;
     const { name, email, password } = request.body;
 
-    const inviteUser = await UsersRespository.findInviteByPublicId({
+    const inviteUser = await InvitationsRespository.findInviteByPublicId({
       invitePublicId,
     });
 
@@ -119,7 +120,7 @@ export class AuthController {
     );
     await Promise.all(insertUserInProjects);
 
-    await UsersRespository.deleteInviteByPublicId({ invitePublicId });
+    await InvitationsRespository.deleteInviteByPublicId({ invitePublicId });
 
     const tokenPayload: TokenPayload = {
       publicId: user.public_id,
