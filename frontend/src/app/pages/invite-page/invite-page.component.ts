@@ -11,13 +11,13 @@ import { InviteComponent } from '@features/invite/invite.component';
 })
 export class InvitePageComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
-  invitationId!: string;
+  inviteId!: string;
 
   ngOnInit() {
-    const invitationId =
+    const inviteId =
       this.activatedRoute.snapshot.queryParamMap.get('invitation');
-    console.log(invitationId);
+    console.log(inviteId);
 
-    if (invitationId) this.invitationId = invitationId;
+    if (inviteId) this.inviteId = inviteId;
   }
 }

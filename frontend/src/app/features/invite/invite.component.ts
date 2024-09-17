@@ -40,7 +40,7 @@ export class InviteComponent implements OnInit {
   }
 
   initForm() {
-    return this.formBuilder.group({
+    this.inviteForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

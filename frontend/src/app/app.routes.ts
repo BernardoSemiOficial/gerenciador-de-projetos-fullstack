@@ -17,6 +17,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'invite',
+    loadComponent: () =>
+      import('./pages/invite-page/invite-page.component').then(
+        (m) => m.InvitePageComponent
+      ),
+  },
+  {
     path: 'dashboard',
     canActivate: [canActivateAuth],
     loadComponent: () =>
