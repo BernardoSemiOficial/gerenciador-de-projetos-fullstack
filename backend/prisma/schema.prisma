@@ -20,6 +20,8 @@ model User {
   updated_at     DateTime          @updatedAt
   projects       UsersOnProjects[]
   userInvitation UserInvitation[]
+  role           Role              @relation(fields: [role_id], references: [id])
+  role_id        Int
 
   @@map("users")
 }
@@ -45,6 +47,8 @@ model UsersOnProjects {
   user_id    Int
   project    Project @relation(fields: [project_id], references: [id])
   project_id Int
+  role       Role    @relation(fields: [role_id], references: [id])
+  role_id    Int
   is_owner   Boolean @default(false)
 
   @@id([project_id, user_id])
@@ -95,4 +99,13 @@ model UserInvitation {
   user_id    Int
 
   @@map("user_invitations")
+}
+
+model Role {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  User            User[]
+  UsersOnProjects UsersOnProjects[]
+
+  @@map("roles")
 }
