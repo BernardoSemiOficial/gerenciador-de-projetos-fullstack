@@ -1,0 +1,11 @@
+<input
+  pInputText
+  [id]="id()"
+  [name]="id()"
+  [type]="inputType()"
+  [disabled]="isDisabled"
+  [(ngModel)]="inputValue"
+  (blur)="_onTouched()"
+  (ngModelChange)="_onChange(inputValue)"
+  aria-describedby="field-help"
+/>
