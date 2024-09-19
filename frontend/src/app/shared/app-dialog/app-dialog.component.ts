@@ -11,7 +11,8 @@ import { DialogModule } from 'primeng/dialog';
 export class AppDialogComponent {
   title = input.required<string>();
   isVisible = input.required<boolean>();
-  maxWidth = input<string>('25rem');
+  maxWidth = input<string>();
+  minHeight = input<string>();
   visible = false;
 
   constructor() {

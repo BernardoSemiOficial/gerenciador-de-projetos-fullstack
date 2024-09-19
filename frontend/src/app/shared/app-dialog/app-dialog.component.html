@@ -3,7 +3,11 @@
   [maximizable]="true"
   [header]="title()"
   [(visible)]="visible"
-  [style]="{ maxWidth: maxWidth() || '25rem', width: '100%' }"
+  [style]="{
+    minHeight: minHeight() || '40rem',
+    maxWidth: maxWidth() || '25rem',
+    width: '100%'
+  }"
 >
   <ng-content></ng-content>
 </p-dialog>
