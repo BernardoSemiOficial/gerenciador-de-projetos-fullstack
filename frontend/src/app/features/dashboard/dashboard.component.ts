@@ -11,7 +11,7 @@ import { AppFooterComponent } from '@shared/app-footer/app-footer.component';
 import { AppHeaderComponent } from '@shared/app-header/app-header.component';
 import { PrimeIcons } from 'primeng/api';
 import { map, Observable } from 'rxjs';
-import { DashboardDialogInvitesComponent } from './components/dashboard-dialog-invites/dashboard-dialog-invites.component';
+import { DashboardDialogInvitationsComponent } from './components/dashboard-dialog-invites/dashboard-dialog-invitations.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +24,7 @@ import { DashboardDialogInvitesComponent } from './components/dashboard-dialog-i
     AppFooterComponent,
     AppCardComponent,
     AppButtonComponent,
-    DashboardDialogInvitesComponent,
+    DashboardDialogInvitationsComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
