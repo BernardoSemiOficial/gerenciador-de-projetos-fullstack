@@ -3,6 +3,7 @@
   [maximizable]="true"
   [header]="title()"
   [(visible)]="visible"
+  (onHide)="closeDialog()"
   [style]="{
     minHeight: minHeight() || '40rem',
     maxWidth: maxWidth() || '25rem',

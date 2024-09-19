@@ -1,4 +1,4 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, effect, Input, input, WritableSignal } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 
 @Component({
@@ -9,15 +9,19 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './app-dialog.component.scss',
 })
 export class AppDialogComponent {
+  @Input() visibleSignal!: WritableSignal<boolean>;
   title = input.required<string>();
-  isVisible = input.required<boolean>();
   maxWidth = input<string>();
   minHeight = input<string>();
   visible = false;
 
   constructor() {
     effect(() => {
-      this.visible = this.isVisible();
+      this.visible = this.visibleSignal();
     });
+  }
+
+  closeDialog() {
+    this.visibleSignal.set(false);
   }
 }
