@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { RoleId } from "../../enums/roles.enum";
 import { env } from "../../env";
 import { ClientError } from "../../errors/client-error";
 import { EmailTemplates } from "../../models/email-templates";
@@ -7,6 +8,7 @@ import {
   ProjectForUserClient,
   UserClient,
 } from "../../models/user.model";
+import { ProjectsRespository } from "../../repositories/projects/projects.repository";
 import { UsersRespository } from "../../repositories/users/users.repository";
 import { EmailService } from "../../services/email.service";
 import { UsersControllerSchemaType } from "./users.schema";
@@ -62,7 +64,47 @@ export class UsersController {
     const userPublicId = request.authenticatedUser?.publicId;
     const userEmail = request.authenticatedUser?.email;
 
-    const invitationsPromise = invitationForUsers.map(async (user) =>
+    const invitationForUsersEmail = invitationForUsers.map(
+      (user) => user.email
+    );
+    const usersInTheSystem = await UsersRespository.findAllUsersByEmail(
+      invitationForUsersEmail
+    );
+
+    const invitationForUserProjectsId = invitationForUsers
+      .map((user) => user.projectsId)
+      .flat();
+    const projectsInTheSystem =
+      await ProjectsRespository.findAllProjectsByPublicId(
+        invitationForUserProjectsId
+      );
+
+    const usersEmailInTheSystem = usersInTheSystem.map((user) => user.email);
+    const newUsers = invitationForUsers.filter(
+      (user) => !usersEmailInTheSystem.includes(user.email)
+    );
+    const currentUsers = invitationForUsers
+      .filter((user) => usersEmailInTheSystem.includes(user.email))
+      .map((user) => ({
+        ...user,
+        id: usersInTheSystem.find((u) => u.email === user.email)!.id,
+      }));
+
+    const insertCurrentUsersInProjects = currentUsers.map(async (user) => {
+      const userProjectsToAdd = projectsInTheSystem.filter((p) =>
+        user.projectsId.includes(p.public_id)
+      );
+      const newUserInProjectLine = userProjectsToAdd.map((project) => ({
+        is_owner: false,
+        user_id: user.id,
+        project_id: project.id,
+        role_id: RoleId.CONTRIBUTOR,
+      }));
+      return UsersRespository.createProjectsForUser(newUserInProjectLine);
+    });
+    await Promise.all(insertCurrentUsersInProjects);
+
+    const invitationsPromise = newUsers.map(async (user) =>
       UsersRespository.createInvitationForUsers({
         user_public_id: userPublicId,
         email: user.email,

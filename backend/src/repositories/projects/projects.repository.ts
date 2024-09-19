@@ -129,4 +129,22 @@ export class ProjectsRespository {
       throw new ServerError({ message: (error as Error).message, code: 500 });
     }
   }
+
+  static async findAllProjectsByPublicId(publicIds: string[]) {
+    try {
+      return await prisma.project.findMany({
+        where: {
+          public_id: {
+            in: publicIds,
+          },
+        },
+        select: {
+          id: true,
+          public_id: true,
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
+  }
 }

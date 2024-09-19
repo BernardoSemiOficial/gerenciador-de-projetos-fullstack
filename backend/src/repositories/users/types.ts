@@ -29,6 +29,13 @@ export type UsersRespositoryCreateProjectForUser = {
   role_id: RoleId;
 };
 
+export type UsersRespositoryCreateProjectsForUser = {
+  is_owner: boolean;
+  user_id: number;
+  project_id: number;
+  role_id: RoleId;
+};
+
 export type UsersRespositoryCreateInvitationForUsers = {
   email: string;
   user_public_id: string;

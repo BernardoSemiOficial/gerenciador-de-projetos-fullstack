@@ -3,6 +3,7 @@ import { ServerError } from "../../errors/server-error";
 import {
   UsersRespositoryCreateInvitationForUsers,
   UsersRespositoryCreateProjectForUser,
+  UsersRespositoryCreateProjectsForUser,
   UsersRespositoryCreateUser,
   UsersRespositoryFindProjectForUser,
   UsersRespositoryFindUserByEmail,
@@ -144,6 +145,18 @@ export class UsersRespository {
     }
   }
 
+  static async createProjectsForUser(
+    data: UsersRespositoryCreateProjectsForUser[]
+  ) {
+    try {
+      return await prisma.usersOnProjects.createMany({
+        data,
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
+  }
+
   static async createInvitationForUsers(
     data: UsersRespositoryCreateInvitationForUsers
   ) {
@@ -159,6 +172,24 @@ export class UsersRespository {
               public_id: data.user_public_id,
             },
           },
+        },
+      });
+    } catch (error) {
+      throw new ServerError({ message: (error as Error).message, code: 500 });
+    }
+  }
+
+  static async findAllUsersByEmail(emails: string[]) {
+    try {
+      return await prisma.user.findMany({
+        where: {
+          email: {
+            in: emails,
+          },
+        },
+        select: {
+          id: true,
+          email: true,
         },
       });
     } catch (error) {
