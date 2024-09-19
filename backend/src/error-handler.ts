@@ -41,7 +41,7 @@ export const errorHandler: FastitfyErrorHandler = (error, request, reply) => {
 
   if (error instanceof ServerError) {
     return reply
-      .status(error.statusCode)
+      .status(error.statusCode ?? 400)
       .send({ message: "Internal server error" });
   }
 
