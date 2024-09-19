@@ -1,0 +1,9 @@
+<p-multiSelect
+  [options]="options()"
+  optionLabel="name"
+  [placeholder]="placeholder()"
+  [disabled]="isDisabled"
+  [(ngModel)]="value"
+  (blur)="onTouched()"
+  (ngModelChange)="onChange(value)"
+/>
