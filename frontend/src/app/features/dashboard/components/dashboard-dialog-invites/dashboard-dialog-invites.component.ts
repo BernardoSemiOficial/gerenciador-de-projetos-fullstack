@@ -74,6 +74,8 @@ export class DashboardDialogInvitesComponent {
   }
 
   sendInvites() {
+    if (this.invitesForm.invalid) return;
+
     console.log(
       this.invitesForm.value,
       this.invitesForm.valid,

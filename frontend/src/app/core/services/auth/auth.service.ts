@@ -59,12 +59,12 @@ export class AuthService {
     );
   }
 
-  invite(
+  invitation(
     inviteId: string,
     registerPayload: RegisterPayload
   ): Observable<InviteResponse> {
     return this.http.post<InviteResponse>(
-      this.baseUrl + `/auth/invite/${inviteId}`,
+      this.baseUrl + `/auth/invitation/${inviteId}`,
       registerPayload
     );
   }

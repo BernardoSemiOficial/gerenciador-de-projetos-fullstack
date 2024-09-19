@@ -79,12 +79,12 @@ export class UsersController {
 
     const invitationsEmailsPromise = invitationsClient.map(async (user) =>
       EmailService.sendEmail(
-        EmailTemplates.InviteUser,
+        EmailTemplates.InvitationUser,
         { name: user.email, address: user.email },
         {
           email: user.email,
           create_user_link:
-            env.FRONTEND_URL + "/invite" + `?invitation=${user.id}`,
+            env.FRONTEND_URL + "/invitation" + `?invitation=${user.id}`,
           user_owner: userEmail,
         }
       )

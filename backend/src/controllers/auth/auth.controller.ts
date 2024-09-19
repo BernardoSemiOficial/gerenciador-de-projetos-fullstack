@@ -84,10 +84,10 @@ export class AuthController {
       .send({ accessToken, refreshToken, user: userClient });
   }
 
-  static async invite(
+  static async invitation(
     request: FastifyRequest<{
-      Params: AuthControllerSchemaType["inviteParams"];
-      Body: AuthControllerSchemaType["inviteBody"];
+      Params: AuthControllerSchemaType["invitationParams"];
+      Body: AuthControllerSchemaType["invitationBody"];
     }>,
     reply: FastifyReply
   ) {

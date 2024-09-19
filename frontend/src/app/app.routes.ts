@@ -17,10 +17,10 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'invite',
+    path: 'invitation',
     loadComponent: () =>
-      import('./pages/invite-page/invite-page.component').then(
-        (m) => m.InvitePageComponent
+      import('./pages/invitation-page/invitation-page.component').then(
+        (m) => m.InvitationPageComponent
       ),
   },
   {

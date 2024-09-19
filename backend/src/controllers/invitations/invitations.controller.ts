@@ -22,7 +22,7 @@ export class InvitationsController {
 
     const inviteUserClient = new InviteForUserClient(inviteUser);
 
-    return reply.status(200).send({ invite: inviteUserClient });
+    return reply.status(200).send({ invitation: inviteUserClient });
   }
 
   static async deleteInvitationForUser(
@@ -37,6 +37,6 @@ export class InvitationsController {
     });
     return reply
       .status(200)
-      .send({ invite: `Invite ${invitePublicId} deleted` });
+      .send({ invitation: `Invitation ${invitePublicId} deleted` });
   }
 }

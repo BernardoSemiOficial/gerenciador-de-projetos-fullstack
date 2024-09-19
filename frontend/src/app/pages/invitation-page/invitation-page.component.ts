@@ -4,16 +4,16 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { InviteForUser } from '@core/interfaces/user.interface';
 import { ToastAlertService } from '@core/services/toast-alert/toast-alert.service';
 import { UserService } from '@core/services/user/user.service';
-import { InviteComponent } from '@features/invite/invite.component';
+import { InvitationComponent } from '@features/invitation/invitation.component';
 
 @Component({
-  selector: 'app-invite-page',
+  selector: 'app-invitation-page',
   standalone: true,
-  imports: [InviteComponent, RouterLink],
-  templateUrl: './invite-page.component.html',
-  styleUrl: './invite-page.component.scss',
+  imports: [InvitationComponent, RouterLink],
+  templateUrl: './invitation-page.component.html',
+  styleUrl: './invitation-page.component.scss',
 })
-export class InvitePageComponent implements OnInit {
+export class InvitationPageComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   userService = inject(UserService);
   toastAlertService = inject(ToastAlertService);
@@ -34,7 +34,7 @@ export class InvitePageComponent implements OnInit {
   getInvite() {
     this.userService.getInvitationForUser(this.inviteId).subscribe({
       next: (data) => {
-        this.inviteDetails = data.invite;
+        this.inviteDetails = data.invitation;
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);

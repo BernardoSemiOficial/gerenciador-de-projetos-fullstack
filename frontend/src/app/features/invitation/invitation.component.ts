@@ -18,13 +18,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-  selector: 'app-invite',
+  selector: 'app-invitation',
   standalone: true,
   imports: [ReactiveFormsModule, InputTextModule, PasswordModule, ButtonModule],
-  templateUrl: './invite.component.html',
-  styleUrl: './invite.component.scss',
+  templateUrl: './invitation.component.html',
+  styleUrl: './invitation.component.scss',
 })
-export class InviteComponent implements OnInit {
+export class InvitationComponent implements OnInit {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private authService: AuthService = inject(AuthService);
   private userService: UserService = inject(UserService);
@@ -61,7 +61,7 @@ export class InviteComponent implements OnInit {
       email: registerFormValue.email!,
       password: registerFormValue.password!,
     };
-    this.authService.invite(inviteId, payload).subscribe({
+    this.authService.invitation(inviteId, payload).subscribe({
       next: (data) => {
         this.authService.setTokens(data);
         this.userService.saveUser(data.user);

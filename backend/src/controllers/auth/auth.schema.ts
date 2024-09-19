@@ -20,7 +20,7 @@ export const AuthControllerSchema = {
       }),
     },
   },
-  invite: {
+  invitation: {
     schema: {
       params: zod.object({
         invitePublicId: zod.string().uuid(),
@@ -47,6 +47,8 @@ export type AuthControllerSchemaType = {
     typeof AuthControllerSchema.refreshToken.schema.body
   >;
   registerBody: Zod.infer<typeof AuthControllerSchema.register.schema.body>;
-  inviteParams: Zod.infer<typeof AuthControllerSchema.invite.schema.params>;
-  inviteBody: Zod.infer<typeof AuthControllerSchema.invite.schema.body>;
+  invitationParams: Zod.infer<
+    typeof AuthControllerSchema.invitation.schema.params
+  >;
+  invitationBody: Zod.infer<typeof AuthControllerSchema.invitation.schema.body>;
 };

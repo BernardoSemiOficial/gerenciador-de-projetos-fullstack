@@ -13,5 +13,5 @@ export interface ResponseGetProjectsForUser {
 }
 
 export interface ResponseGetInvitationForUser {
-  invite: InviteForUser;
+  invitation: InviteForUser;
 }

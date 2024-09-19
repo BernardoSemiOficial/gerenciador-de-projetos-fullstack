@@ -1,3 +1,3 @@
 export enum EmailTemplates {
-  InviteUser = "invite-user.html",
+  InvitationUser = "invitation-user.html",
 }

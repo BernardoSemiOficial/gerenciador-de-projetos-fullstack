@@ -11,9 +11,9 @@ export const initializerAuthController = async (app: FastifyZod) => {
     AuthController.register
   );
   app.post(
-    "/auth/invite/:invitePublicId",
-    AuthControllerSchema.invite,
-    AuthController.invite
+    "/auth/invitation/:invitePublicId",
+    AuthControllerSchema.invitation,
+    AuthController.invitation
   );
   app.post(
     "/auth/refresh-token",
