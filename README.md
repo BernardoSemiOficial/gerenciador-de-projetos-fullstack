@@ -10,6 +10,21 @@ Documentação do front-end: [readme](/frontend/README.md)
 
 Documentação do back-end: [readme](/backend/README.md)
 
+## Diagrama de entidade relacionamento
+
+Tabelas: Users, Projects, UsersOnProjects, Tasks, UserInvitation, TaskStatus, TaskPriority, Role.
+
+- O Users salva os usuários cadastrados no sistema que finalizaram o cadastro.
+- O UsersOnProjects associa um usuário a um projeto e tem informações únicas para esse relacionamento.
+- O Projects salva os projetos e tem associado zero ou mais tarefas.
+- A Tasks salva as tarefas e está associado a somente um projeto
+- A UserInvitation salva os usuários que foram convidados por outros usuários e que precisam finalizar o cadastro
+- A TaskStatus são associadas as tarefas para definir o status.
+- A TaskPriority são associadas as tarefas para definir a prioridade.
+- A Role são associadas aos usuários e usersOnProjects (definir o acesso a um projeto).
+
+diagrama da modelagem: [diagrama](./backend/diagrama.jpeg)
+
 ## Requisitos Funcionais
 
 ### Autenticação de Usuário
