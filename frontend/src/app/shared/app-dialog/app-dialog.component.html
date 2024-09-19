@@ -1,0 +1,9 @@
+<p-dialog
+  [modal]="true"
+  [maximizable]="true"
+  [header]="title()"
+  [(visible)]="visible"
+  [style]="{ maxWidth: maxWidth() || '25rem', width: '100%' }"
+>
+  <ng-content></ng-content>
+</p-dialog>
