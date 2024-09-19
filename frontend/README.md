@@ -36,17 +36,23 @@ Resumidamente o projeto foi dividido em 4 partes:
 
 1. Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo em [https://nodejs.org](https://nodejs.org).
 
-2. Abra o terminal e navegue até o diretório raiz do projeto.
+2. Clone o reposítorio:
 
-3. Execute o seguinte comando para instalar as dependências do projeto:
-
+```sh
+git clone https://github.com/BernardoSemiOficial/gerenciador-de-projetos-fullstack.git
 ```
+
+3. Abra o terminal e navegue até o diretório raiz do projeto que fica na pasta frontend.
+
+4. Execute o seguinte comando para instalar as dependências do projeto:
+
+```sh
 npm install
 ```
 
 4. Após a instalação das dependências, execute o seguinte comando para iniciar o servidor de desenvolvimento:
 
-```
+```sh
 ng serve
 ```
 

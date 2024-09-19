@@ -2,6 +2,14 @@
 
 Este é um projeto de um gerenciador de projetos fullstack, que permite aos usuários criar, editar e gerenciar projetos e tarefas.
 
+## Front-end
+
+Documentação do front-end: [readme](/frontend/README.md)
+
+## Back-end
+
+Documentação do back-end: [readme](/backend/README.md)
+
 ## Requisitos Funcionais
 
 ### Autenticação de Usuário
