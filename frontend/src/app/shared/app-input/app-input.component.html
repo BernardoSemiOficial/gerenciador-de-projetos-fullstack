@@ -3,9 +3,9 @@
   [id]="id()"
   [name]="id()"
   [type]="inputType()"
+  [placeholder]="placeholder()"
   [disabled]="isDisabled"
   [(ngModel)]="inputValue"
   (blur)="_onTouched()"
   (ngModelChange)="_onChange(inputValue)"
-  aria-describedby="field-help"
 />

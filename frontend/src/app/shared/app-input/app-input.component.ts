@@ -23,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 export class AppInputComponent implements ControlValueAccessor {
   id = input.required<string>();
   inputType = input<HTMLInputElement['type']>('text');
+  placeholder = input<HTMLInputElement['placeholder']>();
   inputValue: string | number = '';
   isDisabled: boolean = false;
 
