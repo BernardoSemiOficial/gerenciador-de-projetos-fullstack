@@ -13,6 +13,20 @@
 
 Este projeto é uma aplicação Node.js escrita em TypeScript. Siga os passos abaixo para configurar e executar o projeto.
 
+## Tecnologias utilizadas
+
+- Fastify
+- Prisma ORM
+- Typescript
+- Fastify Type Provider Zod
+- JWT (Json Web Token)
+- Nodemailer
+- Zod
+- Bcript
+- Dayjs
+- Dotenv
+- TSX
+
 ## Pré-requisitos
 
 - Node.js (versão 14.x ou superior)

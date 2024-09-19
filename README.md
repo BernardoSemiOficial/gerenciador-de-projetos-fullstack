@@ -1,14 +1,37 @@
 # Gerenciador de Projetos - Fullstack
 
-Este é um projeto de um gerenciador de projetos fullstack, que permite aos usuários criar, editar e gerenciar projetos e tarefas.
+Este é um projeto onde usuários podem ter um gerenciador de projetos, que permite aos usuários criar, editar e gerenciar projetos e tarefas.
 
 ## Front-end
 
 Documentação do front-end: [readme](/frontend/README.md)
 
+#### tecnologias
+
+- Angular v18
+- Typescript
+- RxJS
+- PrimeNG
+- PrimeFlex
+- PrimeIcons
+
 ## Back-end
 
 Documentação do back-end: [readme](/backend/README.md)
+
+#### tecnologias
+
+- Fastify
+- Prisma ORM
+- Typescript
+- Fastify Type Provider Zod
+- JWT (Json Web Token)
+- Nodemailer
+- Zod
+- Bcript
+- Dayjs
+- Dotenv
+- Tsx
 
 ## Diagrama de entidade relacionamento
 
