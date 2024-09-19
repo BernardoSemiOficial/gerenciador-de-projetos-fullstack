@@ -1,6 +1,7 @@
 <p-multiSelect
   [options]="options()"
-  optionLabel="name"
+  [optionValue]="optionValue()"
+  [optionLabel]="optionLabel()"
   [placeholder]="placeholder()"
   [disabled]="isDisabled"
   [(ngModel)]="value"

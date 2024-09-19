@@ -23,6 +23,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 export class AppMultiSelectComponent implements ControlValueAccessor {
   options = input.required<any[]>();
   id = input.required<string>();
+  optionLabel = input.required<string>();
+  optionValue = input.required<string>();
   inputType = input<HTMLInputElement['type']>('text');
   placeholder = input<HTMLInputElement['placeholder']>();
   value: any;
