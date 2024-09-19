@@ -38,6 +38,7 @@
     </ng-container>
     <div class="flex justify-content-end mt-4">
       <app-button
+        [isDisabled]="isLoadingInvites"
         [label]="'user'"
         severity="help"
         [icon]="PrimeIcons.PLUS"
@@ -46,7 +47,7 @@
       ></app-button>
     </div>
   </form>
-  <div class="flex align-items-center justify-content-end gap-2">
+  <div class="flex align-items-end justify-content-end gap-2 flex-grow-1">
     <app-button
       [isDisabled]="isLoadingInvites"
       [label]="'cancel'"

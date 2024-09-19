@@ -1,0 +1,7 @@
+:host {
+  ::ng-deep p-dialog .p-dialog-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
