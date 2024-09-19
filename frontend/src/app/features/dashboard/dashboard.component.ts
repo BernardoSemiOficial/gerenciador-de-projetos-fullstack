@@ -34,7 +34,7 @@ export class DashboardComponent {
   user = this.userService.user();
   userProjects$!: Observable<ResponseGetProjectsForUser>;
   PrimeIcons = PrimeIcons;
-  viewDialogInvites = signal<boolean>(true);
+  viewDialogInvites = signal<boolean>(false);
   projects: ProjectForUser[] = [];
 
   constructor() {
