@@ -16,6 +16,6 @@ export interface ResponsePostInvitations {
   }[];
 }
 
-export interface ResponseDeleteInvitations {
+export interface ResponseDeleteInvitation {
   invitation: string;
 }

@@ -3,15 +3,15 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import {
   PayloadPostInvitations,
-  ResponseDeleteInvitations,
+  ResponseDeleteInvitation,
   ResponseGetInvitationForUser,
   ResponsePostInvitations,
-} from './invitations.service.types';
+} from './invitation.service.types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class InvitationsService {
+export class InvitationService {
   private http: HttpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
 
@@ -29,7 +29,7 @@ export class InvitationsService {
   }
 
   deleteInvitation(inviteId: string) {
-    return this.http.delete<ResponseDeleteInvitations>(
+    return this.http.delete<ResponseDeleteInvitation>(
       this.baseUrl + `/invitations/${inviteId}`
     );
   }
