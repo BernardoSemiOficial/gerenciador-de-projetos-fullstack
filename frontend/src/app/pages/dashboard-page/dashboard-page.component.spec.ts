@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Component } from '@angular/core';
+import { DashboardComponent } from '@features/dashboard/dashboard.component';
 import { DashboardPageComponent } from './dashboard-page.component';
 
 describe('DashboardPageComponent', () => {
@@ -8,9 +10,13 @@ describe('DashboardPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardPageComponent]
+      imports: [DashboardPageComponent],
     })
-    .compileComponents();
+      .overrideComponent(DashboardPageComponent, {
+        remove: { imports: [DashboardComponent] },
+        add: { imports: [DashboardStubComponent] },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardPageComponent);
     component = fixture.componentInstance;
@@ -21,3 +27,6 @@ describe('DashboardPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+@Component({ standalone: true, selector: 'app-dashboard', template: '' })
+class DashboardStubComponent {}
