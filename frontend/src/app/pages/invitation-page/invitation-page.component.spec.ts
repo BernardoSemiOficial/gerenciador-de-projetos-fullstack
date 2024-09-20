@@ -1,28 +1,35 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastAlertService } from '@core/services/toast-alert/toast-alert.service';
 import { UserService } from '@core/services/user/user.service';
-import { InvitationComponent } from '@features/invitation/invitation.component';
+import { InvitationStubComponent } from 'src/__mocks__/components/invitations.component.mock';
+import { ActivatedRouteMock } from 'src/__mocks__/services/activated-route.service.mock';
+import { ToastAlertServiceMock } from 'src/__mocks__/services/toast-alert.service.mock';
+import { UserServiceMock } from 'src/__mocks__/services/user.service.mock';
 import { InvitationPageComponent } from './invitation-page.component';
 
 describe('InvitationPageComponent', () => {
   let component: InvitationPageComponent;
   let fixture: ComponentFixture<InvitationPageComponent>;
+  let userService: UserService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InvitationPageComponent],
-      providers: [ActivatedRoute, UserService, ToastAlertService],
+      providers: [
+        { provide: ActivatedRoute, useClass: ActivatedRouteMock },
+        { provide: UserService, useClass: UserServiceMock },
+        { provide: ToastAlertService, useClass: ToastAlertServiceMock },
+      ],
     })
       .overrideComponent(InvitationPageComponent, {
-        remove: { imports: [InvitationComponent] },
-        add: { imports: [InvitationStubComponent] },
+        set: { imports: [InvitationStubComponent] },
       })
       .compileComponents();
 
     fixture = TestBed.createComponent(InvitationPageComponent);
+    userService = TestBed.inject(UserService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -31,6 +38,3 @@ describe('InvitationPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-@Component({ standalone: true, selector: 'app-invitation', template: '' })
-class InvitationStubComponent {}

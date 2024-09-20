@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ProjectForUser } from '@core/interfaces/user.interface';
+import { ProjectForUser, User } from '@core/interfaces/user.interface';
 import { UserService } from '@core/services/user/user.service';
 import { ResponseGetProjectsForUser } from '@core/services/user/user.service.types';
 import { AppButtonComponent } from '@shared/app-button/app-button.component';
@@ -31,13 +31,14 @@ import { DashboardDialogInvitationsComponent } from './components/dashboard-dial
 })
 export class DashboardComponent {
   private userService: UserService = inject(UserService);
-  user = this.userService.user();
+  user: User | null = null;
   userProjects$!: Observable<ResponseGetProjectsForUser>;
   PrimeIcons = PrimeIcons;
   viewDialogInvites = signal<boolean>(false);
   projects: ProjectForUser[] = [];
 
   constructor() {
+    this.user = this.userService.user();
     effect(() => {
       if (this.user) {
         this.userProjects$ = this.userService
