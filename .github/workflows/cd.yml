@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Carregar repositório inteiro
-          path: "./frontend/dist"
+          path: "./frontend/dist/browser"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
