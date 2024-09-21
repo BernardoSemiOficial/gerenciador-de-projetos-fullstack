@@ -1,4 +1,4 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -21,9 +21,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
   styleUrl: './app-field-textarea.component.scss',
 })
 export class AppFieldTextareaComponent implements ControlValueAccessor {
-  fieldId = input.required<string>();
-  fieldLabel = input.required<string>();
-  fieldInputHelp = input.required<string>();
+  @Input() fieldId: string = '';
+  @Input() fieldLabel: string = '';
+  @Input() fieldInputHelp: string = '';
   fieldInputValue: string | number = '';
   isDisabled: boolean = false;
 

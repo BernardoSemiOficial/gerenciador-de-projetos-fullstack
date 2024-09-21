@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, input, InputSignal } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  Input,
+  input,
+  InputSignal,
+} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -28,9 +34,9 @@ export class AppFieldInputComponent implements ControlValueAccessor {
     | InputSignal<NgModel>
     | InputSignal<AbstractControl>
     | InputSignal<null> = input(null);
-  fieldId = input.required<string>();
-  fieldLabel = input.required<string>();
-  fieldInputHelp = input.required<string>();
+  @Input({ required: true }) fieldId: string = '';
+  @Input({ required: true }) fieldLabel: string = '';
+  @Input({ required: true }) fieldInputHelp: string = '';
   fieldInputType = input<HTMLInputElement['type']>('text');
   fieldInputValue: string | number = '';
   isDisabled: boolean = false;

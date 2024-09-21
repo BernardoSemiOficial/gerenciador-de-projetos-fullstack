@@ -9,8 +9,8 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './app-dialog.component.scss',
 })
 export class AppDialogComponent {
+  @Input({ required: true }) title: string = '';
   @Input() visibleSignal!: WritableSignal<boolean>;
-  title = input.required<string>();
   maxWidth = input<string>();
   minHeight = input<string>();
   visible = false;

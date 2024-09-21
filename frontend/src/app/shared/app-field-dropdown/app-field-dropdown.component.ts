@@ -1,4 +1,4 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, Input, input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -21,10 +21,10 @@ import { DropdownModule } from 'primeng/dropdown';
   styleUrl: './app-field-dropdown.component.scss',
 })
 export class AppFieldDropdownComponent implements ControlValueAccessor {
-  fieldId = input.required<string>();
-  fieldLabel = input.required<string>();
-  fieldInputHelp = input.required<string>();
-  options = input.required<any[]>();
+  @Input({ required: true }) fieldId: string = '';
+  @Input({ required: true }) fieldLabel: string = '';
+  @Input({ required: true }) fieldInputHelp: string = '';
+  @Input({ required: true }) options: any[] = [];
   optionLabel = input<string>('');
   optionValue = input<string>('');
   placeholder = input<string>('');

@@ -1,14 +1,13 @@
-@let id = fieldId(); @let label = fieldLabel(); @let inputHelp =
-fieldInputHelp();
+@let id = fieldId; @let label = fieldLabel; @let inputHelp = fieldInputHelp;
 
 <div class="w-full flex flex-column gap-2">
   @if (label) {
-  <label [for]="fieldId()">{{ label }}</label>
+  <label [for]="fieldId">{{ label }}</label>
   }
   <p-dropdown
     [id]="id"
     [name]="id"
-    [options]="options()"
+    [options]="options"
     [optionLabel]="optionLabel()"
     [optionValue]="optionValue()"
     [placeholder]="placeholder()"

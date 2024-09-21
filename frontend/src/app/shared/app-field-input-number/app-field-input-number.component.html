@@ -1,10 +1,10 @@
-@let formControlAnalytics = analyticsFormControl(); @let id = fieldId(); @let
-label = fieldLabel(); @let inputHelp = fieldInputHelp();
+@let formControlAnalytics = analyticsFormControl(); @let id = fieldId; @let
+label = fieldLabel; @let inputHelp = fieldInputHelp;
 
 <div class="w-full flex flex-column gap-2">
   @if (label) {
   <label
-    [for]="fieldId()"
+    [for]="fieldId"
     [ngClass]="{
       'text-red-600':
         formControlField()?.touched && formControlAnalytics.errorsLength > 0

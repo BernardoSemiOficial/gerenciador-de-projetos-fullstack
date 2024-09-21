@@ -1,4 +1,4 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, Input, input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -21,10 +21,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
   styleUrl: './app-multi-select.component.scss',
 })
 export class AppMultiSelectComponent implements ControlValueAccessor {
-  options = input.required<any[]>();
-  id = input.required<string>();
-  optionLabel = input.required<string>();
-  optionValue = input.required<string>();
+  @Input({ required: true }) options: any[] = [];
+  @Input({ required: true }) id: string = '';
+  @Input({ required: true }) optionLabel: string = '';
+  @Input({ required: true }) optionValue: string = '';
   inputType = input<HTMLInputElement['type']>('text');
   placeholder = input<HTMLInputElement['placeholder']>();
   value: any;

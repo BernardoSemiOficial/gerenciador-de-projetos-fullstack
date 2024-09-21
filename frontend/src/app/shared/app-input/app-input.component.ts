@@ -1,4 +1,4 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, Input, input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -21,7 +21,7 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './app-input.component.scss',
 })
 export class AppInputComponent implements ControlValueAccessor {
-  id = input.required<string>();
+  @Input({ required: true }) id: string = '';
   inputType = input<HTMLInputElement['type']>('text');
   placeholder = input<HTMLInputElement['placeholder']>();
   inputValue: string | number = '';

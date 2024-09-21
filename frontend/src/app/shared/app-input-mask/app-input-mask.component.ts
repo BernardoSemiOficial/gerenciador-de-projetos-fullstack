@@ -1,4 +1,4 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -22,8 +22,8 @@ import { InputMaskModule } from 'primeng/inputmask';
   styleUrl: './app-input-mask.component.scss',
 })
 export class AppInputMaskComponent implements ControlValueAccessor {
-  mask = input.required<string>();
-  placeholder = input.required<string>();
+  @Input({ required: true }) mask: string = '';
+  @Input({ required: true }) placeholder: string = '';
   inputValue: string | number = '';
   isDisabled: boolean = false;
 

@@ -1,4 +1,4 @@
-import { Component, forwardRef, input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -21,9 +21,9 @@ import { CalendarModule } from 'primeng/calendar';
   styleUrl: './app-field-calendar.component.scss',
 })
 export class AppFieldCalendarComponent implements ControlValueAccessor, OnInit {
-  fieldId = input.required<string>();
-  fieldLabel = input.required<string>();
-  fieldInputHelp = input.required<string>();
+  @Input({ required: true }) fieldId: string = '';
+  @Input({ required: true }) fieldLabel: string = '';
+  @Input({ required: true }) fieldInputHelp: string = '';
   fieldInputFormat = input<string>('dd/mm/yy');
   isShowIcon = input<boolean>(true);
   isShowOnFocus = input<boolean>(true);
