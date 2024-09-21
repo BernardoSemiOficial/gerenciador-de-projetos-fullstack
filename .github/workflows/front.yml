@@ -3,6 +3,10 @@
 
 name: Front-end | Build & Tests
 
+defaults:
+  run:
+    working-directory: ./frontend
+
 on:
   push:
     branches: ["main"]
@@ -11,23 +15,14 @@ on:
 
 jobs:
   build:
-    name: Test on node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 20.9.0
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20.9.0
           cache: "npm"
 
       - name: Install dependencies
