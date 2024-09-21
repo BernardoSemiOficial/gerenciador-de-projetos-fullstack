@@ -9,8 +9,8 @@ import { ChipModule } from 'primeng/chip';
   styleUrl: './app-chip.component.scss',
 })
 export class AppChipComponent {
-  label = input.required<string>();
-  icon = input<string>();
-  image = input<string>();
-  altImage = input<string>();
+  label = input<string>('');
+  icon = input<string>('');
+  image = input<string>('');
+  altImage = input<string>('');
 }

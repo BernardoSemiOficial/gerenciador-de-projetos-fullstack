@@ -1,16 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ChipModule } from 'primeng/chip';
 import { AppChipComponent } from './app-chip.component';
 
 describe('AppChipComponent', () => {
   let component: AppChipComponent;
   let fixture: ComponentFixture<AppChipComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppChipComponent]
-    })
-    .compileComponents();
+  beforeEach(() => {
+    TestBed.overrideComponent(AppChipComponent, {
+      set: {
+        imports: [ChipModule],
+      },
+    });
 
     fixture = TestBed.createComponent(AppChipComponent);
     component = fixture.componentInstance;

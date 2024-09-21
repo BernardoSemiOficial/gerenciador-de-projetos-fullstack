@@ -1,4 +1,4 @@
-import { Component, inject, Input, input, WritableSignal } from '@angular/core';
+import { Component, inject, Input, WritableSignal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -35,9 +35,11 @@ export class DashboardDialogInvitationsComponent {
   private fb = inject(FormBuilder);
   invitationsService = inject(InvitationService);
   toastAlertService = inject(ToastAlertService);
+
   @Input({ required: true, alias: 'visibleSignal' })
   visibleDialogInvites!: WritableSignal<boolean>;
-  projects = input.required<ProjectForUser[]>();
+  @Input({ required: true }) projects: ProjectForUser[] = [];
+
   sendInvitesForm!: FormGroup<SendInvitationsForm>;
   PrimeIcons = PrimeIcons;
   isLoadingInvites = false;

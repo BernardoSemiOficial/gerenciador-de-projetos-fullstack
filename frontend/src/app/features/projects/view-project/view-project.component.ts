@@ -1,5 +1,5 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DialogConfirmationService } from '@core/services/dialog-confirmation/dialog-confirmation.service';
 import { ProjectService } from '@core/services/project/project.service';
@@ -41,15 +41,15 @@ export class ViewProjectComponent implements OnInit {
   dialogConfirmationService = inject(DialogConfirmationService);
   router = inject(Router);
   taskService = inject(TaskService);
-  projectId = input.required<string>();
+  @Input({ required: true }) projectId: string = '';
   PrimeIcons = PrimeIcons;
 
   getProject$!: Observable<ResponseGetProject>;
   getTasks$!: Observable<ResponseGetTasks>;
 
   ngOnInit() {
-    this.getProject$ = this.projectService.getProject(this.projectId());
-    this.getTasks$ = this.projectService.getTasksForProject(this.projectId());
+    this.getProject$ = this.projectService.getProject(this.projectId);
+    this.getTasks$ = this.projectService.getTasksForProject(this.projectId);
   }
 
   confirmationDelete() {
@@ -62,7 +62,7 @@ export class ViewProjectComponent implements OnInit {
   }
 
   deleteProject() {
-    this.projectService.deleteProject(this.projectId()).subscribe({
+    this.projectService.deleteProject(this.projectId).subscribe({
       next: (data) => {
         this.toastAlertService.addSuccessMessage({
           title: 'Deleted project',

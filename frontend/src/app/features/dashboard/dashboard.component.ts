@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ProjectForUser, User } from '@core/interfaces/user.interface';
 import { UserService } from '@core/services/user/user.service';
 import { ResponseGetProjectsForUser } from '@core/services/user/user.service.types';
@@ -18,7 +18,7 @@ import { DashboardDialogInvitationsComponent } from './components/dashboard-dial
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,
+    RouterLink,
     ReactiveFormsModule,
     AppHeaderComponent,
     AppFooterComponent,
