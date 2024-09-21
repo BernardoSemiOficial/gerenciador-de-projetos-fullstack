@@ -53,13 +53,15 @@
                 }
               ],
               "verbose": true,
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "deployUrl": "gerenciador-de-projetos-fullstack/"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
               "verbose": true,
+              "deployUrl": "frontend/dist/browser/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
