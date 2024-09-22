@@ -1,0 +1,494 @@
+{
+	"info": {
+		"_postman_id": "8c00cf61-7f7b-4df7-9e46-8a96d4482c46",
+		"name": "Gerenciador de Projetos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29984384"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"bernardo.258@hotmail.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bernardo Pereira\",\n    \"email\": \"bernardo.258@hotmail.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bernardo Pereira\",\n    \"email\": \"bernardo.258@hotmail.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/invite/fbfeb1df-cb19-4987-984a-eb3a7026a54f",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"invite",
+								"fbfeb1df-cb19-4987-984a-eb3a7026a54f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNJZCI6IjM1YTU3MDhjLTZjZWEtNDU4ZS04OGFmLTA4ZjllMzk3MTZhZiIsImVtYWlsIjoiYmVybmFyZG8uMjU4QGhvdG1haWwuY29tIiwiaWF0IjoxNzI1ODQxNjE1LCJleHAiOjE3MjY0NDY0MTV9.hYIFiSqSSa3nA2Qmh3QDYJDQMuE2uWK5Q51aaBgoJmk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/refresh-token",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/35a5708c-6cea-458e-88af-08f9e39716af",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"35a5708c-6cea-458e-88af-08f9e39716af"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project for User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/e2bd29c9-9d19-413c-9351-4c8188208736/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"e2bd29c9-9d19-413c-9351-4c8188208736",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite Users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"email\": \"bernardo.oliveira@accountfy.com\",\n        \"projectsId\": [\"41b82e03-8d92-478d-ac28-3dac5d08012e\", \"80132454-5acf-4db4-a63f-68e49a4da208\"]\n    },\n    {\n        \"email\": \"bernardopereiraoliveira258@gmail.com\",\n        \"projectsId\": [\"41b82e03-8d92-478d-ac28-3dac5d08012e\", \"80132454-5acf-4db4-a63f-68e49a4da208\"]\n    },\n    {\n        \"email\": \"bernardo.258@hotmail.com\",\n        \"projectsId\": [\"41b82e03-8d92-478d-ac28-3dac5d08012e\", \"80132454-5acf-4db4-a63f-68e49a4da208\"]\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/invitation-for-users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"invitation-for-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Invite User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/invitations/1649036e-508a-4e43-9f24-973739ae66b5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"invitations",
+								"1649036e-508a-4e43-9f24-973739ae66b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Invite User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/invitations/1bf5766d-67ff-46d4-8c7a-ec38d1e8d84c",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"invitations",
+								"1bf5766d-67ff-46d4-8c7a-ec38d1e8d84c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/cbd1a708-e027-40d0-9a42-2a1a29850de1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"cbd1a708-e027-40d0-9a42-2a1a29850de1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/cbd1a708-e027-40d0-9a42-2a1a29850de1/tasks",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"cbd1a708-e027-40d0-9a42-2a1a29850de1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Projeto Core\",\n    \"description\": \"Lorem ipsum description\",\n    \"starts_at\": \"2024-09-11T22:00:00.7342\",\n    \"ends_at\": \"2024-10-11T22:00:00.7342\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/35a5708c-6cea-458e-88af-08f9e39716af",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"35a5708c-6cea-458e-88af-08f9e39716af"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Projeto Data Builder\",\n    \"description\": \"Lorem ipsum description\",\n    \"starts_at\": \"2024-09-11T22:00:00.7342\",\n    \"ends_at\": \"2024-10-11T22:00:00.7342\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/cbd1a708-e027-40d0-9a42-2a1a29850de1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"cbd1a708-e027-40d0-9a42-2a1a29850de1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/3d391483-d174-42b2-a905-ee64125482d7",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"3d391483-d174-42b2-a905-ee64125482d7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Find Task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tasks/ae9694ed-7788-44d9-983e-53803ed7c3d1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"ae9694ed-7788-44d9-983e-53803ed7c3d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Task Name\",\n    \"description\": \"Descrição\",\n    \"delivery_time\": 2,\n    \"priority\": \"LOW\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tasks/cbd1a708-e027-40d0-9a42-2a1a29850de1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"cbd1a708-e027-40d0-9a42-2a1a29850de1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Task Bernardo\",\n    \"description\": \"Descrição tarefa\",\n    \"delivery_time\": 4,\n    \"priority\": \"LOW\",\n    \"status\": \"IN_PROGRESS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tasks/ae9694ed-7788-44d9-983e-53803ed7c3d1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"ae9694ed-7788-44d9-983e-53803ed7c3d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tasks/e5436c3d-e240-4051-8f43-87fb7432b51c",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"e5436c3d-e240-4051-8f43-87fb7432b51c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNJZCI6ImUyYmQyOWM5LTlkMTktNDEzYy05MzUxLTRjODE4ODIwODczNiIsImVtYWlsIjoiYmVybmFyZG8uMjU4QGhvdG1haWwuY29tIiwiaWF0IjoxNzI2Nzc1MTkxLCJleHAiOjE3MjY3NzU3OTF9.rLPyDNJZFCduCkWXsml0rvfEheQsVRypmNDRUaxU_iM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}

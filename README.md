@@ -33,6 +33,8 @@ Documentação do back-end: [readme](/backend/README.md)
 - Dotenv
 - Tsx
 
+Tem uma colletion com todos os endpoints da aplicação disponíveis. [Postman Collection](backend/gerenciador-de-projetos.postman_collection.json)
+
 ## Diagrama de entidade relacionamento
 
 Tabelas: Users, Projects, UsersOnProjects, Tasks, UserInvitation, TaskStatus, TaskPriority, Role.
