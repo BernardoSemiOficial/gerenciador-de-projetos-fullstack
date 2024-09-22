@@ -41,7 +41,7 @@ export class ViewProjectComponent implements OnInit {
   dialogConfirmationService = inject(DialogConfirmationService);
   router = inject(Router);
   taskService = inject(TaskService);
-  @Input({ required: true }) projectId: string = '';
+  @Input({ required: true }) projectId = '';
   PrimeIcons = PrimeIcons;
 
   getProject$!: Observable<ResponseGetProject>;

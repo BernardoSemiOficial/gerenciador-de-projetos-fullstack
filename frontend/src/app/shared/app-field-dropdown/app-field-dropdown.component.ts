@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, forwardRef, Input, input } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -21,25 +23,25 @@ import { DropdownModule } from 'primeng/dropdown';
   styleUrl: './app-field-dropdown.component.scss',
 })
 export class AppFieldDropdownComponent implements ControlValueAccessor {
-  @Input({ required: true }) fieldId: string = '';
-  @Input({ required: true }) fieldLabel: string = '';
-  @Input({ required: true }) fieldInputHelp: string = '';
-  @Input({ required: true }) options: any[] = [];
+  @Input({ required: true }) fieldId = '';
+  @Input({ required: true }) fieldLabel = '';
+  @Input({ required: true }) fieldInputHelp = '';
+  @Input({ required: true }) options: unknown[] = [];
   optionLabel = input<string>('');
   optionValue = input<string>('');
   placeholder = input<string>('');
   isDisabled = false;
   fieldInputValue: string | number = '';
 
-  _onChange = (_: any) => {};
+  _onChange = (_: unknown) => {};
   _onTouched = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (value !== this.fieldInputValue) {
       this.fieldInputValue = value;
     }
   }
-  registerOnChange(fn: (_: any) => void): void {
+  registerOnChange(fn: (_: unknown) => void): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, forwardRef, Input, input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -21,15 +23,15 @@ import { CalendarModule } from 'primeng/calendar';
   styleUrl: './app-field-calendar.component.scss',
 })
 export class AppFieldCalendarComponent implements ControlValueAccessor, OnInit {
-  @Input({ required: true }) fieldId: string = '';
-  @Input({ required: true }) fieldLabel: string = '';
-  @Input({ required: true }) fieldInputHelp: string = '';
+  @Input({ required: true }) fieldId = '';
+  @Input({ required: true }) fieldLabel = '';
+  @Input({ required: true }) fieldInputHelp = '';
   fieldInputFormat = input<string>('dd/mm/yy');
   isShowIcon = input<boolean>(true);
   isShowOnFocus = input<boolean>(true);
   fieldInputValue: string | number = '';
-  isDisabled: boolean = false;
-  isShowButtonBar: boolean = true;
+  isDisabled = false;
+  isShowButtonBar = true;
   minDate = input<Date>(new Date());
 
   ngOnInit() {
@@ -43,15 +45,15 @@ export class AppFieldCalendarComponent implements ControlValueAccessor, OnInit {
     this.minDate().setFullYear(currentYear);
   }
 
-  _onChange = (_: any) => {};
+  _onChange = (_: unknown) => {};
   _onTouched = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (value !== this.fieldInputValue) {
       this.fieldInputValue = value;
     }
   }
-  registerOnChange(fn: (_: any) => void): void {
+  registerOnChange(fn: (_: unknown) => void): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

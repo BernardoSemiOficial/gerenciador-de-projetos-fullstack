@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -45,7 +45,7 @@ import { CreateEditTaskForm } from './create-edit-task.model';
   templateUrl: './create-edit-task.component.html',
   styleUrl: './create-edit-task.component.scss',
 })
-export class CreateEditTaskComponent {
+export class CreateEditTaskComponent implements OnInit {
   taskService = inject(TaskService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);

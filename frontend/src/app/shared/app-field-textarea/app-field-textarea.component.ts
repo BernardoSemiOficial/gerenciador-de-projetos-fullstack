@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -21,21 +23,21 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
   styleUrl: './app-field-textarea.component.scss',
 })
 export class AppFieldTextareaComponent implements ControlValueAccessor {
-  @Input() fieldId: string = '';
-  @Input() fieldLabel: string = '';
-  @Input() fieldInputHelp: string = '';
+  @Input() fieldId = '';
+  @Input() fieldLabel = '';
+  @Input() fieldInputHelp = '';
   fieldInputValue: string | number = '';
-  isDisabled: boolean = false;
+  isDisabled = false;
 
-  _onChange = (_: any) => {};
+  _onChange = (_: unknown) => {};
   _onTouched = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (value !== this.fieldInputValue) {
       this.fieldInputValue = value;
     }
   }
-  registerOnChange(fn: (_: any) => void): void {
+  registerOnChange(fn: (_: unknown) => void): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

@@ -10,7 +10,8 @@
     "watch:development": "ng build --watch --configuration development",
     "test": "ng test",
     "test:headless": "ng test --no-watch --browsers=ChromeHeadless",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix"
   },
   "private": true,
   "dependencies": {

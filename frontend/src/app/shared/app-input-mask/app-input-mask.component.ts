@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -22,20 +24,20 @@ import { InputMaskModule } from 'primeng/inputmask';
   styleUrl: './app-input-mask.component.scss',
 })
 export class AppInputMaskComponent implements ControlValueAccessor {
-  @Input({ required: true }) mask: string = '';
-  @Input({ required: true }) placeholder: string = '';
+  @Input({ required: true }) mask = '';
+  @Input({ required: true }) placeholder = '';
   inputValue: string | number = '';
-  isDisabled: boolean = false;
+  isDisabled = false;
 
-  _onChange = (_: any) => {};
+  _onChange = (_: unknown) => {};
   _onTouched = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (value !== this.inputValue) {
       this.inputValue = value;
     }
   }
-  registerOnChange(fn: (_: any) => void): void {
+  registerOnChange(fn: (_: unknown) => void): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

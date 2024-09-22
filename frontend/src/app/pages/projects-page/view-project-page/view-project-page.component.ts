@@ -9,7 +9,7 @@ import { ViewProjectComponent } from '@features/projects/view-project/view-proje
   styleUrl: './view-project-page.component.scss',
 })
 export class ViewProjectPageComponent {
-  id: string = '';
+  id = '';
 
   @Input() set projectId(id: string) {
     this.id = id;

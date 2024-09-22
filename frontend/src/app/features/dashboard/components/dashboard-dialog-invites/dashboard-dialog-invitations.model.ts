@@ -7,6 +7,6 @@ export type InvitationFormArray = FormArray<
   }>
 >;
 
-export type SendInvitationsForm = {
+export interface SendInvitationsForm {
   invitations: InvitationFormArray;
-};
+}
