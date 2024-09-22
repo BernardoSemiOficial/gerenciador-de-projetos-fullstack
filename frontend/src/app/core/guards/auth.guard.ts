@@ -1,17 +1,8 @@
 import { inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateChildFn,
-  CanActivateFn,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth/auth.service';
 
-export const canActivateAuth: CanActivateFn = (
-  _: ActivatedRouteSnapshot,
-  __: RouterStateSnapshot
-) => {
+export const canActivateAuth: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const hasAccessToken = authService.getAccessToken();
@@ -23,10 +14,7 @@ export const canActivateAuth: CanActivateFn = (
   return true;
 };
 
-export const canActivateChildAuth: CanActivateChildFn = (
-  _: ActivatedRouteSnapshot,
-  __: RouterStateSnapshot
-) => {
+export const canActivateChildAuth: CanActivateChildFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const hasAccessToken = authService.getAccessToken();

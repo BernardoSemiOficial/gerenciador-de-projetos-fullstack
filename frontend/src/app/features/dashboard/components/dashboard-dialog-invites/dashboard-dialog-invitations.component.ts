@@ -1,4 +1,10 @@
-import { Component, inject, Input, WritableSignal } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnInit,
+  WritableSignal,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -31,12 +37,12 @@ import {
   templateUrl: './dashboard-dialog-invitations.component.html',
   styleUrl: './dashboard-dialog-invitations.component.scss',
 })
-export class DashboardDialogInvitationsComponent {
+export class DashboardDialogInvitationsComponent implements OnInit {
   private fb = inject(FormBuilder);
   invitationsService = inject(InvitationService);
   toastAlertService = inject(ToastAlertService);
 
-  @Input({ required: true, alias: 'visibleSignal' })
+  @Input({ required: true })
   visibleDialogInvites!: WritableSignal<boolean>;
   @Input({ required: true }) projects: ProjectForUser[] = [];
 

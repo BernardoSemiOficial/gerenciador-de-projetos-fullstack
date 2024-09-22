@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -34,9 +36,9 @@ export class AppFieldInputNumberComponent implements ControlValueAccessor {
     | InputSignal<NgModel>
     | InputSignal<AbstractControl>
     | InputSignal<null> = input(null);
-  @Input({ required: true }) fieldId: string = '';
-  @Input({ required: true }) fieldLabel: string = '';
-  @Input({ required: true }) fieldInputHelp: string = '';
+  @Input({ required: true }) fieldId = '';
+  @Input({ required: true }) fieldLabel = '';
+  @Input({ required: true }) fieldInputHelp = '';
 
   step = input<number>(1);
   mode = input<'decimal' | 'currency'>('decimal');
@@ -53,7 +55,7 @@ export class AppFieldInputNumberComponent implements ControlValueAccessor {
   decrementButtonIcon = input<string>();
 
   fieldInputValue: string | number = '';
-  isDisabled: boolean = false;
+  isDisabled = false;
 
   analyticsFormControl() {
     const formControl = this.formControlField();
@@ -67,15 +69,15 @@ export class AppFieldInputNumberComponent implements ControlValueAccessor {
     };
   }
 
-  _onChange = (_: any) => {};
+  _onChange = (_: unknown) => {};
   _onTouched = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (value !== this.fieldInputValue) {
       this.fieldInputValue = value;
     }
   }
-  registerOnChange(fn: (_: any) => void): void {
+  registerOnChange(fn: (_: unknown) => void): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

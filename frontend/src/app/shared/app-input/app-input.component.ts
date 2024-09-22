@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, forwardRef, Input, input } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -21,21 +23,21 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './app-input.component.scss',
 })
 export class AppInputComponent implements ControlValueAccessor {
-  @Input({ required: true }) id: string = '';
+  @Input({ required: true }) id = '';
   inputType = input<HTMLInputElement['type']>('text');
   placeholder = input<HTMLInputElement['placeholder']>();
   inputValue: string | number = '';
-  isDisabled: boolean = false;
+  isDisabled = false;
 
-  _onChange = (_: any) => {};
+  _onChange = (_: unknown) => {};
   _onTouched = () => {};
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (value !== this.inputValue) {
       this.inputValue = value;
     }
   }
-  registerOnChange(fn: (_: any) => void): void {
+  registerOnChange(fn: (_: unknown) => void): void {
     this._onChange = fn;
   }
   registerOnTouched(fn: () => void): void {

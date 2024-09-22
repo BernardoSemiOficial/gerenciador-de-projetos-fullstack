@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -53,7 +52,7 @@ export class LoginComponent {
         });
         this.router.navigate(['/dashboard']);
       },
-      error: (error: HttpErrorResponse) => {
+      error: () => {
         this.toastAlertService.addDangerMessage({
           title: 'Error',
           description: 'Invalid credentials',

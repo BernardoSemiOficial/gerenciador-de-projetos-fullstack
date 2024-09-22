@@ -9,5 +9,5 @@ import { CreateEditTaskComponent } from '@features/projects/create-edit-task/cre
   styleUrl: './create-task-page.component.scss',
 })
 export class CreateTaskPageComponent {
-  @Input() projectId: string = '';
+  @Input() projectId = '';
 }
