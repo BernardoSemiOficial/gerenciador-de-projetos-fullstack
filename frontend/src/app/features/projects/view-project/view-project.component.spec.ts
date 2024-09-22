@@ -19,42 +19,42 @@ import { ToastAlertServiceMock } from 'src/__mocks__/services/toast-alert.servic
 import { ViewProjectComponent } from './view-project.component';
 
 describe('ViewProjectComponent', () => {
-  let component: ViewProjectComponent;
-  let fixture: ComponentFixture<ViewProjectComponent>;
+	let component: ViewProjectComponent;
+	let fixture: ComponentFixture<ViewProjectComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(ViewProjectComponent, {
-      set: {
-        imports: [
-          AppHeaderComponentMock,
-          AppFooterComponentMock,
-          AppCardComponent,
-          AppChipComponent,
-          AppDividerComponent,
-          AppButtonComponent,
-          RouterLink,
-          AsyncPipe,
-          DatePipe,
-        ],
-        providers: [
-          Router,
-          { provide: ProjectService, useClass: ProjectServiceMock },
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-          {
-            provide: DialogConfirmationService,
-            useClass: DialogConfirmationServiceMock,
-          },
-          { provide: TaskService, useClass: TaskServiceMock },
-        ],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(ViewProjectComponent, {
+			set: {
+				imports: [
+					AppHeaderComponentMock,
+					AppFooterComponentMock,
+					AppCardComponent,
+					AppChipComponent,
+					AppDividerComponent,
+					AppButtonComponent,
+					RouterLink,
+					AsyncPipe,
+					DatePipe
+				],
+				providers: [
+					Router,
+					{ provide: ProjectService, useClass: ProjectServiceMock },
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock },
+					{
+						provide: DialogConfirmationService,
+						useClass: DialogConfirmationServiceMock
+					},
+					{ provide: TaskService, useClass: TaskServiceMock }
+				]
+			}
+		});
 
-    fixture = TestBed.createComponent(ViewProjectComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(ViewProjectComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

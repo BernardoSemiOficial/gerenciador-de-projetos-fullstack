@@ -4,22 +4,22 @@ import { ChipModule } from 'primeng/chip';
 import { AppChipComponent } from './app-chip.component';
 
 describe('AppChipComponent', () => {
-  let component: AppChipComponent;
-  let fixture: ComponentFixture<AppChipComponent>;
+	let component: AppChipComponent;
+	let fixture: ComponentFixture<AppChipComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(AppChipComponent, {
-      set: {
-        imports: [ChipModule],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(AppChipComponent, {
+			set: {
+				imports: [ChipModule]
+			}
+		});
 
-    fixture = TestBed.createComponent(AppChipComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(AppChipComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

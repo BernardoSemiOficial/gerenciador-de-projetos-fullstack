@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root'
 })
 export class ActivatedRouteMock {
-  snapshot = {
-    queryParamMap: {
-      get: () => '1',
-    },
-  };
+	snapshot = {
+		queryParamMap: {
+			get: () => '1'
+		}
+	};
 }

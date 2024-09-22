@@ -10,29 +10,29 @@ import { UserServiceMock } from 'src/__mocks__/services/user.service.mock';
 import { InvitationPageComponent } from './invitation-page.component';
 
 describe('InvitationPageComponent', () => {
-  let component: InvitationPageComponent;
-  let fixture: ComponentFixture<InvitationPageComponent>;
+	let component: InvitationPageComponent;
+	let fixture: ComponentFixture<InvitationPageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [InvitationPageComponent],
-      providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-        { provide: UserService, useClass: UserServiceMock },
-        { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-      ],
-    })
-      .overrideComponent(InvitationPageComponent, {
-        set: { imports: [InvitationComponentMock] },
-      })
-      .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [InvitationPageComponent],
+			providers: [
+				{ provide: ActivatedRoute, useClass: ActivatedRouteMock },
+				{ provide: UserService, useClass: UserServiceMock },
+				{ provide: ToastAlertService, useClass: ToastAlertServiceMock }
+			]
+		})
+			.overrideComponent(InvitationPageComponent, {
+				set: { imports: [InvitationComponentMock] }
+			})
+			.compileComponents();
 
-    fixture = TestBed.createComponent(InvitationPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(InvitationPageComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

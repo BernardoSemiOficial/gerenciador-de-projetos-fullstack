@@ -1,15 +1,15 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
+	FormBuilder,
+	FormGroup,
+	ReactiveFormsModule,
+	Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProjectService } from '@core/services/project/project.service';
 import {
-  PayloadCreateProjectForUser,
-  PayloadEditProjectForUser,
+	PayloadCreateProjectForUser,
+	PayloadEditProjectForUser
 } from '@core/services/project/project.service.types';
 import { UserService } from '@core/services/user/user.service';
 
@@ -24,132 +24,132 @@ import { PrimeIcons } from 'primeng/api';
 import { CreateEditProjectForm } from './create-edit-project.model';
 
 @Component({
-  selector: 'app-create-edit-project',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    AppHeaderComponent,
-    AppFooterComponent,
-    AppButtonComponent,
-    AppFieldInputComponent,
-    AppFieldTextareaComponent,
-    AppFieldCalendarComponent,
-  ],
-  templateUrl: './create-edit-project.component.html',
-  styleUrl: './create-edit-project.component.scss',
+	selector: 'app-create-edit-project',
+	standalone: true,
+	imports: [
+		ReactiveFormsModule,
+		AppHeaderComponent,
+		AppFooterComponent,
+		AppButtonComponent,
+		AppFieldInputComponent,
+		AppFieldTextareaComponent,
+		AppFieldCalendarComponent
+	],
+	templateUrl: './create-edit-project.component.html',
+	styleUrl: './create-edit-project.component.scss'
 })
 export class CreateEditProjectComponent implements OnInit {
-  userService = inject(UserService);
-  projectService = inject(ProjectService);
-  toastAlertService = inject(ToastAlertService);
-  router = inject(Router);
-  fb = inject(FormBuilder);
-  projectId = input<string>('');
-  PrimeIcons = PrimeIcons;
-  currentDate = new Date();
+	userService = inject(UserService);
+	projectService = inject(ProjectService);
+	toastAlertService = inject(ToastAlertService);
+	router = inject(Router);
+	fb = inject(FormBuilder);
+	projectId = input<string>('');
+	PrimeIcons = PrimeIcons;
+	currentDate = new Date();
 
-  createEditProjectForm!: FormGroup<CreateEditProjectForm>;
+	createEditProjectForm!: FormGroup<CreateEditProjectForm>;
 
-  ngOnInit() {
-    this.initProjectForm();
-    if (this.projectId()) this.getProject();
-  }
+	ngOnInit() {
+		this.initProjectForm();
+		if (this.projectId()) this.getProject();
+	}
 
-  initProjectForm() {
-    this.createEditProjectForm = this.fb.nonNullable.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required, Validators.minLength(5)]],
-      starts_at: [new Date(), Validators.required],
-      ends_at: [
-        new Date(new Date().setDate(new Date().getDate() + 1)),
-        Validators.required,
-      ],
-    });
-  }
+	initProjectForm() {
+		this.createEditProjectForm = this.fb.nonNullable.group({
+			name: ['', [Validators.required, Validators.minLength(5)]],
+			description: ['', [Validators.required, Validators.minLength(5)]],
+			starts_at: [new Date(), Validators.required],
+			ends_at: [
+				new Date(new Date().setDate(new Date().getDate() + 1)),
+				Validators.required
+			]
+		});
+	}
 
-  getProject() {
-    this.projectService.getProject(this.projectId()).subscribe({
-      next: (data) => {
-        const project = data.project;
-        this.createEditProjectForm.patchValue({
-          ...project,
-          starts_at: new Date(project.starts_at),
-          ends_at: new Date(project.ends_at),
-        });
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
-  }
+	getProject() {
+		this.projectService.getProject(this.projectId()).subscribe({
+			next: (data) => {
+				const project = data.project;
+				this.createEditProjectForm.patchValue({
+					...project,
+					starts_at: new Date(project.starts_at),
+					ends_at: new Date(project.ends_at)
+				});
+			},
+			error: (error) => {
+				console.error(error);
+			}
+		});
+	}
 
-  onSubmit() {
-    console.log(
-      { invalid: this.createEditProjectForm.invalid },
-      this.createEditProjectForm.value
-    );
-    if (this.createEditProjectForm.invalid) return;
+	onSubmit() {
+		console.log(
+			{ invalid: this.createEditProjectForm.invalid },
+			this.createEditProjectForm.value
+		);
+		if (this.createEditProjectForm.invalid) return;
 
-    const userId = this.userService.user()?.id;
-    if (!userId) return;
+		const userId = this.userService.user()?.id;
+		if (!userId) return;
 
-    const data = this.createEditProjectForm.getRawValue();
-    const startsAt = data.starts_at?.toISOString();
-    const endsAt = data.ends_at?.toISOString();
-    const payload = {
-      ...data,
-      starts_at: startsAt,
-      ends_at: endsAt,
-    };
+		const data = this.createEditProjectForm.getRawValue();
+		const startsAt = data.starts_at?.toISOString();
+		const endsAt = data.ends_at?.toISOString();
+		const payload = {
+			...data,
+			starts_at: startsAt,
+			ends_at: endsAt
+		};
 
-    const projectId = this.projectId();
-    if (projectId) {
-      this.editProject(projectId, payload);
-    } else {
-      this.createProject(userId, payload);
-    }
-  }
+		const projectId = this.projectId();
+		if (projectId) {
+			this.editProject(projectId, payload);
+		} else {
+			this.createProject(userId, payload);
+		}
+	}
 
-  createProject(userId: string, payload: PayloadCreateProjectForUser) {
-    this.projectService.createProjectForUser(userId, payload).subscribe({
-      next: (data) => {
-        console.log('Project created:', data);
-        this.router.navigate(['/projects/edit', data.project.id]);
-        this.toastAlertService.addSuccessMessage({
-          title: 'Success',
-          description: 'Project created',
-        });
-      },
-      error: ({ error }) => {
-        console.error(error);
-        this.toastAlertService.addDangerMessage({
-          title: 'Error',
-          description: error.message,
-        });
-      },
-    });
-  }
+	createProject(userId: string, payload: PayloadCreateProjectForUser) {
+		this.projectService.createProjectForUser(userId, payload).subscribe({
+			next: (data) => {
+				console.log('Project created:', data);
+				this.router.navigate(['/projects/edit', data.project.id]);
+				this.toastAlertService.addSuccessMessage({
+					title: 'Success',
+					description: 'Project created'
+				});
+			},
+			error: ({ error }) => {
+				console.error(error);
+				this.toastAlertService.addDangerMessage({
+					title: 'Error',
+					description: error.message
+				});
+			}
+		});
+	}
 
-  editProject(projectId: string, payload: PayloadEditProjectForUser) {
-    this.projectService.editProjectForUser(projectId, payload).subscribe({
-      next: (data) => {
-        console.log('Project edited:', data);
-        this.toastAlertService.addSuccessMessage({
-          title: 'Success',
-          description: 'Project edited',
-        });
-      },
-      error: ({ error }) => {
-        console.error(error);
-        this.toastAlertService.addDangerMessage({
-          title: 'Error',
-          description: error.message,
-        });
-      },
-    });
-  }
+	editProject(projectId: string, payload: PayloadEditProjectForUser) {
+		this.projectService.editProjectForUser(projectId, payload).subscribe({
+			next: (data) => {
+				console.log('Project edited:', data);
+				this.toastAlertService.addSuccessMessage({
+					title: 'Success',
+					description: 'Project edited'
+				});
+			},
+			error: ({ error }) => {
+				console.error(error);
+				this.toastAlertService.addDangerMessage({
+					title: 'Error',
+					description: error.message
+				});
+			}
+		});
+	}
 
-  returnToProject() {
-    this.router.navigate(['projects', this.projectId()]);
-  }
+	returnToProject() {
+		this.router.navigate(['projects', this.projectId()]);
+	}
 }

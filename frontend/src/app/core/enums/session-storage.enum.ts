@@ -1,3 +1,3 @@
 export enum SessionStorage {
-  User = '@USER',
+	User = '@USER'
 }

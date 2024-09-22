@@ -4,20 +4,20 @@ $footer-height: 72px;
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 main {
-  min-height: calc(100dvh - $header-height - $footer-height);
+	min-height: calc(100dvh - $header-height - $footer-height);
 }
 
 .container-max-w-120rem {
-  width: 100%;
-  max-width: 70rem;
-  margin: 0 auto;
+	width: 100%;
+	max-width: 70rem;
+	margin: 0 auto;
 }

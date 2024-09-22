@@ -1,4 +1,4 @@
 export interface ToaskAlertMessage {
-  title: string;
-  description: string;
+	title: string;
+	description: string;
 }

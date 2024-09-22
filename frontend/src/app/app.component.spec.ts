@@ -10,32 +10,32 @@ import { ToastAlertServiceMock } from 'src/__mocks__/services/toast-alert.servic
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(() => {
-    TestBed.overrideComponent(AppComponent, {
-      set: {
-        imports: [RouterOutlet, ToastModule, ConfirmDialogModule],
-        providers: [
-          MessageService,
-          ConfirmationService,
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-          {
-            provide: DialogConfirmationService,
-            useClass: DialogConfirmationServiceMock,
-          },
-        ],
-      },
-    });
-  });
+	beforeEach(() => {
+		TestBed.overrideComponent(AppComponent, {
+			set: {
+				imports: [RouterOutlet, ToastModule, ConfirmDialogModule],
+				providers: [
+					MessageService,
+					ConfirmationService,
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock },
+					{
+						provide: DialogConfirmationService,
+						useClass: DialogConfirmationServiceMock
+					}
+				]
+			}
+		});
+	});
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+	it('should create the app', () => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.componentInstance;
+		expect(app).toBeTruthy();
+	});
 
-  it(`should have the '@gerenciador-de-tarefas/frontend' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('@gerenciador-de-tarefas/frontend');
-  });
+	it(`should have the '@gerenciador-de-tarefas/frontend' title`, () => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.componentInstance;
+		expect(app.title).toEqual('@gerenciador-de-tarefas/frontend');
+	});
 });

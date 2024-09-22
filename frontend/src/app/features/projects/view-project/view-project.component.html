@@ -3,92 +3,99 @@
 @let getProject = getProject$ | async; @let project = getProject?.project;
 
 <main class="container-max-w-120rem">
-  @if (project) {
-  <div class="pt-5 px-3">
-    <app-chip label="project" [icon]="PrimeIcons.BRIEFCASE" />
-    <div class="flex justify-content-between">
-      <h1>{{ project?.name }}</h1>
+	@if (project) {
+		<div class="pt-5 px-3">
+			<app-chip label="project" [icon]="PrimeIcons.BRIEFCASE" />
+			<div class="flex justify-content-between">
+				<h1>{{ project?.name }}</h1>
 
-      <div class="flex gap-2">
-        <app-button
-          label="edit project"
-          [icon]="PrimeIcons.FILE_EDIT"
-          [routerLink]="['/projects/edit', project?.id]"
-        ></app-button>
-        <app-button
-          label="delete project"
-          severity="danger"
-          [icon]="PrimeIcons.TRASH"
-          (click)="confirmationDelete()"
-          (keydown.enter)="confirmationDelete()"
-        ></app-button>
-      </div>
-    </div>
-    <app-divider></app-divider>
-    <p>{{ project?.description }}</p>
-  </div>
+				<div class="flex gap-2">
+					<app-button
+						label="edit project"
+						[icon]="PrimeIcons.FILE_EDIT"
+						[routerLink]="['/projects/edit', project?.id]"
+					></app-button>
+					<app-button
+						label="delete project"
+						severity="danger"
+						[icon]="PrimeIcons.TRASH"
+						(click)="confirmationDelete()"
+						(keydown.enter)="confirmationDelete()"
+					></app-button>
+				</div>
+			</div>
+			<app-divider></app-divider>
+			<p>{{ project?.description }}</p>
+		</div>
 
-  <section class="my-5 px-3">
-    <article class="mt-6">
-      <h2>Basic informations</h2>
-      <app-divider></app-divider>
-      <p>Created at {{ project?.created_at | date }}</p>
-      <p>Updated at {{ project?.updated_at | date }}</p>
-      <p>
-        Starts at {{ project?.starts_at | date }} and ends at
-        {{ project?.ends_at | date }}
-      </p>
+		<section class="my-5 px-3">
+			<article class="mt-6">
+				<h2>Basic informations</h2>
+				<app-divider></app-divider>
+				<p>Created at {{ project?.created_at | date }}</p>
+				<p>Updated at {{ project?.updated_at | date }}</p>
+				<p>
+					Starts at {{ project?.starts_at | date }} and ends at
+					{{ project?.ends_at | date }}
+				</p>
 
-      <div class="flex gap-2">
-        <app-chip
-          label="{{ project?.number_of_users }} users"
-          [icon]="PrimeIcons.USERS"
-        />
-        <app-chip
-          label="{{ project?.number_of_tasks }} tasks"
-          [icon]="PrimeIcons.LIST_CHECK"
-        />
-      </div>
-    </article>
+				<div class="flex gap-2">
+					<app-chip
+						label="{{ project?.number_of_users }} users"
+						[icon]="PrimeIcons.USERS"
+					/>
+					<app-chip
+						label="{{ project?.number_of_tasks }} tasks"
+						[icon]="PrimeIcons.LIST_CHECK"
+					/>
+				</div>
+			</article>
 
-    <article class="tasks mt-8">
-      <div class="flex justify-content-between">
-        <h2>Tasks</h2>
-        <app-button
-          label="create task"
-          [icon]="PrimeIcons.PLUS"
-          [routerLink]="['tasks/create']"
-        ></app-button>
-      </div>
-      <app-divider></app-divider>
-      <ul class="tasks-list">
-        @let getTasks = getTasks$ | async; @let tasks = getTasks?.tasks; @for
-        (task of tasks; track task.id) {
-        <app-card
-          [title]="task.name"
-          [icons]="[
-            {
-              label:
-                task.delivery_time > 1
-                  ? task.delivery_time + ' days'
-                  : task.delivery_time + ' day',
-              class: PrimeIcons.CALENDAR_TIMES
-            },
-            {
-              label: task.priority.name.toLowerCase(),
-              class: PrimeIcons.INFO_CIRCLE
-            },
-            {
-              label: task.status.name.toLowerCase(),
-              class: PrimeIcons.QUESTION
-            }
-          ]"
-          [redirectPath]="['/projects', project.id, 'tasks', 'edit', task.id]"
-        ></app-card>
-        }
-      </ul>
-    </article>
-  </section>
-  }
+			<article class="tasks mt-8">
+				<div class="flex justify-content-between">
+					<h2>Tasks</h2>
+					<app-button
+						label="create task"
+						[icon]="PrimeIcons.PLUS"
+						[routerLink]="['tasks/create']"
+					></app-button>
+				</div>
+				<app-divider></app-divider>
+				<ul class="tasks-list">
+					@let getTasks = getTasks$ | async;
+					@let tasks = getTasks?.tasks;
+					@for (task of tasks; track task.id) {
+						<app-card
+							[title]="task.name"
+							[icons]="[
+								{
+									label:
+										task.delivery_time > 1
+											? task.delivery_time + ' days'
+											: task.delivery_time + ' day',
+									class: PrimeIcons.CALENDAR_TIMES
+								},
+								{
+									label: task.priority.name.toLowerCase(),
+									class: PrimeIcons.INFO_CIRCLE
+								},
+								{
+									label: task.status.name.toLowerCase(),
+									class: PrimeIcons.QUESTION
+								}
+							]"
+							[redirectPath]="[
+								'/projects',
+								project.id,
+								'tasks',
+								'edit',
+								task.id
+							]"
+						></app-card>
+					}
+				</ul>
+			</article>
+		</section>
+	}
 </main>
 <app-footer></app-footer>

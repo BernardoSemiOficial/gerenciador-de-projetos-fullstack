@@ -4,22 +4,22 @@ import { CreateEditTaskComponentMock } from 'src/__mocks__/components/create-edi
 import { EditTaskPageComponent } from './edit-task-page.component';
 
 describe('EditTaskPageComponent', () => {
-  let component: EditTaskPageComponent;
-  let fixture: ComponentFixture<EditTaskPageComponent>;
+	let component: EditTaskPageComponent;
+	let fixture: ComponentFixture<EditTaskPageComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(EditTaskPageComponent, {
-      set: {
-        imports: [CreateEditTaskComponentMock],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(EditTaskPageComponent, {
+			set: {
+				imports: [CreateEditTaskComponentMock]
+			}
+		});
 
-    fixture = TestBed.createComponent(EditTaskPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(EditTaskPageComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

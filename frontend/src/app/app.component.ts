@@ -6,13 +6,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ToastModule, ConfirmDialogModule],
-  providers: [ToastAlertService, DialogConfirmationService],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+	selector: 'app-root',
+	standalone: true,
+	imports: [RouterOutlet, ToastModule, ConfirmDialogModule],
+	providers: [ToastAlertService, DialogConfirmationService],
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = '@gerenciador-de-tarefas/frontend';
+	title = '@gerenciador-de-tarefas/frontend';
 }

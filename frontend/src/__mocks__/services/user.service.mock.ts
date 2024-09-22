@@ -2,15 +2,15 @@ import { Injectable, signal } from '@angular/core';
 import { of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root'
 })
 export class UserServiceMock {
-  user = signal({});
+	user = signal({});
 
-  getInvitationForUser() {
-    return of({});
-  }
-  getProjectsForUser() {
-    return of({});
-  }
+	getInvitationForUser() {
+		return of({});
+	}
+	getProjectsForUser() {
+		return of({});
+	}
 }

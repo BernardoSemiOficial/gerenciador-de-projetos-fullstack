@@ -1,14 +1,14 @@
 <p-dialog
-  [modal]="true"
-  [maximizable]="true"
-  [header]="title"
-  [(visible)]="visible"
-  (onHide)="closeDialog()"
-  [style]="{
-    minHeight: minHeight() || '40rem',
-    maxWidth: maxWidth() || '25rem',
-    width: '100%'
-  }"
+	[modal]="true"
+	[maximizable]="true"
+	[header]="title"
+	[(visible)]="visible"
+	(onHide)="closeDialog()"
+	[style]="{
+		minHeight: minHeight() || '40rem',
+		maxWidth: maxWidth() || '25rem',
+		width: '100%'
+	}"
 >
-  <ng-content></ng-content>
+	<ng-content></ng-content>
 </p-dialog>
