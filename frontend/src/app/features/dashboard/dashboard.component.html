@@ -1,43 +1,43 @@
 @let userProjects = userProjects$ | async;
 <app-header></app-header>
 <main>
-  <h1 class="m-0 pt-5 px-3">Dashboard</h1>
+	<h1 class="m-0 pt-5 px-3">Dashboard</h1>
 
-  <section class="projects my-5 px-3">
-    <div class="flex align-item-center justify-content-between gap-2">
-      <h2>Projects</h2>
+	<section class="projects my-5 px-3">
+		<div class="flex align-item-center justify-content-between gap-2">
+			<h2>Projects</h2>
 
-      <div class="flex align-items-center gap-2">
-        <app-button
-          [label]="'create project'"
-          [icon]="PrimeIcons.PLUS"
-          [routerLink]="['/projects/create']"
-        ></app-button>
-        <app-button
-          [label]="'invites'"
-          [icon]="PrimeIcons.ENVELOPE"
-          (click)="showDialogInvites()"
-          (keydown.enter)="showDialogInvites()"
-        ></app-button>
-      </div>
-    </div>
+			<div class="flex align-items-center gap-2">
+				<app-button
+					[label]="'create project'"
+					[icon]="PrimeIcons.PLUS"
+					[routerLink]="['/projects/create']"
+				></app-button>
+				<app-button
+					[label]="'invites'"
+					[icon]="PrimeIcons.ENVELOPE"
+					(click)="showDialogInvites()"
+					(keydown.enter)="showDialogInvites()"
+				></app-button>
+			</div>
+		</div>
 
-    <article class="projects-list">
-      @for (project of userProjects?.projects; track project.id) {
-      <app-card
-        [title]="project.name"
-        [description]="project.description"
-        [icons]="[{ label: project.number_of_users, class: PrimeIcons.USER }]"
-        [redirectPath]="['projects', project.id]"
-        [date]="{ startsAt: project.created_at, endsAt: project.ends_at }"
-      ></app-card>
-      }
-    </article>
-  </section>
+		<article class="projects-list">
+			@for (project of userProjects?.projects; track project.id) {
+				<app-card
+					[title]="project.name"
+					[description]="project.description"
+					[icons]="[{ label: project.number_of_users, class: PrimeIcons.USER }]"
+					[redirectPath]="['projects', project.id]"
+					[date]="{ startsAt: project.created_at, endsAt: project.ends_at }"
+				></app-card>
+			}
+		</article>
+	</section>
 </main>
 <app-footer></app-footer>
 
 <app-dashboard-dialog-invitations
-  [visibleDialogInvites]="viewDialogInvites"
-  [projects]="projects"
+	[visibleDialogInvites]="viewDialogInvites"
+	[projects]="projects"
 ></app-dashboard-dialog-invitations>

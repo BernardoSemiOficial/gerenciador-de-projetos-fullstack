@@ -1,68 +1,68 @@
 <app-dialog
-  [title]="'Invites'"
-  [maxWidth]="'40rem'"
-  [minHeight]="'30rem'"
-  [visibleSignal]="visibleDialogInvites"
-  (close)="visibleDialogInvites.set(false)"
+	[title]="'Invites'"
+	[maxWidth]="'40rem'"
+	[minHeight]="'30rem'"
+	[visibleSignal]="visibleDialogInvites"
+	(close)="visibleDialogInvites.set(false)"
 >
-  <form class="py-4" [formGroup]="sendInvitesForm">
-    <ng-container formArrayName="invitations">
-      @for (item of invitations.controls; track $index; let i = $index) {
-      <div class="flex flex-wrap gap-2 my-2" [formGroupName]="i">
-        <app-input
-          class="flex-1"
-          [id]="'email'"
-          inputType="email"
-          placeholder="your-email@domain.com"
-          formControlName="email"
-        ></app-input>
-        <app-multi-select
-          class="flex-1"
-          [id]="'projects'"
-          formControlName="projectsId"
-          [optionLabel]="'name'"
-          [optionValue]="'id'"
-          [options]="projects"
-        >
-        </app-multi-select>
-        @if (invitations.controls.length > 1 && i > 0) {
-        <app-button
-          severity="danger"
-          [icon]="PrimeIcons.TIMES"
-          (click)="removeInviteUser(i)"
-          (keydown.enter)="removeInviteUser(i)"
-        ></app-button>
-        }
-      </div>
-      }
-    </ng-container>
-    <div class="flex justify-content-end mt-4">
-      <app-button
-        [isDisabled]="isLoadingInvites"
-        [label]="'user'"
-        severity="help"
-        [icon]="PrimeIcons.PLUS"
-        (click)="addNewInviteUser()"
-        (keydown.enter)="addNewInviteUser()"
-      ></app-button>
-    </div>
-  </form>
-  <div class="flex align-items-end justify-content-end gap-2 flex-grow-1">
-    <app-button
-      [isDisabled]="isLoadingInvites"
-      [label]="'cancel'"
-      severity="danger"
-      [icon]="PrimeIcons.TIMES"
-      (click)="closeDialogInvites()"
-      (keydown.enter)="closeDialogInvites()"
-    ></app-button>
-    <app-button
-      [isDisabled]="sendInvitesForm.invalid"
-      [isLoading]="isLoadingInvites"
-      [label]="'send invitation'"
-      [icon]="PrimeIcons.ENVELOPE"
-      (click)="sendInvites()"
-      (keydown.enter)="sendInvites()"
-    ></app-button>
-  </div>
+	<form class="py-4" [formGroup]="sendInvitesForm">
+		<ng-container formArrayName="invitations">
+			@for (item of invitations.controls; track $index; let i = $index) {
+				<div class="flex flex-wrap gap-2 my-2" [formGroupName]="i">
+					<app-input
+						class="flex-1"
+						[id]="'email'"
+						inputType="email"
+						placeholder="your-email@domain.com"
+						formControlName="email"
+					></app-input>
+					<app-multi-select
+						class="flex-1"
+						[id]="'projects'"
+						formControlName="projectsId"
+						[optionLabel]="'name'"
+						[optionValue]="'id'"
+						[options]="projects"
+					>
+					</app-multi-select>
+					@if (invitations.controls.length > 1 && i > 0) {
+						<app-button
+							severity="danger"
+							[icon]="PrimeIcons.TIMES"
+							(click)="removeInviteUser(i)"
+							(keydown.enter)="removeInviteUser(i)"
+						></app-button>
+					}
+				</div>
+			}
+		</ng-container>
+		<div class="flex justify-content-end mt-4">
+			<app-button
+				[isDisabled]="isLoadingInvites"
+				[label]="'user'"
+				severity="help"
+				[icon]="PrimeIcons.PLUS"
+				(click)="addNewInviteUser()"
+				(keydown.enter)="addNewInviteUser()"
+			></app-button>
+		</div>
+	</form>
+	<div class="flex align-items-end justify-content-end gap-2 flex-grow-1">
+		<app-button
+			[isDisabled]="isLoadingInvites"
+			[label]="'cancel'"
+			severity="danger"
+			[icon]="PrimeIcons.TIMES"
+			(click)="closeDialogInvites()"
+			(keydown.enter)="closeDialogInvites()"
+		></app-button>
+		<app-button
+			[isDisabled]="sendInvitesForm.invalid"
+			[isLoading]="isLoadingInvites"
+			[label]="'send invitation'"
+			[icon]="PrimeIcons.ENVELOPE"
+			(click)="sendInvites()"
+			(keydown.enter)="sendInvites()"
+		></app-button>
+	</div>
 </app-dialog>

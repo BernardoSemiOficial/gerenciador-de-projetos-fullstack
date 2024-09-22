@@ -3,35 +3,35 @@ import { Task } from '@core/interfaces/task.interface';
 import { ProjectForUser } from '@core/interfaces/user.interface';
 
 export interface ResponseGetProject {
-  project: Project;
+	project: Project;
 }
 
 export interface ResponseGetTasks {
-  tasks: Task[];
+	tasks: Task[];
 }
 
 export interface PayloadCreateProjectForUser {
-  name: string;
-  description: string;
-  starts_at: string;
-  ends_at: string;
+	name: string;
+	description: string;
+	starts_at: string;
+	ends_at: string;
 }
 
 export interface ResponseCreateProjectForUser {
-  project: ProjectForUser;
+	project: ProjectForUser;
 }
 
 export interface PayloadEditProjectForUser {
-  name: string;
-  description: string;
-  starts_at: string;
-  ends_at: string;
+	name: string;
+	description: string;
+	starts_at: string;
+	ends_at: string;
 }
 
 export interface ResponseEditProjectForUser {
-  project: ProjectForUser;
+	project: ProjectForUser;
 }
 
 export interface ResponseDeleteProject {
-  project: string;
+	project: string;
 }

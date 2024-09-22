@@ -12,33 +12,33 @@ import { ToastAlertServiceMock } from 'src/__mocks__/services/toast-alert.servic
 import { CreateEditTaskComponent } from './create-edit-task.component';
 
 describe('CreateEditTaskComponent', () => {
-  let component: CreateEditTaskComponent;
-  let fixture: ComponentFixture<CreateEditTaskComponent>;
+	let component: CreateEditTaskComponent;
+	let fixture: ComponentFixture<CreateEditTaskComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(CreateEditTaskComponent, {
-      set: {
-        imports: [CreateEditTaskComponent],
-        providers: [
-          FormBuilder,
-          Router,
-          { provide: TaskService, useClass: TaskServiceMock },
-          { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-          {
-            provide: DialogConfirmationService,
-            useClass: DialogConfirmationServiceMock,
-          },
-        ],
-      },
-    }).compileComponents();
+	beforeEach(() => {
+		TestBed.overrideComponent(CreateEditTaskComponent, {
+			set: {
+				imports: [CreateEditTaskComponent],
+				providers: [
+					FormBuilder,
+					Router,
+					{ provide: TaskService, useClass: TaskServiceMock },
+					{ provide: ActivatedRoute, useClass: ActivatedRouteMock },
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock },
+					{
+						provide: DialogConfirmationService,
+						useClass: DialogConfirmationServiceMock
+					}
+				]
+			}
+		}).compileComponents();
 
-    fixture = TestBed.createComponent(CreateEditTaskComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(CreateEditTaskComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

@@ -1,26 +1,26 @@
 <section
-  class="min-h-screen flex flex-column justify-content-center mx-auto max-w-30rem"
+	class="min-h-screen flex flex-column justify-content-center mx-auto max-w-30rem"
 >
-  <h1 class="text-center">Invite</h1>
-  @if (inviteDetails) {
-  <h2>
-    User <strong>{{ inviteDetails.user.name }}</strong> called you to
-    participate in the following projects:
-  </h2>
+	<h1 class="text-center">Invite</h1>
+	@if (inviteDetails) {
+		<h2>
+			User <strong>{{ inviteDetails.user.name }}</strong> called you to
+			participate in the following projects:
+		</h2>
 
-  <ul class="mx-2">
-    @for (project of inviteDetails.projects; track $index) {
-    <li class="font-bold">{{ project.name }}</li>
-    }
-  </ul>
+		<ul class="mx-2">
+			@for (project of inviteDetails.projects; track $index) {
+				<li class="font-bold">{{ project.name }}</li>
+			}
+		</ul>
 
-  <p>
-    But to do this, you need to create an account with name, email and password
-    to you can access the projects.
-  </p>
-  <app-invitation [inviteDetails]="inviteDetails"></app-invitation>
-  }
-  <div class="text-center mt-4">
-    <a routerLink="/login">already have an account created? log in now</a>
-  </div>
+		<p>
+			But to do this, you need to create an account with name, email and
+			password to you can access the projects.
+		</p>
+		<app-invitation [inviteDetails]="inviteDetails"></app-invitation>
+	}
+	<div class="text-center mt-4">
+		<a routerLink="/login">already have an account created? log in now</a>
+	</div>
 </section>

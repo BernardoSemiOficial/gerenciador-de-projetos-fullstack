@@ -11,29 +11,29 @@ import { UserServiceMock } from 'src/__mocks__/services/user.service.mock';
 import { CreateEditProjectComponent } from './create-edit-project.component';
 
 describe('CreateEditProjectComponent', () => {
-  let component: CreateEditProjectComponent;
-  let fixture: ComponentFixture<CreateEditProjectComponent>;
+	let component: CreateEditProjectComponent;
+	let fixture: ComponentFixture<CreateEditProjectComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(CreateEditProjectComponent, {
-      set: {
-        imports: [CreateEditProjectComponent],
-        providers: [
-          Router,
-          FormBuilder,
-          { provide: UserService, useClass: UserServiceMock },
-          { provide: ProjectService, useClass: ProjectServiceMock },
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-        ],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(CreateEditProjectComponent, {
+			set: {
+				imports: [CreateEditProjectComponent],
+				providers: [
+					Router,
+					FormBuilder,
+					{ provide: UserService, useClass: UserServiceMock },
+					{ provide: ProjectService, useClass: ProjectServiceMock },
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock }
+				]
+			}
+		});
 
-    fixture = TestBed.createComponent(CreateEditProjectComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(CreateEditProjectComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

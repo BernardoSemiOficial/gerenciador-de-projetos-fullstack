@@ -4,22 +4,22 @@ import { CreateEditProjectComponentMock } from 'src/__mocks__/components/create-
 import { CreateProjectPageComponent } from './create-project-page.component';
 
 describe('CreateProjectPageComponent', () => {
-  let component: CreateProjectPageComponent;
-  let fixture: ComponentFixture<CreateProjectPageComponent>;
+	let component: CreateProjectPageComponent;
+	let fixture: ComponentFixture<CreateProjectPageComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(CreateProjectPageComponent, {
-      set: {
-        imports: [CreateEditProjectComponentMock],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(CreateProjectPageComponent, {
+			set: {
+				imports: [CreateEditProjectComponentMock]
+			}
+		});
 
-    fixture = TestBed.createComponent(CreateProjectPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(CreateProjectPageComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

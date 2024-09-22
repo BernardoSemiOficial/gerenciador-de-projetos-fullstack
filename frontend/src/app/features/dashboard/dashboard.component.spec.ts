@@ -18,37 +18,37 @@ import { DashboardDialogInvitationsComponent } from './components/dashboard-dial
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+	let component: DashboardComponent;
+	let fixture: ComponentFixture<DashboardComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(DashboardComponent, {
-      set: {
-        imports: [
-          CommonModule,
-          RouterLink,
-          ReactiveFormsModule,
-          AppCardComponent,
-          AppButtonComponent,
-          DashboardDialogInvitationsComponent,
-          AppHeaderComponentMock,
-          AppFooterComponentMock,
-        ],
-        providers: [
-          { provide: UserService, useClass: UserServiceMock },
-          { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-          { provide: InvitationService, useClass: InvitationServiceMock },
-        ],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(DashboardComponent, {
+			set: {
+				imports: [
+					CommonModule,
+					RouterLink,
+					ReactiveFormsModule,
+					AppCardComponent,
+					AppButtonComponent,
+					DashboardDialogInvitationsComponent,
+					AppHeaderComponentMock,
+					AppFooterComponentMock
+				],
+				providers: [
+					{ provide: UserService, useClass: UserServiceMock },
+					{ provide: ActivatedRoute, useClass: ActivatedRouteMock },
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock },
+					{ provide: InvitationService, useClass: InvitationServiceMock }
+				]
+			}
+		});
 
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(DashboardComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

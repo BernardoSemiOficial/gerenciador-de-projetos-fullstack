@@ -8,27 +8,27 @@ import { ToastAlertServiceMock } from 'src/__mocks__/services/toast-alert.servic
 import { DashboardDialogInvitationsComponent } from './dashboard-dialog-invitations.component';
 
 describe('DashboardDialogInvitationsComponent', () => {
-  let component: DashboardDialogInvitationsComponent;
-  let fixture: ComponentFixture<DashboardDialogInvitationsComponent>;
+	let component: DashboardDialogInvitationsComponent;
+	let fixture: ComponentFixture<DashboardDialogInvitationsComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(DashboardDialogInvitationsComponent, {
-      set: {
-        imports: [DashboardDialogInvitationsComponent],
-        providers: [
-          FormBuilder,
-          { provide: InvitationService, useClass: InvitationServiceMock },
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-        ],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(DashboardDialogInvitationsComponent, {
+			set: {
+				imports: [DashboardDialogInvitationsComponent],
+				providers: [
+					FormBuilder,
+					{ provide: InvitationService, useClass: InvitationServiceMock },
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock }
+				]
+			}
+		});
 
-    fixture = TestBed.createComponent(DashboardDialogInvitationsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(DashboardDialogInvitationsComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

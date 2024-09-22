@@ -1,17 +1,17 @@
 :host {
-  display: block;
-  height: 66px;
+	display: block;
+	height: 66px;
 
-  ::ng-deep {
-    p-menubarsub {
-      margin-left: 1rem;
-    }
-    .p-menubar {
-      border-radius: 0;
-      justify-content: space-between;
-    }
-    .p-menubar-button {
-      margin-left: 1rem;
-    }
-  }
+	::ng-deep {
+		p-menubarsub {
+			margin-left: 1rem;
+		}
+		.p-menubar {
+			border-radius: 0;
+			justify-content: space-between;
+		}
+		.p-menubar-button {
+			margin-left: 1rem;
+		}
+	}
 }

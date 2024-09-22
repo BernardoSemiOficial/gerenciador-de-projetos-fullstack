@@ -1,21 +1,21 @@
 @let id = fieldId; @let label = fieldLabel; @let inputHelp = fieldInputHelp;
 
 <div class="w-full flex flex-column gap-2">
-  @if (label) {
-  <label [for]="fieldId">{{ label }}</label>
-  }
-  <textarea
-    pInputTextarea
-    rows="5"
-    [id]="id"
-    [name]="id"
-    [disabled]="isDisabled"
-    [(ngModel)]="fieldInputValue"
-    (blur)="_onTouched()"
-    (ngModelChange)="_onChange(fieldInputValue)"
-    aria-describedby="field-help"
-  ></textarea>
-  @if(inputHelp) {
-  <small id="field-help">{{ inputHelp }}</small>
-  }
+	@if (label) {
+		<label [for]="fieldId">{{ label }}</label>
+	}
+	<textarea
+		pInputTextarea
+		rows="5"
+		[id]="id"
+		[name]="id"
+		[disabled]="isDisabled"
+		[(ngModel)]="fieldInputValue"
+		(blur)="_onTouched()"
+		(ngModelChange)="_onChange(fieldInputValue)"
+		aria-describedby="field-help"
+	></textarea>
+	@if (inputHelp) {
+		<small id="field-help">{{ inputHelp }}</small>
+	}
 </div>

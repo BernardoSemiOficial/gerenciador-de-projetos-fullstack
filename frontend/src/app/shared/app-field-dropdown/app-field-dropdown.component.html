@@ -1,23 +1,23 @@
 @let id = fieldId; @let label = fieldLabel; @let inputHelp = fieldInputHelp;
 
 <div class="w-full flex flex-column gap-2">
-  @if (label) {
-  <label [for]="fieldId">{{ label }}</label>
-  }
-  <p-dropdown
-    [id]="id"
-    [name]="id"
-    [options]="options"
-    [optionLabel]="optionLabel()"
-    [optionValue]="optionValue()"
-    [placeholder]="placeholder()"
-    [disabled]="isDisabled"
-    [(ngModel)]="fieldInputValue"
-    (blur)="_onTouched()"
-    (ngModelChange)="_onChange(fieldInputValue)"
-    aria-describedby="field-help"
-  />
-  @if(inputHelp) {
-  <small id="field-help">{{ inputHelp }}</small>
-  }
+	@if (label) {
+		<label [for]="fieldId">{{ label }}</label>
+	}
+	<p-dropdown
+		[id]="id"
+		[name]="id"
+		[options]="options"
+		[optionLabel]="optionLabel()"
+		[optionValue]="optionValue()"
+		[placeholder]="placeholder()"
+		[disabled]="isDisabled"
+		[(ngModel)]="fieldInputValue"
+		(blur)="_onTouched()"
+		(ngModelChange)="_onChange(fieldInputValue)"
+		aria-describedby="field-help"
+	/>
+	@if (inputHelp) {
+		<small id="field-help">{{ inputHelp }}</small>
+	}
 </div>

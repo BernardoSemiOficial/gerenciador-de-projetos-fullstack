@@ -2,108 +2,108 @@
 
 @let id = taskId();
 <main class="container-max-w-120rem">
-  <div
-    class="pt-5 px-3 flex align-items-center justify-content-between flex-wrap"
-  >
-    <h1 class="m-0">
-      {{ id ? "Edit your task" : "Create your task" }}
-    </h1>
-    <div class="flex gap-2">
-      <app-button
-        label="return to the project"
-        [icon]="PrimeIcons.UNDO"
-        (click)="returnToProject()"
-        (keydown.enter)="returnToProject()"
-      ></app-button>
-      <app-button
-        label="delete task"
-        severity="danger"
-        [icon]="PrimeIcons.TRASH"
-        (click)="confirmationDelete()"
-        (keydown.enter)="confirmationDelete()"
-      ></app-button>
-    </div>
-  </div>
+	<div
+		class="pt-5 px-3 flex align-items-center justify-content-between flex-wrap"
+	>
+		<h1 class="m-0">
+			{{ id ? "Edit your task" : "Create your task" }}
+		</h1>
+		<div class="flex gap-2">
+			<app-button
+				label="return to the project"
+				[icon]="PrimeIcons.UNDO"
+				(click)="returnToProject()"
+				(keydown.enter)="returnToProject()"
+			></app-button>
+			<app-button
+				label="delete task"
+				severity="danger"
+				[icon]="PrimeIcons.TRASH"
+				(click)="confirmationDelete()"
+				(keydown.enter)="confirmationDelete()"
+			></app-button>
+		</div>
+	</div>
 
-  <section class="my-5 px-3">
-    <h2>Basic informations</h2>
+	<section class="my-5 px-3">
+		<h2>Basic informations</h2>
 
-    <form
-      [formGroup]="createEditTaskForm"
-      (ngSubmit)="onSubmit()"
-      class="flex align-content-center flex-wrap justify-content-between gap-5"
-    >
-      <app-field-input
-        [fieldId]="'name'"
-        formControlName="name"
-        [fieldLabel]="'name'"
-        [fieldInputHelp]="'The name of your task'"
-        [formControlField]="createEditTaskForm.get('name')"
-      ></app-field-input>
-      <app-field-textarea
-        [fieldId]="'description'"
-        formControlName="description"
-        [fieldLabel]="'description'"
-        [fieldInputHelp]="'The description of your task'"
-      ></app-field-textarea>
-      <app-field-input-number
-        [fieldId]="'delivery_time'"
-        formControlName="delivery_time"
-        [fieldLabel]="'delivery time'"
-        [fieldInputHelp]="'The delivery time of your task'"
-        formControlName="delivery_time"
-        buttonLayout="horizontal"
-        decrementButtonClass="p-button-danger"
-        incrementButtonClass="p-button-success"
-        incrementButtonIcon="pi pi-plus"
-        decrementButtonIcon="pi pi-minus"
-        [isShowButtons]="true"
-        [required]="true"
-        [max]="100"
-        [min]="1"
-        [step]="1"
-        [maxlength]="3"
-      />
-      <app-field-dropdown
-        [fieldId]="'priority'"
-        formControlName="priority"
-        [fieldLabel]="'priority'"
-        [fieldInputHelp]="'The priority of your task'"
-        [options]="taskPriorityOptions"
-        formControlName="priority"
-        optionLabel="name"
-        placeholder="Select a priority"
-      />
-      @if (id) {
-      <app-field-dropdown
-        [fieldId]="'status'"
-        formControlName="status"
-        [fieldLabel]="'status'"
-        [fieldInputHelp]="'The status of your task'"
-        [options]="taskStatusOptions"
-        formControlName="status"
-        optionLabel="name"
-        placeholder="Select a status"
-      />
-      }
-      <app-button
-        [isDisabled]="createEditTaskForm.invalid"
-        class="w-full mt-5"
-        [type]="'submit'"
-        [label]="id ? 'edit task here' : 'create task here'"
-        [icon]="id ? PrimeIcons.SYNC : PrimeIcons.PLUS"
-      ></app-button>
+		<form
+			[formGroup]="createEditTaskForm"
+			(ngSubmit)="onSubmit()"
+			class="flex align-content-center flex-wrap justify-content-between gap-5"
+		>
+			<app-field-input
+				[fieldId]="'name'"
+				formControlName="name"
+				[fieldLabel]="'name'"
+				[fieldInputHelp]="'The name of your task'"
+				[formControlField]="createEditTaskForm.get('name')"
+			></app-field-input>
+			<app-field-textarea
+				[fieldId]="'description'"
+				formControlName="description"
+				[fieldLabel]="'description'"
+				[fieldInputHelp]="'The description of your task'"
+			></app-field-textarea>
+			<app-field-input-number
+				[fieldId]="'delivery_time'"
+				formControlName="delivery_time"
+				[fieldLabel]="'delivery time'"
+				[fieldInputHelp]="'The delivery time of your task'"
+				formControlName="delivery_time"
+				buttonLayout="horizontal"
+				decrementButtonClass="p-button-danger"
+				incrementButtonClass="p-button-success"
+				incrementButtonIcon="pi pi-plus"
+				decrementButtonIcon="pi pi-minus"
+				[isShowButtons]="true"
+				[required]="true"
+				[max]="100"
+				[min]="1"
+				[step]="1"
+				[maxlength]="3"
+			/>
+			<app-field-dropdown
+				[fieldId]="'priority'"
+				formControlName="priority"
+				[fieldLabel]="'priority'"
+				[fieldInputHelp]="'The priority of your task'"
+				[options]="taskPriorityOptions"
+				formControlName="priority"
+				optionLabel="name"
+				placeholder="Select a priority"
+			/>
+			@if (id) {
+				<app-field-dropdown
+					[fieldId]="'status'"
+					formControlName="status"
+					[fieldLabel]="'status'"
+					[fieldInputHelp]="'The status of your task'"
+					[options]="taskStatusOptions"
+					formControlName="status"
+					optionLabel="name"
+					placeholder="Select a status"
+				/>
+			}
+			<app-button
+				[isDisabled]="createEditTaskForm.invalid"
+				class="w-full mt-5"
+				[type]="'submit'"
+				[label]="id ? 'edit task here' : 'create task here'"
+				[icon]="id ? PrimeIcons.SYNC : PrimeIcons.PLUS"
+			></app-button>
 
-      <app-button
-        class="w-full"
-        [type]="'button'"
-        [label]="'clear form'"
-        [icon]="PrimeIcons.TRASH"
-        [isOutlined]="true"
-        (click)="createEditTaskForm.reset()"
-        (keydown.enter)="createEditTaskForm.reset()"
-      ></app-button>
-    </form>
-  </section>
+			<app-button
+				class="w-full"
+				[type]="'button'"
+				[label]="'clear form'"
+				[icon]="PrimeIcons.TRASH"
+				[isOutlined]="true"
+				(click)="createEditTaskForm.reset()"
+				(keydown.enter)="createEditTaskForm.reset()"
+			></app-button>
+		</form>
+	</section>
 </main>
 <app-footer></app-footer>

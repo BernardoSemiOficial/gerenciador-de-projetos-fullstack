@@ -1,17 +1,17 @@
 import {
-  InviteForUser,
-  ProjectForUser,
-  User,
+	InviteForUser,
+	ProjectForUser,
+	User
 } from '@core/interfaces/user.interface';
 
 export interface ResponseGetUser {
-  user: User;
+	user: User;
 }
 
 export interface ResponseGetProjectsForUser {
-  projects: ProjectForUser[];
+	projects: ProjectForUser[];
 }
 
 export interface ResponseGetInvitationForUser {
-  invitation: InviteForUser;
+	invitation: InviteForUser;
 }

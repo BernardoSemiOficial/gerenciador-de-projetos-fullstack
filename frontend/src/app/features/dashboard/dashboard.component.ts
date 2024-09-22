@@ -14,46 +14,46 @@ import { map, Observable } from 'rxjs';
 import { DashboardDialogInvitationsComponent } from './components/dashboard-dialog-invites/dashboard-dialog-invitations.component';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    ReactiveFormsModule,
-    AppHeaderComponent,
-    AppFooterComponent,
-    AppCardComponent,
-    AppButtonComponent,
-    DashboardDialogInvitationsComponent,
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+	selector: 'app-dashboard',
+	standalone: true,
+	imports: [
+		CommonModule,
+		RouterLink,
+		ReactiveFormsModule,
+		AppHeaderComponent,
+		AppFooterComponent,
+		AppCardComponent,
+		AppButtonComponent,
+		DashboardDialogInvitationsComponent
+	],
+	templateUrl: './dashboard.component.html',
+	styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  private userService: UserService = inject(UserService);
-  user: User | null = null;
-  userProjects$!: Observable<ResponseGetProjectsForUser>;
-  PrimeIcons = PrimeIcons;
-  viewDialogInvites = signal<boolean>(false);
-  projects: ProjectForUser[] = [];
+	private userService: UserService = inject(UserService);
+	user: User | null = null;
+	userProjects$!: Observable<ResponseGetProjectsForUser>;
+	PrimeIcons = PrimeIcons;
+	viewDialogInvites = signal<boolean>(false);
+	projects: ProjectForUser[] = [];
 
-  constructor() {
-    this.user = this.userService.user();
-    effect(() => {
-      if (this.user) {
-        this.userProjects$ = this.userService
-          .getProjectsForUser(this.user?.id)
-          .pipe(
-            map((data) => {
-              this.projects = data.projects;
-              return data;
-            })
-          );
-      }
-    });
-  }
+	constructor() {
+		this.user = this.userService.user();
+		effect(() => {
+			if (this.user) {
+				this.userProjects$ = this.userService
+					.getProjectsForUser(this.user?.id)
+					.pipe(
+						map((data) => {
+							this.projects = data.projects;
+							return data;
+						})
+					);
+			}
+		});
+	}
 
-  showDialogInvites() {
-    this.viewDialogInvites.set(true);
-  }
+	showDialogInvites() {
+		this.viewDialogInvites.set(true);
+	}
 }

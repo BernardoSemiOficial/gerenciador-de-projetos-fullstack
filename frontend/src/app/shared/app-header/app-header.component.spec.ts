@@ -7,26 +7,26 @@ import { UserServiceMock } from 'src/__mocks__/services/user.service.mock';
 import { AppHeaderComponent } from './app-header.component';
 
 describe('AppHeaderComponent', () => {
-  let component: AppHeaderComponent;
-  let fixture: ComponentFixture<AppHeaderComponent>;
+	let component: AppHeaderComponent;
+	let fixture: ComponentFixture<AppHeaderComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(AppHeaderComponent, {
-      set: {
-        imports: [],
-        providers: [
-          { provide: UserService, useClass: UserServiceMock },
-          { provide: AuthService, useClass: AuthServiceMock },
-        ],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(AppHeaderComponent, {
+			set: {
+				imports: [],
+				providers: [
+					{ provide: UserService, useClass: UserServiceMock },
+					{ provide: AuthService, useClass: AuthServiceMock }
+				]
+			}
+		});
 
-    fixture = TestBed.createComponent(AppHeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(AppHeaderComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

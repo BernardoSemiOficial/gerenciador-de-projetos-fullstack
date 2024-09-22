@@ -11,28 +11,28 @@ import { UserServiceMock } from 'src/__mocks__/services/user.service.mock';
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+	let component: RegisterComponent;
+	let fixture: ComponentFixture<RegisterComponent>;
 
-  beforeEach(() => {
-    TestBed.overrideComponent(RegisterComponent, {
-      set: {
-        providers: [
-          FormBuilder,
-          Router,
-          { provide: AuthService, useClass: AuthServiceMock },
-          { provide: UserService, useClass: UserServiceMock },
-          { provide: ToastAlertService, useClass: ToastAlertServiceMock },
-        ],
-      },
-    });
+	beforeEach(() => {
+		TestBed.overrideComponent(RegisterComponent, {
+			set: {
+				providers: [
+					FormBuilder,
+					Router,
+					{ provide: AuthService, useClass: AuthServiceMock },
+					{ provide: UserService, useClass: UserServiceMock },
+					{ provide: ToastAlertService, useClass: ToastAlertServiceMock }
+				]
+			}
+		});
 
-    fixture = TestBed.createComponent(RegisterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(RegisterComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });
