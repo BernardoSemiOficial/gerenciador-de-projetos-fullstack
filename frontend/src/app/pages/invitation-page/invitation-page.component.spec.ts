@@ -12,7 +12,6 @@ import { InvitationPageComponent } from './invitation-page.component';
 describe('InvitationPageComponent', () => {
   let component: InvitationPageComponent;
   let fixture: ComponentFixture<InvitationPageComponent>;
-  let userService: UserService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -29,7 +28,6 @@ describe('InvitationPageComponent', () => {
       .compileComponents();
 
     fixture = TestBed.createComponent(InvitationPageComponent);
-    userService = TestBed.inject(UserService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

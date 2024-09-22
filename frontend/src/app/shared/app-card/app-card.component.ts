@@ -24,7 +24,7 @@ export class AppCardComponent {
   date = input<{ startsAt: Date; endsAt: Date }>();
   description = input<string>();
   icons = input<{ label: string | number; class: PrimeIcons }[]>([]);
-  redirectPath = input<any[]>();
+  redirectPath = input<unknown[]>();
   PrimeIcons = PrimeIcons;
 
   handleClickButton() {

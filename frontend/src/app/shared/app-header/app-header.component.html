@@ -10,6 +10,8 @@
       pRipple
       class="flex align-items-center p-menuitem-link"
       (click)="logout()"
+      (keydown.enter)="logout()"
+      tabindex="0"
     >
       <span [class]="item.icon"></span>
       <span class="ml-2">{{ item.label }}</span>

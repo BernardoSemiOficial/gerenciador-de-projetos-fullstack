@@ -17,10 +17,7 @@ export function authenticationInterceptor(
 
   return next(newReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      const loginOrRefreshOrRegister = requestToLoginOrRefreshToken(
-        req.url,
-        authService
-      );
+      const loginOrRefreshOrRegister = requestToLoginOrRefreshToken(req.url);
       if (loginOrRefreshOrRegister) return throwError(() => error);
       if (error instanceof HttpErrorResponse && error.status !== 401)
         return throwError(() => error);
@@ -67,10 +64,7 @@ const retryRequestWithNewAccessToken = (
   );
 };
 
-const requestToLoginOrRefreshToken = (
-  url: string,
-  authService: AuthService
-) => {
+const requestToLoginOrRefreshToken = (url: string) => {
   console.log('requestToLoginOrRefreshToken');
   return (
     url.includes('refresh-token') ||
