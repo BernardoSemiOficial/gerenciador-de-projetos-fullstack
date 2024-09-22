@@ -13,6 +13,8 @@
 
 Este projeto é uma aplicação Node.js escrita em TypeScript. Siga os passos abaixo para configurar e executar o projeto.
 
+- A parte de envio de e-mails com o nodemailer é criada para fins de teste somente.
+
 ## Tecnologias utilizadas
 
 - Fastify
