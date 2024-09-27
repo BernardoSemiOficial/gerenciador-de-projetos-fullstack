@@ -43,5 +43,9 @@
   },
   "prisma": {
     "seed": "tsx prisma/seeds/seed.ts"
+  },
+  "engines": {
+    "node": "20.9.0",
+    "npm": "10.1.0"
   }
 }
