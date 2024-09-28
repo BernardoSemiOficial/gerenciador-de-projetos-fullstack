@@ -8,6 +8,7 @@
     "server:watch": "tsx --watch src/server.ts",
     "server:start": "node dist/src/server.js",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed"
   },
