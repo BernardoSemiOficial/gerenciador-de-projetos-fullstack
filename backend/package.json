@@ -2,7 +2,7 @@
   "name": "@gerenciador-de-tarefas/backend",
   "version": "1.0.0",
   "description": "Projeto backend do gerenciador de tarefas que armazenar e gerencia todas as funcionalidades do sistema",
-  "main": "index.js",
+  "main": "./dist/server.js",
   "scripts": {
     "server:build": "tsc --build --verbose",
     "server:watch": "tsx --watch src/server.ts",
