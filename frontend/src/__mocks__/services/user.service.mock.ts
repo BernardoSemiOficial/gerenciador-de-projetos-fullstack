@@ -13,4 +13,5 @@ export class UserServiceMock {
 	getProjectsForUser() {
 		return of({});
 	}
+	saveUser() {}
 }
