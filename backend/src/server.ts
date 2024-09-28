@@ -39,6 +39,6 @@ app.register(initializerTasksController);
 app.register(initializerProjectsController);
 app.register(initializerInvitationsController);
 
-app.listen({ port: env.PORT }).then(() => {
+app.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {
   console.log(`Server listening at http://localhost:${env.PORT}`);
 });
