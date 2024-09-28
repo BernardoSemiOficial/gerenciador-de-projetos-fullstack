@@ -1,0 +1,10 @@
+node_modules
+Dockerfile
+docker-compose.yml
+.dockerignore
+dist
+.env.exemple
+.gitignore
+diagrama.jpeg
+README.md
+gerenciador-de-projetos.postman_collection.json
