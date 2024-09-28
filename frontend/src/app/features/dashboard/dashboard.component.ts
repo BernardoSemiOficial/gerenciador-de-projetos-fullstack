@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProjectForUser, User } from '@core/interfaces/user.interface';
@@ -29,7 +29,7 @@ import { DashboardDialogInvitationsComponent } from './components/dashboard-dial
 	templateUrl: './dashboard.component.html',
 	styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 	private userService: UserService = inject(UserService);
 	user: User | null = null;
 	userProjects$!: Observable<ResponseGetProjectsForUser>;
@@ -37,20 +37,18 @@ export class DashboardComponent {
 	viewDialogInvites = signal<boolean>(false);
 	projects: ProjectForUser[] = [];
 
-	constructor() {
+	ngOnInit() {
 		this.user = this.userService.user();
-		effect(() => {
-			if (this.user) {
-				this.userProjects$ = this.userService
-					.getProjectsForUser(this.user?.id)
-					.pipe(
-						map((data) => {
-							this.projects = data.projects;
-							return data;
-						})
-					);
-			}
-		});
+		if (this.user) {
+			this.userProjects$ = this.userService
+				.getProjectsForUser(this.user?.id)
+				.pipe(
+					map((data) => {
+						this.projects = data.projects;
+						return data;
+					})
+				);
+		}
 	}
 
 	showDialogInvites() {
