@@ -4,7 +4,7 @@
   "description": "Projeto backend do gerenciador de tarefas que armazenar e gerencia todas as funcionalidades do sistema",
   "main": "index.js",
   "scripts": {
-    "server:build": "tsc",
+    "server:build": "tsc --build --verbose",
     "server:watch": "tsx --watch src/server.ts",
     "server:start": "node dist/src/server.js",
     "prisma:migrate": "prisma migrate dev",
